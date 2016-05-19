@@ -1,3 +1,5 @@
 [user]
 	name = Andreas Gerstmayr
 	email = andreas.gerstmayr@gmail.com
+[core]
+	excludesfile = ~/.globalgitignore
