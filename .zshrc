@@ -18,10 +18,16 @@ unalias rm
 # see https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-# directory bookmarks
-hash -d sem8="/Users/andihit/Dropbox/Uni/TU Wien/Semester8"
-hash -d bac="/Users/andihit/Dropbox/Uni/TU Wien/Semester8/bachelor-thesis"
-hash -d ben="/Users/andihit/Dropbox/Uni/TU Wien/Semester8/bachelor-thesis/benchmarks"
+if [[ "$OSTYPE" == "darwin" ]]; then
+  local dropbox="$HOME/Dropbox"
+  export COPYFILE_DISABLE=true # don't add hidden files to tar archives
+elif [[ "$OSTYPE" == "linux" ]]; then
+  local dropbox="$HOME/Dropbox"
+elif [[ "$OSTYPE" == "cygwin" ]]; then
+  local dropbox="/cygdrive/c/Users/Andreas/Dropbox"
+fi
 
-# don't add hidden files to tar archives
-export COPYFILE_DISABLE=true
+# directory bookmarks
+hash -d sem8="$dropbox/Uni/TU Wien/Semester8"
+hash -d bac="$dropbox/Uni/TU Wien/Semester8/bachelor-thesis"
+hash -d ben="$dropbox/Uni/TU Wien/Semester8/bachelor-thesis/benchmarks"
