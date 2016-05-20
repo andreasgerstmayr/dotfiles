@@ -3,3 +3,5 @@
 	email = andreas.gerstmayr@gmail.com
 [core]
 	excludesfile = ~/.globalgitignore
+[push]
+	default = simple
