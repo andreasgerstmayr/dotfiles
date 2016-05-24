@@ -25,6 +25,7 @@ elif [[ "$OSTYPE" == linux* ]]; then
   local dropbox="$HOME/Dropbox"
 elif [[ "$OSTYPE" == "cygwin" ]]; then
   local dropbox="/cygdrive/c/Users/Andreas/Dropbox"
+  export PROMPT_ENABLE_VCSINFO=n
 fi
 
 # directory bookmarks
