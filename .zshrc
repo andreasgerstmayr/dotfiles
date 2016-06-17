@@ -21,8 +21,10 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 if [[ "$OSTYPE" == darwin* ]]; then
   local dropbox="$HOME/Dropbox"
   export COPYFILE_DISABLE=true # don't add hidden files to tar archives
+  alias netstat-open-ports="netstat -an | egrep 'Proto|LISTEN'"
 elif [[ "$OSTYPE" == linux* ]]; then
   local dropbox="$HOME/Dropbox"
+  alias netstat-open-ports="netstat -anp | egrep 'Proto|LISTEN'"
 elif [[ "$OSTYPE" == "cygwin" ]]; then
   local dropbox="/cygdrive/c/Users/Andreas/Dropbox"
   export PROMPT_ENABLE_VCSINFO=n
