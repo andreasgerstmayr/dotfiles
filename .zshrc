@@ -32,3 +32,7 @@ fi
 hash -d sem8="$dropbox/Uni/TU Wien/Semester8"
 hash -d bac="$dropbox/Uni/TU Wien/Semester8/bachelor-thesis"
 hash -d ben="$dropbox/Uni/TU Wien/Semester8/bachelor-thesis/benchmarks"
+
+# zsh options
+setopt rm_star_silent # disable verification message for rm with *
+unsetopt correct      # disable autocorrection

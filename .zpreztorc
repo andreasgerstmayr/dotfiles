@@ -32,6 +32,8 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'completion' \
+  'syntax-highlighting' \
+  'history-substring-search' \
   'prompt'
 
 #
@@ -133,10 +135,9 @@ zstyle ':prezto:module:prompt' theme 'andihit'
 #   'root'
 #
 # Set syntax highlighting styles.
-# zstyle ':prezto:module:syntax-highlighting' styles \
-#   'builtin' 'bg=blue' \
-#   'command' 'bg=blue' \
-#   'function' 'bg=blue'
+ zstyle ':prezto:module:syntax-highlighting' styles \
+    'path' 'none' \
+    'path_prefix' 'none'
 
 #
 # Terminal
