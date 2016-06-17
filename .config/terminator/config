@@ -1,0 +1,23 @@
+[global_config]
+[keybindings]
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_color = "#110f1d"
+    background_darkness = 0.85
+    background_image = None
+    background_type = transparent
+    cursor_color = "#7f7f7f"
+    font = Consolas 13
+    foreground_color = "#f2f2f2"
+    palette = "#000000:#e62929:#64ef5b:#fc951e:#1c74c5:#e4007d:#55ddff:#ffffff:#1c1c1c:#e53e41:#94ef8e:#fcad53:#3f9cf0:#fa68ad:#97eaff:#d3d3d3"
+    show_titlebar = False
+    use_system_font = False
