@@ -23,7 +23,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
   export COPYFILE_DISABLE=true # don't add hidden files to tar archives
   alias netstat-open-ports="netstat -an | egrep 'Proto|LISTEN'"
 elif [[ "$OSTYPE" == linux* ]]; then
-  local dropbox="$HOME/Dropbox"
+  local dropbox="/media/sf_Dropbox"
   alias netstat-open-ports="netstat -anp | egrep 'Proto|LISTEN'"
 elif [[ "$OSTYPE" == "cygwin" ]]; then
   local dropbox="/cygdrive/c/Users/Andreas/Dropbox"
