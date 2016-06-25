@@ -1,13 +1,7 @@
 # My dotfiles
 
 ## Setup
-```bash
-git clone --bare --recursive https://github.com/andihit/dotfiles.git $HOME/.dotfiles
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-config checkout
-config submodule update --init --recursive
-config config --local status.showUntrackedFiles no
-```
+Take a look at the `Makefile` and install the things you want.
 
 ## Software
 * zsh

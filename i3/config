@@ -156,4 +156,4 @@ bar {
         position top
 }
 
-exec --no-startup-id feh --bg-scale ~/.setup/wallpaper/mountain.jpg
+exec --no-startup-id feh --bg-scale ~/dotfiles/resources/wallpaper/mountain.jpg
