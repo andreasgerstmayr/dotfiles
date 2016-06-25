@@ -18,10 +18,12 @@ zsh: update-submodules
 
 .PHONY: i3
 i3:
+	mkdir -p ~/.config/i3
 	ln -sf $$(pwd)/i3/config ~/.config/i3/config
 
 .PHONY: terminator
 terminator:
+	mkdir -p ~/.config/terminator
 	ln -sf $$(pwd)/terminator/config ~/.config/terminator/config
 
 .PHONY: fonts
@@ -30,7 +32,8 @@ fonts:
 
 .PHONY: hidpi
 hidpi:
-	@echo TODO
+	ln -sf $$(pwd)/hidpi/xprofile ~/.xprofile
+	ln -sf $$(pwd)/hidpi/Xresources ~/.Xresources
 
 .PHONY: macbook
 macbook: zsh
