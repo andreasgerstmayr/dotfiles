@@ -8,7 +8,7 @@ update-submodules:
 
 .PHONY: zsh
 zsh: update-submodules
-	ln -sf $$(pwd)/zsh/zprezto ~/.zprezto
+	ln -snf $$(pwd)/zsh/zprezto ~/.zprezto
 	ln -sf $$(pwd)/zsh/zprezto/runcoms/zlogin ~/.zlogin
 	ln -sf $$(pwd)/zsh/zprezto/runcoms/zlogout ~/.zlogout
 	ln -sf $$(pwd)/zsh/zprezto/runcoms/zprofile ~/.zprofile
