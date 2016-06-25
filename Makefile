@@ -6,6 +6,11 @@ usage:
 update-submodules:
 	git submodule update --init --recursive
 
+.PHONY: git
+git:
+	ln -sf $$(pwd)/git/gitconfig ~/.gitconfig
+	ln -sf $$(pwd)/git/globalgitignore ~/.globalgitignore
+
 .PHONY: zsh
 zsh: update-submodules
 	ln -snf $$(pwd)/zsh/zprezto ~/.zprezto
@@ -36,7 +41,7 @@ hidpi:
 	ln -sf $$(pwd)/hidpi/Xresources ~/.Xresources
 
 .PHONY: macbook
-macbook: zsh
+macbook: git zsh
 
 .PHONY: ubuntuvm
-ubuntuvm: zsh i3 terminator hidpi fonts
+ubuntuvm: git zsh i3 terminator hidpi fonts

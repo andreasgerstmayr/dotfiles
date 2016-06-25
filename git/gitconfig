@@ -2,6 +2,6 @@
 	name = Andreas Gerstmayr
 	email = andreas.gerstmayr@gmail.com
 [core]
-	excludesfile = ~/.globalgitignore
+	excludesfile = /Users/andihit/.globalgitignore
 [push]
 	default = simple
