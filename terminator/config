@@ -19,6 +19,7 @@
     font = Consolas 13
     foreground_color = "#f2f2f2"
     palette = "#000000:#e62929:#64ef5b:#fc951e:#1c74c5:#e4007d:#55ddff:#ffffff:#1c1c1c:#e53e41:#94ef8e:#fcad53:#3f9cf0:#fa68ad:#97eaff:#d3d3d3"
-    scrollback_lines = 2000
+    scroll_on_output = False
+    scrollback_lines = 5000
     show_titlebar = False
     use_system_font = False
