@@ -27,7 +27,6 @@ elif [[ "$OSTYPE" == linux* ]]; then
   alias netstat-open-ports="netstat -anp | egrep 'Proto|LISTEN'"
 elif [[ "$OSTYPE" == "cygwin" ]]; then
   local dropbox="/cygdrive/c/Users/Andreas/Dropbox"
-  export PROMPT_ENABLE_VCSINFO=n
 fi
 
 # directory bookmarks
