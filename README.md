@@ -5,7 +5,7 @@ Take a look at the `Makefile` and install the things you want.
 
 ## Software
 * zsh
-* i3, rofi, feh
+* i3, rofi, feh, numlockx
 * terminator
 
 ## Fonts

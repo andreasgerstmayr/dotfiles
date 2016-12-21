@@ -1,3 +1,12 @@
 [submodule "zsh/zprezto"]
 	path = zsh/zprezto
 	url = https://github.com/andihit/prezto.git
+[submodule "vim/bundle/vim-airline"]
+	path = vim/bundle/vim-airline
+	url = https://github.com/vim-airline/vim-airline.git
+[submodule "vim/bundle/cscope-maps"]
+	path = vim/bundle/cscope-maps
+	url = https://github.com/joe-skb7/cscope-maps.git
+[submodule "vim/bundle/nerdtree"]
+	path = vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git

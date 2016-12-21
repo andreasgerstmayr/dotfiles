@@ -8,28 +8,34 @@ update-submodules:
 
 .PHONY: git
 git:
-	ln -sf $$(pwd)/git/gitconfig ~/.gitconfig
-	ln -sf $$(pwd)/git/globalgitignore ~/.globalgitignore
+	ln -snf $$(pwd)/git/gitconfig ~/.gitconfig
+	ln -snf $$(pwd)/git/globalgitignore ~/.globalgitignore
 
 .PHONY: zsh
 zsh: update-submodules
 	ln -snf $$(pwd)/zsh/zprezto ~/.zprezto
-	ln -sf $$(pwd)/zsh/zprezto/runcoms/zlogin ~/.zlogin
-	ln -sf $$(pwd)/zsh/zprezto/runcoms/zlogout ~/.zlogout
-	ln -sf $$(pwd)/zsh/zprezto/runcoms/zprofile ~/.zprofile
-	ln -sf $$(pwd)/zsh/zprezto/runcoms/zshenv ~/.zshenv
-	ln -sf $$(pwd)/zsh/zshrc ~/.zshrc
-	ln -sf $$(pwd)/zsh/zpreztorc ~/.zpreztorc
+	ln -snf $$(pwd)/zsh/zprezto/runcoms/zlogin ~/.zlogin
+	ln -snf $$(pwd)/zsh/zprezto/runcoms/zlogout ~/.zlogout
+	ln -snf $$(pwd)/zsh/zprezto/runcoms/zprofile ~/.zprofile
+	ln -snf $$(pwd)/zsh/zprezto/runcoms/zshenv ~/.zshenv
+	ln -snf $$(pwd)/zsh/zshrc ~/.zshrc
+	ln -snf $$(pwd)/zsh/zpreztorc ~/.zpreztorc
+
+.PHONY: vim
+vim: update-submodules
+	ln -snf $$(pwd)/vim/autoload ~/.vim/autoload
+	ln -snf $$(pwd)/vim/bundle ~/.vim/bundle
+	ln -snf $$(pwd)/vim/vimrc ~/.vimrc
 
 .PHONY: i3
 i3:
 	mkdir -p ~/.config/i3
-	ln -sf $$(pwd)/i3/config ~/.config/i3/config
+	ln -snf $$(pwd)/i3/config ~/.config/i3/config
 
 .PHONY: terminator
 terminator:
 	mkdir -p ~/.config/terminator
-	ln -sf $$(pwd)/terminator/config ~/.config/terminator/config
+	ln -snf $$(pwd)/terminator/config ~/.config/terminator/config
 
 .PHONY: fonts
 fonts:
@@ -37,11 +43,11 @@ fonts:
 
 .PHONY: hidpi
 hidpi:
-	ln -sf $$(pwd)/hidpi/xprofile ~/.xprofile
-	ln -sf $$(pwd)/hidpi/Xresources ~/.Xresources
+	ln -snf $$(pwd)/hidpi/xprofile ~/.xprofile
+	ln -snf $$(pwd)/hidpi/Xresources ~/.Xresources
 
 .PHONY: macbook
-macbook: git zsh
+macbook: git zsh vim
 
 .PHONY: ubuntuvm
-ubuntuvm: git zsh i3 terminator hidpi fonts
+ubuntuvm: git zsh vim i3 terminator hidpi fonts

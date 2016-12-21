@@ -1,0 +1,20 @@
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+
+"otherwise vim-airline doesnt show up"
+set laststatus=2
+
+"prefix keys with ,"
+let mapleader = ","
+
+"open nerdtree with ,ne"
+nnoremap <silent> <Leader>ne :NERDTreeFind<CR>
+let NERDTreeQuitOnOpen = 1
+
+"ctags: jump to declaration/definition"
+map ü <C-]>
+map gü g<C-]>
+
+"cscope: prefix"
+map ß <C-\>
