@@ -23,6 +23,7 @@ zsh: update-submodules
 
 .PHONY: vim
 vim: update-submodules
+	mkdir -p ~/.vim
 	ln -snf $$(pwd)/vim/autoload ~/.vim/autoload
 	ln -snf $$(pwd)/vim/bundle ~/.vim/bundle
 	ln -snf $$(pwd)/vim/vimrc ~/.vimrc

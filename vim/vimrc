@@ -1,6 +1,9 @@
 execute pathogen#infect()
+filetype indent plugin on
 syntax on
-filetype plugin indent on
+
+"indent new line like the previous one"
+set autoindent
 
 "otherwise vim-airline doesnt show up"
 set laststatus=2
