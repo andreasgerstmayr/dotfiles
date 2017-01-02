@@ -2,22 +2,26 @@ execute pathogen#infect()
 filetype indent plugin on
 syntax on
 
-"indent new line like the previous one"
+" indent new line like the previous one
 set autoindent
 
-"otherwise vim-airline doesnt show up"
+" otherwise vim-airline doesnt show up
 set laststatus=2
 
-"prefix keys with ,"
+" prefix keys with ,
 let mapleader = ","
 
-"open nerdtree with ,ne"
+" open nerdtree with ,ne
 nnoremap <silent> <Leader>ne :NERDTreeFind<CR>
 let NERDTreeQuitOnOpen = 1
 
-"ctags: jump to declaration/definition"
+" ctags: jump to declaration/definition
 map ü <C-]>
 map gü g<C-]>
 
-"cscope: prefix"
+" cscope: prefix
 map ß <C-\>
+
+
+" python
+autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
