@@ -22,6 +22,9 @@ map gü g<C-]>
 " cscope: prefix
 map ß <C-\>
 
+" tagbar
+nmap <F8> :TagbarToggle<CR>
+
 
 " python
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
