@@ -28,6 +28,11 @@ vim: update-submodules
 	ln -snf $$(pwd)/vim/bundle ~/.vim/bundle
 	ln -snf $$(pwd)/vim/vimrc ~/.vimrc
 
+.PHONY: tmux
+tmux: update-submodules
+	ln -snf $$(pwd)/tmux/.tmux/.tmux.conf ~/.tmux.conf
+	ln -snf $$(pwd)/tmux/.tmux/.tmux.conf.lobal ~/.tmux.conf.local
+
 .PHONY: i3
 i3:
 	mkdir -p ~/.config/i3
