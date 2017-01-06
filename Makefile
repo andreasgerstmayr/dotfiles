@@ -1,6 +1,7 @@
 .PHONY: usage
 usage:
-	@echo Take a look at the Makefile and install the things you want.
+	@echo Available targets:
+	@make -rpn | sed -n -e '/^$$/ { n ; /^[^ .#][^ ]*:/ { s/:.*$$// ; p ; } ; }' | sort
 
 .PHONY: update-submodules
 update-submodules:
@@ -43,6 +44,10 @@ terminator:
 	mkdir -p ~/.config/terminator
 	ln -snf $$(pwd)/terminator/config ~/.config/terminator/config
 
+.PHONY: terminal
+terminal:
+	cat $$(pwd)/terminal/README.md
+
 .PHONY: fonts
 fonts:
 	@echo Please install Consolas manually.
@@ -53,7 +58,7 @@ hidpi:
 	ln -snf $$(pwd)/hidpi/Xresources ~/.Xresources
 
 .PHONY: macbook
-macbook: git zsh vim
+macbook: git zsh vim tmux
 
 .PHONY: ubuntuvm
-ubuntuvm: git zsh vim i3 terminator hidpi fonts
+ubuntuvm: git zsh vim tmux i3 terminator hidpi fonts
