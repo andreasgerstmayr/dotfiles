@@ -1,13 +1,63 @@
+command=~/.config/i3blocks/scripts/$BLOCK_NAME
 separator=false
-separator_block_width=5
+separator_block_width=10
 border_top=0
 border_left=0
 border_right=0
 border_bottom=4
+markup=none
 
+
+# CPU usage
+#
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+[cpu_usage]
+label=   
+interval=10
+min_width=: 99.99%
+border=#cc241d
+
+# Memory usage
+#
+# The type defaults to "mem" if the instance is not specified.
+[memory]
+label=   
+interval=30
+border=#d79921
+
+# Disk usage
+#
+# The directory defaults to $HOME if the instance is not specified.
+# The script may be called with a optional argument to set the alert
+# (defaults to 10 for 10%).
+[disk]
+label=   
+#instance=/mnt/data
+interval=30
+border=#b16286
+
+# Network interface monitoring
+#
+# If the instance is not specified, use the interface used for default route.
+# The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
+[iface]
+#instance=wlan0
+label=   
+interval=10
+border=#98971a
+
+[bandwidth]
+#instance=eth0
+label=   
+interval=5
+border=#458588
+
+# Date Time
+#
 [time]
-label=    
-command=echo "`date +'%a %d %b'` <b>`date +'%T'`</b> "; [[ -z "${BLOCK_BUTTON}" ]] || gsimplecal &
+label=   
+command=echo "`date +'%a %d %b'` <b>`date +'%T'`</b> "
 interval=1
 markup=pango
 border=#928374

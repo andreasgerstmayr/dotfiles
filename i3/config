@@ -9,28 +9,6 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-# variables
-set $transparent #00000000
-set $white #ffffff
-set $darkwhite #a89984
-set $darkred #cc241d
-
-# statusbar height
-set $height 68
-
-set $ws1  "1:  "
-set $ws2  "2:  "
-set $ws3  "3:  "
-set $ws4  "4:  "
-set $ws5  "5:  "
-set $ws6  "6:  "
-set $ws7  "7:  "
-set $ws8  "8:  "
-set $ws9  "9:  "
-set $ws10 "10:  "
-
-
-# begin default config
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -115,6 +93,17 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
+set $ws1  "1:  "
+set $ws2  "2:  "
+set $ws3  "3:  "
+set $ws4  "4:  "
+set $ws5  "5:  "
+set $ws6  "6:  "
+set $ws7  "7:  "
+set $ws8  "8:  "
+set $ws9  "9:  "
+set $ws10 "10:  "
+
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -171,36 +160,47 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+set $transparent #00000000
+set $white #ffffff
+set $darkblue #1C74C5
+set $lightblue #3F9CF0
+set $darkred #E62929
+
 bar {
         status_command i3blocks
         i3bar_command i3bar -t
         position top
         font pango:Verdana, FontAwesome 11
-        strip_workspace_numbers yes
+        #strip_workspace_numbers yes
         separator_symbol "■"
         bindsym button4 nop
         bindsym button5 nop
         tray_padding 0
-        height $height
+        height 68
         colors {
-            	statusline         $white
-             	background         $transparent
-        	separator          $transparent
+                statusline         $white
+                background         $transparent
+                separator          $transparent
 
-		#                  BORDER       BACKGROUND   TEXT
-        	focused_workspace  $transparent $transparent $darkwhite
-        	inactive_workspace $transparent $transparent $white
-        	active_workspace   $transparent $transparent $white
-        	urgent_workspace   $darkred     $darkred     $transparent
-        	binding_mode       $darkred     $darkred     $transparent
-    	}
+                #                  BORDER       BACKGROUND   TEXT
+                focused_workspace  $transparent $transparent $lightblue
+                inactive_workspace $transparent $transparent $white
+                active_workspace   $transparent $transparent $white
+                urgent_workspace   $darkred     $darkred     $transparent
+                binding_mode       $darkred     $darkred     $transparent
+        }
 }
 
-# hide window title
-new_window none
+# window border
+new_window pixel 2
 
 # i3-gaps
 gaps inner 10
 
+# colors
+#                       border  backgr. text    indicator child_border
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+
 exec --no-startup-id numlockx on
-exec --no-startup-id feh --bg-scale ~/dotfiles/resources/wallpaper/mountain.jpg
+exec_always --no-startup-id feh --bg-fill ~/dotfiles/resources/wallpaper/mountain.jpg

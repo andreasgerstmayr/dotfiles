@@ -38,6 +38,7 @@ tmux: update-submodules
 i3blocks:
 	mkdir -p ~/.config/i3blocks
 	ln -snf $$(pwd)/i3blocks/config ~/.config/i3blocks/config
+	ln -snf $$(pwd)/i3blocks/scripts ~/.config/i3blocks/scripts
 
 .PHONY: i3
 i3: i3blocks
