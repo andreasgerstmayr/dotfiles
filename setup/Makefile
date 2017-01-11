@@ -1,5 +1,5 @@
-.PHONY: all
-all: basics i3gaps i3blocks-gaps dotfiles
+.PHONY: default
+default: dotfiles
 
 .PHONY: update
 update:
@@ -8,13 +8,13 @@ update:
 
 .PHONY: basics
 basics: update
-	sudo apt install git zsh vim tmux terminator feh rofi fonts-font-awesome fonts-powerline
+	sudo apt install git zsh vim tmux terminator feh rofi fonts-font-awesome fonts-powerline sysstat
 
 .PHONY: i3gaps-deps
 i3gaps-deps: update
 	sudo apt install libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm0 libxcb-xrm-dev
 
-/usr/bin/i3: i3gaps-deps
+/usr/bin/i3: basics i3gaps-deps
 	cd $$(mktemp -d) && \
 	git clone https://github.com/Airblader/i3.git i3-gaps && \
 	cd i3-gaps && \
@@ -24,7 +24,7 @@ i3gaps-deps: update
 	make && \
 	sudo make install
 
-/usr/bin/i3blocks:
+/usr/bin/i3blocks: basics
 	cd $$(mktemp -d) && \
 	git clone https://github.com/Airblader/i3blocks-gaps.git && \
 	cd i3blocks-gaps && \
@@ -33,5 +33,5 @@ i3gaps-deps: update
 
 .PHONY: dotfiles
 dotfiles: basics /usr/bin/i3 /usr/bin/i3blocks
-	make -C ~/dotfiles git zsh vim tmux i3 i3blocks terminator
+	make -C ../ git zsh vim tmux i3 i3blocks terminator
 	chsh -s $$(which zsh)
