@@ -5,7 +5,7 @@ usage:
 
 .PHONY: update-submodules
 update-submodules:
-	git submodule update --init --recursive
+	git submodule update --init --recursive --remote
 
 .PHONY: git
 git:
@@ -39,8 +39,12 @@ i3:
 	mkdir -p ~/.config/i3
 	ln -snf $$(pwd)/i3/config ~/.config/i3/config
 
+.PHONY: consolas
+consolas:
+	@echo Please install Consolas manually.
+
 .PHONY: terminator
-terminator:
+terminator: consolas
 	mkdir -p ~/.config/terminator
 	ln -snf $$(pwd)/terminator/config ~/.config/terminator/config
 
@@ -48,17 +52,7 @@ terminator:
 terminal:
 	cat $$(pwd)/terminal/README.md
 
-.PHONY: fonts
-fonts:
-	@echo Please install Consolas manually.
-
 .PHONY: hidpi
 hidpi:
 	ln -snf $$(pwd)/hidpi/xprofile ~/.xprofile
 	ln -snf $$(pwd)/hidpi/Xresources ~/.Xresources
-
-.PHONY: macbook
-macbook: git zsh vim tmux
-
-.PHONY: ubuntuvm
-ubuntuvm: git zsh vim tmux i3 terminator hidpi fonts
