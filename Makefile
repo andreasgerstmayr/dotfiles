@@ -34,8 +34,13 @@ tmux: update-submodules
 	ln -snf $$(pwd)/tmux/.tmux/.tmux.conf ~/.tmux.conf
 	ln -snf $$(pwd)/tmux/.tmux/.tmux.conf.lobal ~/.tmux.conf.local
 
+.PHONY: i3blocks
+i3blocks:
+	mkdir -p ~/.config/i3blocks
+	ln -snf $$(pwd)/i3blocks/config ~/.config/i3blocks/config
+
 .PHONY: i3
-i3:
+i3: i3blocks
 	mkdir -p ~/.config/i3
 	ln -snf $$(pwd)/i3/config ~/.config/i3/config
 

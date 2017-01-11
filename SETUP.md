@@ -4,7 +4,7 @@
 # basic software
 sudo apt update
 sudo apt dist-upgrade
-sudo apt install git zsh vim tmux terminator feh rofi
+sudo apt install git zsh vim tmux terminator feh rofi fonts-font-awesome fonts-powerline
 
 
 # i3-gaps
@@ -23,8 +23,12 @@ mkdir build && cd build
 make
 sudo make install
 
-## i3blocks
-sudo apt install --no-install-recommends i3blocks
+## i3blocks-gaps
+cd ~
+git clone https://github.com/Airblader/i3blocks-gaps.git
+cd i3blocks-gaps
+make
+sudo make install
 
 
 # install dotfiles

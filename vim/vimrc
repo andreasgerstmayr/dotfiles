@@ -25,6 +25,8 @@ map ß <C-\>
 " tagbar
 nmap <F8> :TagbarToggle<CR>
 
+" powerline fonts
+let g:airline_powerline_fonts = 1
 
 " python
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8

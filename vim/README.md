@@ -5,6 +5,7 @@
 * `<Ctrl-W> H/J/K/L>` switch pane
 * `<Ctrl-W> Left/Down/Up/Right>` switch pane
 * `<Ctrl-T>` jump back to last opened file
+* `:vsp` vertical split current buffer
 
 ### nerdtree
 * `,ne` open
