@@ -8,7 +8,9 @@ update:
 
 .PHONY: basics
 basics: update
-	sudo apt install git zsh vim tmux terminator feh rofi fonts-font-awesome fonts-powerline sysstat
+	# sysstat is required for cpu stats in i3blocks
+	# compton for transparency of the i3bar
+	sudo apt install git zsh vim tmux terminator feh rofi fonts-font-awesome fonts-powerline sysstat compton
 
 .PHONY: i3gaps-deps
 i3gaps-deps: update
@@ -33,5 +35,5 @@ i3gaps-deps: update
 
 .PHONY: dotfiles
 dotfiles: basics /usr/bin/i3 /usr/bin/i3blocks
-	make -C ../ git zsh vim tmux i3 i3blocks terminator
+	make -C ../ git zsh vim tmux i3 terminator
 	chsh -s $$(which zsh)

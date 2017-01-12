@@ -160,7 +160,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-set $transparent #00000000
+set $transparent #000000C0
 set $white #ffffff
 set $darkblue #1C74C5
 set $lightblue #3F9CF0
@@ -192,15 +192,17 @@ bar {
 }
 
 # window border
-new_window pixel 2
+#new_window pixel 2
 
 # i3-gaps
 gaps inner 10
 
 # colors
 #                       border  backgr. text    indicator child_border
-client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   $darkblue
+client.unfocused        #333333 #222222 #888888 #292d2e   $transparent
 
 exec --no-startup-id numlockx on
-exec_always --no-startup-id feh --bg-fill ~/dotfiles/resources/wallpaper/mountain.jpg
+
+exec --no-startup-id compton -b
+exec_always --no-startup-id feh --bg-fill https://unsplash.it/3840/2160/?random

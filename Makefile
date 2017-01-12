@@ -44,6 +44,7 @@ i3blocks:
 i3: i3blocks
 	mkdir -p ~/.config/i3
 	ln -snf $$(pwd)/i3/config ~/.config/i3/config
+	ln -snf $$(pwd)/resources/wallpapers ~/.config/i3/wallpapers
 
 .PHONY: consolas
 consolas:
