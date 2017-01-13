@@ -5,7 +5,7 @@ usage:
 
 .PHONY: update-submodules
 update-submodules:
-	git submodule update --init --recursive --remote
+	git submodule update --init --recursive
 
 .PHONY: git
 git:

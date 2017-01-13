@@ -166,6 +166,8 @@ set $darkblue #1C74C5
 set $lightblue #3F9CF0
 set $darkred #E62929
 
+set_from_resource $height i3wm.i3bar_height 34
+
 bar {
         status_command i3blocks
         i3bar_command i3bar -t
@@ -176,7 +178,7 @@ bar {
         bindsym button4 nop
         bindsym button5 nop
         tray_padding 0
-        height 68
+        height $height
         colors {
                 statusline         $white
                 background         $transparent
