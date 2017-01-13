@@ -207,4 +207,4 @@ client.unfocused        #333333 #222222 #888888 #292d2e   $transparent
 exec --no-startup-id numlockx on
 
 exec --no-startup-id compton -b
-exec_always --no-startup-id feh --bg-fill https://unsplash.it/3840/2160/?random
+exec_always --no-startup-id feh --bg-fill --randomize .config/i3/wallpapers

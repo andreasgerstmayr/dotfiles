@@ -44,7 +44,6 @@ i3blocks:
 i3: i3blocks
 	mkdir -p ~/.config/i3
 	ln -snf $$(pwd)/i3/config ~/.config/i3/config
-	ln -snf $$(pwd)/resources/wallpapers ~/.config/i3/wallpapers
 
 .PHONY: consolas
 consolas:
@@ -63,3 +62,9 @@ terminal:
 hidpi:
 	ln -snf $$(pwd)/hidpi/xprofile ~/.xprofile
 	ln -snf $$(pwd)/hidpi/Xresources ~/.Xresources
+
+.PHONY: wallpapers
+wallpapers:
+	cd $$(mktemp -d) && \
+	wget https://www.dropbox.com/sh/n8434lg9fi4wdo0/AADx48fhDdiPsvPfB8yw2kIva?dl=1 && \
+	unzip -o * -x / -d ~/.config/i3/wallpapers
