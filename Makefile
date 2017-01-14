@@ -67,4 +67,6 @@ hidpi:
 wallpapers:
 	cd $$(mktemp -d) && \
 	wget https://www.dropbox.com/sh/n8434lg9fi4wdo0/AADx48fhDdiPsvPfB8yw2kIva?dl=1 && \
-	unzip -o * -x / -d ~/.config/i3/wallpapers
+	rm -rf ~/.config/i3/wallpapers && \
+	mkdir -p ~/.config/i3/wallpapers && \
+	unzip * -x / -d ~/.config/i3/wallpapers
