@@ -12,6 +12,11 @@ git:
 	ln -snf $$(pwd)/git/gitconfig ~/.gitconfig
 	ln -snf $$(pwd)/git/globalgitignore ~/.globalgitignore
 
+.PHONY: git-work
+git-work:
+	sed 's/gmail.com/catalysts.cc/' $$(pwd)/git/gitconfig > ~/.gitconfig
+	ln -snf $$(pwd)/git/globalgitignore ~/.globalgitignore
+
 .PHONY: zsh
 zsh: update-submodules
 	ln -snf $$(pwd)/zsh/zprezto ~/.zprezto
