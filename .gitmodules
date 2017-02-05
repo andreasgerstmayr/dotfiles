@@ -34,3 +34,6 @@
 	path = tmux/.tmux
 	url = https://github.com/gpakosz/.tmux.git
 	branch = master
+[submodule "vim/bundle/salt-vim"]
+	path = vim/bundle/salt-vim
+	url = https://github.com/saltstack/salt-vim.git
