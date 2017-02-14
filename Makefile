@@ -26,6 +26,7 @@ zsh: update-submodules
 	ln -snf $$(pwd)/zsh/zprezto/runcoms/zshenv ~/.zshenv
 	ln -snf $$(pwd)/zsh/zshrc ~/.zshrc
 	ln -snf $$(pwd)/zsh/zpreztorc ~/.zpreztorc
+	ln -snf $$(pwd)/zsh/custom/themes/prompt_andihit_setup ~/.zprezto/modules/prompt/functions
 
 .PHONY: vim
 vim: update-submodules
