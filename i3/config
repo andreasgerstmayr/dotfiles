@@ -93,16 +93,16 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-set $ws1  "1:  "
-set $ws2  "2:  "
-set $ws3  "3:  "
-set $ws4  "4:  "
-set $ws5  "5:  "
-set $ws6  "6:  "
-set $ws7  "7:  "
-set $ws8  "8:  "
-set $ws9  "9:  "
-set $ws10 "10:  "
+set $ws1  "1  "
+set $ws2  "2  "
+set $ws3  "3  "
+set $ws4  "4  "
+set $ws5  "5  "
+set $ws6  "6  "
+set $ws7  "7  "
+set $ws8  "8  "
+set $ws9  "9  "
+set $ws10 "10  "
 
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -162,6 +162,7 @@ bindsym $mod+r mode "resize"
 
 set $transparent #000000C0
 set $white #ffffff
+set $grey #5b5b5b
 set $darkblue #1C74C5
 set $lightblue #3F9CF0
 set $darkred #E62929
@@ -185,8 +186,8 @@ bar {
                 separator          $transparent
 
                 #                  BORDER       BACKGROUND   TEXT
-                focused_workspace  $transparent $transparent $lightblue
-                inactive_workspace $transparent $transparent $white
+                focused_workspace  $transparent $transparent $white
+                inactive_workspace $transparent $transparent $grey
                 active_workspace   $transparent $transparent $white
                 urgent_workspace   $darkred     $darkred     $transparent
                 binding_mode       $darkred     $darkred     $transparent
