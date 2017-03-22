@@ -16,22 +16,19 @@ fi
 unalias rm
 
 if [[ "$OSTYPE" == darwin* ]]; then
-  local dropbox="$HOME/Dropbox"
+  local shared="$HOME/shared"
   export COPYFILE_DISABLE=true # don't add hidden files to tar archives
   alias netstat-open-ports="netstat -an | egrep 'Proto|LISTEN'"
 elif [[ "$OSTYPE" == linux* ]]; then
-  local dropbox="/media/sf_Dropbox"
+  local shared="$HOME/shared"
   alias netstat-open-ports="netstat -anp | egrep 'Proto|LISTEN'"
 elif [[ "$OSTYPE" == "cygwin" ]]; then
-  local dropbox="/cygdrive/c/Users/Andreas/Dropbox"
 fi
 
 # directory bookmarks
-hash -d sem8="$dropbox/Uni/TU Wien/Semester8"
-hash -d bac="$dropbox/Uni/TU Wien/Semester8/bachelor-thesis"
-hash -d ben="$dropbox/Uni/TU Wien/Semester8/bachelor-thesis/benchmarks"
-hash -d sem9="$dropbox/Uni/TU Wien/Semester9"
+hash -d sem10="$shared/Uni/Semester10"
 
 # zsh options
 setopt rm_star_silent # disable verification message for rm with *
+setopt clobber        # disable warning when redirecting output to existing file
 unsetopt correct      # disable autocorrection
