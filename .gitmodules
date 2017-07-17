@@ -1,6 +1,6 @@
 [submodule "zsh/zprezto"]
 	path = zsh/zprezto
-	url = https://github.com/zsh-users/prezto.git
+	url = https://github.com/sorin-ionescu/prezto.git
 	branch = master
 [submodule "vim/bundle/vim-airline"]
 	path = vim/bundle/vim-airline
