@@ -91,6 +91,7 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 # Prompt
 #
 
+fpath=( "$ZPREZTODIR/../custom/themes" $fpath )
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
