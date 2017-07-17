@@ -38,7 +38,7 @@ vim: update-submodules
 .PHONY: tmux
 tmux: update-submodules
 	ln -snf $$(pwd)/tmux/.tmux/.tmux.conf ~/.tmux.conf
-	ln -snf $$(pwd)/tmux/.tmux/.tmux.conf.lobal ~/.tmux.conf.local
+	ln -snf $$(pwd)/tmux/.tmux/.tmux.conf.local ~/.tmux.conf.local
 
 .PHONY: i3blocks
 i3blocks:
