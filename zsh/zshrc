@@ -27,6 +27,7 @@ fi
 
 # directory bookmarks
 hash -d sem10="$shared/Uni/Semester10"
+hash -d sem11="$shared/Uni/Semester11"
 
 # zsh options
 setopt rm_star_silent # disable verification message for rm with *
