@@ -3,6 +3,10 @@ usage:
 	@echo Available targets:
 	@make -rpn | sed -n -e '/^$$/ { n ; /^[^ .#][^ ]*:/ { s/:.*$$// ; p ; } ; }' | sort
 
+.PHONY: submodules-pull-origin
+submodules-pull-origin:
+	git submodule foreach git pull origin master
+
 .PHONY: update-submodules
 update-submodules:
 	git submodule update --init --recursive
