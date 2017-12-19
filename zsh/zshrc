@@ -33,3 +33,4 @@ hash -d sem11="$shared/Uni/Semester11"
 setopt rm_star_silent # disable verification message for rm with *
 setopt clobber        # disable warning when redirecting output to existing file
 unsetopt correct      # disable autocorrection
+alias scp='noglob scp' # workaround for scp path autocomplete on ubuntu
