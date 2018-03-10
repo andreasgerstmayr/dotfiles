@@ -18,16 +18,13 @@ unalias rm
 if [[ "$OSTYPE" == darwin* ]]; then
   local shared="$HOME/shared"
   export COPYFILE_DISABLE=true # don't add hidden files to tar archives
-  alias netstat-open-ports="netstat -an | egrep 'Proto|LISTEN'"
 elif [[ "$OSTYPE" == linux* ]]; then
   local shared="$HOME/shared"
-  alias netstat-open-ports="netstat -anp | egrep 'Proto|LISTEN'"
 elif [[ "$OSTYPE" == "cygwin" ]]; then
 fi
 
 # directory bookmarks
-hash -d sem10="$shared/Uni/Semester10"
-hash -d sem11="$shared/Uni/Semester11"
+hash -d uni="$shared/2018S"
 
 # zsh options
 setopt rm_star_silent # disable verification message for rm with *
