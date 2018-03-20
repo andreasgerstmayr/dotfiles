@@ -25,6 +25,7 @@ fi
 
 # directory bookmarks
 hash -d uni="$shared/2018S"
+hash -d gsoc="$shared/2018S/GSOC"
 
 # zsh options
 setopt rm_star_silent # disable verification message for rm with *
