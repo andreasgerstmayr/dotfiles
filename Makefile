@@ -5,7 +5,7 @@ usage:
 
 .PHONY: submodules-pull-origin
 submodules-pull-origin:
-	git submodule foreach git pull origin master
+	git submodule update --recursive --remote
 
 .PHONY: update-submodules
 update-submodules:
