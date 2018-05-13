@@ -18,8 +18,10 @@ unalias rm
 if [[ "$OSTYPE" == darwin* ]]; then
   local shared="$HOME/shared"
   export COPYFILE_DISABLE=true # don't add hidden files to tar archives
+  export PATH=$PATH:$shared/misc/IT/shellscripts
 elif [[ "$OSTYPE" == linux* ]]; then
   local shared="$HOME/shared"
+  export PATH=$PATH:$shared/misc/IT/shellscripts
 elif [[ "$OSTYPE" == "cygwin" ]]; then
 fi
 
