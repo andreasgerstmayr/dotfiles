@@ -20,12 +20,17 @@ if [[ "$OSTYPE" == darwin* ]]; then
   export COPYFILE_DISABLE=true # don't add hidden files to tar archives
   export PATH=$PATH:$shared/misc/IT/shellscripts
 elif [[ "$OSTYPE" == linux* ]]; then
-  local shared="$HOME/shared"
-  export PATH=$PATH:$shared/misc/IT/shellscripts
+  if grep -q Microsoft /proc/version; then
+    local shared="/mnt/c/Users/Andreas/shared"
+  else
+    local shared="$HOME/shared"
+  fi
+   export PATH=$PATH:$shared/misc/IT/shellscripts
 elif [[ "$OSTYPE" == "cygwin" ]]; then
 fi
 
 # directory bookmarks
+hash -d misc="$shared/misc"
 hash -d uni="$shared/2018S"
 hash -d gsoc="$shared/2018S/GSOC"
 
