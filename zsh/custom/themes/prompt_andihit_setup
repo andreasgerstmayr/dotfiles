@@ -3,7 +3,7 @@
 # and mitsuhikos prompt: https://github.com/mitsuhiko/dotfiles
 #
 
-ANDIHIT_BASEPROMPT='%B%(#.%F{red}.%F{magenta})%n%f at %F{yellow}%m%f in %F{green}%~%f'
+ANDIHIT_BASEPROMPT='%B%(#.%F{red}.%F{magenta})%n%f at %F{yellow}'$(hostname --fqdn)'%f in %F{green}%~%f'
 
 function prompt_andihit_worker_callback {
   output=$3
