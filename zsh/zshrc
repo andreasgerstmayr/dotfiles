@@ -10,15 +10,10 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
-
-# aliases
-unalias rm
-
 if [[ "$OSTYPE" == darwin* ]]; then
   local shared="$HOME/shared"
   export COPYFILE_DISABLE=true # don't add hidden files to tar archives
-  export PATH=$PATH:$shared/misc/IT/shellscripts
+  export PATH=$PATH:~/Library/Python/3.7/bin:$shared/misc/IT/shellscripts
 elif [[ "$OSTYPE" == linux* ]]; then
   if grep -q Microsoft /proc/version; then
     local shared="/mnt/c/Users/Andreas/shared"
