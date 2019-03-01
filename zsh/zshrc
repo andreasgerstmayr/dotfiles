@@ -20,8 +20,12 @@ elif [[ "$OSTYPE" == linux* ]]; then
   else
     local shared="$HOME/shared"
   fi
-   export PATH=$PATH:$shared/misc/IT/shellscripts
+  export PATH=$PATH:$shared/misc/IT/shellscripts
 elif [[ "$OSTYPE" == "cygwin" ]]; then
+fi
+
+if [[ -S "$SSH_AUTH_SOCK" ]]; then
+  ln -sf "$SSH_AUTH_SOCK" /tmp/ssh-agent-$USER
 fi
 
 # directory bookmarks

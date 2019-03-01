@@ -31,6 +31,10 @@ zsh: update-submodules
 	ln -snf $$(pwd)/zsh/zshrc ~/.zshrc
 	ln -snf $$(pwd)/zsh/zpreztorc ~/.zpreztorc
 
+.PHONY: bash
+bash:
+	ln -snf $$(pwd)/bash/bashrc ~/.bashrc
+
 .PHONY: vim
 vim: update-submodules
 	mkdir -p ~/.vim
