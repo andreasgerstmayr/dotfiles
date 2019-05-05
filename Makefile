@@ -58,6 +58,16 @@ i3: i3blocks
 	mkdir -p ~/.config/i3
 	ln -snf $$(pwd)/i3/config ~/.config/i3/config
 
+.PHONY: waybar
+waybar:
+	mkdir -p ~/.config/waybar
+	ln -snf $$(pwd)/waybar/config ~/.config/waybar/config
+
+.PHONY: sway
+sway: waybar
+	mkdir -p ~/.config/sway
+	ln -snf $$(pwd)/sway/config ~/.config/sway/config
+
 .PHONY: consolas
 consolas:
 	@echo Please install Consolas manually.
