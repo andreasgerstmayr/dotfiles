@@ -17,7 +17,7 @@ set $right l
 set $term terminator
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
-set $menu rofi -show run
+set $menu rofi -show drun
 
 ### Output configuration
 #
@@ -119,17 +119,17 @@ input * {
 # Workspaces:
 #
 
-set $ws1  "1  "
-set $ws2  "2  "
-set $ws3  "3  "
-set $ws4  "4  "
-set $ws5  "5  "
-#set $ws5  "5  "
-set $ws6  "6  "
-set $ws7  "7  "
-set $ws8  "8  "
-set $ws9  "9  "
-set $ws10 "10  "
+set $ws1  "1 "
+set $ws2  "2 "
+set $ws3  "3 "
+set $ws4  "4 "
+set $ws5  "5 "
+#set $ws5  "5 "
+set $ws6  "6 "
+set $ws7  "7 "
+set $ws8  "8 "
+set $ws9  "9 "
+set $ws10 "10 "
 
     # switch to workspace
     bindsym $mod+1 workspace $ws1
@@ -250,8 +250,9 @@ exec /usr/libexec/polkit-gnome-authentication-agent-1 # polkit daemon
 # workspace assignments, auto floating
 for_window [class="keepassxc"] floating enable
 for_window [title=".+The Lounge.+"] move container to workspace $ws1
+for_window [class="Spotify"] move container to workspace $ws10
 assign [class="Code"] $ws3
 assign [class="Thunderbird"] $ws9
-assign [class="Spotify"] $ws10
+
 
 include /etc/sway/config.d/*

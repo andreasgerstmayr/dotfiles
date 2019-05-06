@@ -62,6 +62,7 @@ i3: i3blocks
 waybar:
 	mkdir -p ~/.config/waybar
 	ln -snf $$(pwd)/waybar/config ~/.config/waybar/config
+	ln -snf $$(pwd)/waybar/style.css ~/.config/waybar/style.css
 
 .PHONY: sway
 sway: waybar
