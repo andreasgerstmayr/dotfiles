@@ -156,6 +156,14 @@ set $ws10 "10 "
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
+# Monitor:
+#
+    # focus other monitor
+    bindsym $mod+m focus output right
+
+    # move workspace to other monitor
+    bindsym $mod+Shift+m move workspace to output right
+#
 # Layout stuff:
 #
     # You can "split" the current object of your focus with
@@ -249,10 +257,6 @@ exec /usr/libexec/polkit-gnome-authentication-agent-1 # polkit daemon
 
 # workspace assignments, auto floating
 for_window [class="keepassxc"] floating enable
-for_window [title=".+The Lounge.+"] move container to workspace $ws1
-for_window [class="Spotify"] move container to workspace $ws10
-assign [class="Code"] $ws3
-assign [class="Thunderbird"] $ws9
 
 
 include /etc/sway/config.d/*

@@ -18,7 +18,7 @@ git:
 
 .PHONY: git-work
 git-work:
-	sed 's/gmail.com/catalysts.cc/' $$(pwd)/git/gitconfig > ~/.gitconfig
+	sed 's/andreas@gerstmayr.me/agerstmayr@redhat.com/' $$(pwd)/git/gitconfig > ~/.gitconfig
 	ln -snf $$(pwd)/git/globalgitignore ~/.globalgitignore
 
 .PHONY: zsh
