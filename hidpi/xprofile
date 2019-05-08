@@ -1,1 +1,0 @@
-xrandr --dpi 192

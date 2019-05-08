@@ -24,9 +24,16 @@ elif [[ "$OSTYPE" == linux* ]]; then
 elif [[ "$OSTYPE" == "cygwin" ]]; then
 fi
 
+if [[ "$XDG_SESSION_DESKTOP" == "sway" ]]; then
+  # will be started only once because of --start arg
+  export $(/usr/bin/gnome-keyring-daemon --start --components=ssh 2>/dev/null)
+fi
+
 if [[ -S "$SSH_AUTH_SOCK" ]]; then
   ln -sf "$SSH_AUTH_SOCK" /tmp/ssh-agent-$USER
 fi
+
+export PATH=$PATH:~/.npm/packages/bin
 
 # directory bookmarks
 hash -d misc="$shared/misc"
@@ -39,3 +46,5 @@ setopt clobber        # disable warning when redirecting output to existing file
 unsetopt correct      # disable autocorrection
 setopt PROMPT_SP      # show partial lines
 alias scp='noglob scp' # workaround for scp path autocomplete on ubuntu
+
+umask 022

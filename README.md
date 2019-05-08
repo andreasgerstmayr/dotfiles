@@ -3,15 +3,13 @@
 ## Setup
 Take a look at the `Makefile` and install the things you want.
 
-## Software (i3)
+## Software
 * zsh
-* i3, rofi, feh, numlockx
 * terminator
 
-## Software (sway)
-* zsh
+## WM
+* i3-gaps, rofi, feh, dunst, compton
 * sway, waybar, rofi, mako
-* terminator
 
 ## Fonts
 * Consolas
