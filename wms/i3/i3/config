@@ -154,14 +154,12 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-        position top
-        status_command i3status
-        font pango:Verdana 10
-        height 68
-}
+# status bar
+#bar {
+#        status_command i3status
+#        position top
+#}
+exec_always --no-startup-id $HOME/.dotfiles/wms/i3/polybar/launch.sh
 
 # colors
 set $transparent #000000C0
