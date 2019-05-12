@@ -1,4 +1,4 @@
-WGET := wget -nc --content-disposition
+WGET := wget -nc --content-disposition -q
 
 fetch:
 	$(WGET) https://unsplash.com/photos/-27Pzw5c_kU/download?force=true
