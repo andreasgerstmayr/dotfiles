@@ -8,7 +8,7 @@ Take a look at the `Makefile` and install the things you want.
 * terminator
 
 ## WM
-* i3-gaps, rofi, feh, dunst, compton
+* i3-gaps, polybar, rofi, feh, dunst, compton
 * sway, waybar, rofi, mako
 
 ## Fonts

@@ -14,8 +14,7 @@ font pango:monospace 12
 
 ### Output configuration
 #
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg $(find ~/.dotfiles/wallpapers -iname '*.jpg' | sort -R | head -n 1) fill
+output * bg $(find ~/.dotfiles/wms/wallpapers -iname '*.jpg' | sort -R | head -n 1) fill
 
 #
 # Example configuration:
