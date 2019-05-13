@@ -53,7 +53,7 @@ font-4 = fixed:pixelsize=22:weight=bold;4
 
 modules-left = i3
 ;modules-center = mpd
-modules-right = cpu memory wlan eth pulseaudio ext-battery int-battery date
+modules-right = cpu memory wlan eth pulseaudio ext-battery int-battery time-toronto time-melbourne date
 
 tray-position = right
 tray-padding = 2
@@ -180,6 +180,18 @@ time-alt = %H:%M:%S
 format-underline = #64727D
 
 label = %date% %{T5}%time%%{T-} 
+
+[module/time-toronto]
+type = custom/script
+exec = TZ=America/Toronto date +"CA %H:%M "
+interval = 30
+format-underline = #66cc99
+
+[module/time-melbourne]
+type = custom/script
+exec = TZ=Australia/Melbourne date +"AUS %H:%M "
+interval = 30
+format-underline = #ffa000
 
 [module/pulseaudio]
 type = internal/pulseaudio
