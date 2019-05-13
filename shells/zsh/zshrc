@@ -107,16 +107,23 @@ if [[ -S "$SSH_AUTH_SOCK" ]]; then
   ln -sf "$SSH_AUTH_SOCK" /tmp/ssh-agent-$USER
 fi
 
-# directory bookmarks
-hash -d misc="$shared/misc"
+# umask
+umask 022
 
 # zsh options
 setopt rm_star_silent # disable verification message for rm with *
-unsetopt share_history
 
 # zsh plugin options
 ZSH_HIGHLIGHT_STYLES[path]=none
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 
-# umask
-umask 022
+# directory bookmarks
+hash -d misc="$shared/misc"
+
+# aliases
+rpm-extract() {
+  rpm2cpio "$1" | cpio -idmv
+}
+
+# environment
+LESS="-F -R"

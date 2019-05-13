@@ -1,5 +1,6 @@
 if [ "$XDG_SESSION_TYPE" = "x11" ]; then
-  #xrandr --output HDMI-2 --mode 3840x2160 --dpi 192 --left-of eDP-1
-  #xrandr --output eDP-1 --dpi 92
-  xrandr --dpi 192
+  if [ "$HOSTNAME" = "agerstmayr-thinkpad" ] && xrandr | grep "HDMI-2 connected" > /dev/null; then
+    xrandr --output HDMI-2 --mode 3840x2160 --dpi 192 --left-of eDP-1 --primary \
+           --output eDP-1 --dpi 92
+  fi
 fi

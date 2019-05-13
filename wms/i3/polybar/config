@@ -83,7 +83,7 @@ index-sort = true
 wrapping-scroll = false
 
 ; Only show workspaces on the same output as the bar
-;pin-workspaces = true
+pin-workspaces = true
 
 ; resize etc
 label-mode-padding = 2
@@ -104,11 +104,12 @@ label-unfocused-padding = ${self.label-focused-padding}
 ; label-visible = %name%
 ;label-visible-background = ${self.label-focused-background}
 ;label-visible-underline = ${self.label-focused-underline}
-;label-visible-padding = ${self.label-focused-padding}
+label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
 ; label-urgent = %name%
 label-urgent-underline = #eb4d4b
+label-urgent-padding = ${self.label-focused-padding}
 
 [module/cpu]
 inherit = module/base
