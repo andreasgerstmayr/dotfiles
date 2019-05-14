@@ -5,6 +5,7 @@ git:
 
 .PHONY: git-work
 git-work:
+	rm -f ~/.gitconfig
 	sed 's/andreas@gerstmayr.me/agerstmayr@redhat.com/' $$(pwd)/git/gitconfig > ~/.gitconfig
 	ln -snf $$(pwd)/git/globalgitignore ~/.globalgitignore
 
