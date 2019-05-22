@@ -177,4 +177,5 @@ exec --no-startup-id compton -b # required for transparency
 # workspace assignments, auto floating
 for_window [class="keepassxc"] floating enable
 for_window [class="Pavucontrol"] floating enable
+for_window [class="SpeedCrunch"] floating enable
 for_window [class="Thunderbird" instance="Msgcompose"] floating enable

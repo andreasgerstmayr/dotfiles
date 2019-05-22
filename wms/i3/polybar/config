@@ -16,6 +16,10 @@
 ;
 ;==========================================================
 
+;
+; find fonts with symbols: printf '%x' \'✓ | xargs -I{} fc-list ":charset={}"
+;
+
 [colors]
 ;background = ${xrdb:color0:#222}
 background = #222
@@ -28,16 +32,16 @@ secondary = #e60053
 [bar/default]
 monitor = ${env:MONITOR}
 width = 100%
-height = 54
+height = 27
 fixed-center = false
 
 background = #992b303b
 foreground = #ffffff
 
-line-size = 5
+line-size = 3
 line-color = #8064727d
 
-border-bottom-size = 4
+border-bottom-size = 2
 border-bottom-color = #8064727d
 
 padding-right = 3
@@ -45,15 +49,17 @@ padding-right = 3
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = fixed:pixelsize=22;4
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;4
-font-2 = siji:pixelsize=10;4
-font-3 = Font Awesome:style=Regular:size=18;4
-font-4 = fixed:pixelsize=22:weight=bold;4
+font-0 = fixed:pixelsize=11;2
+font-1 = unifont:fontformat=truetype:size=4:antialias=false;2
+font-2 = siji:pixelsize=5;2
+font-3 = Font Awesome:style=Regular:size=9;2
+font-4 = fixed:pixelsize=11:weight=bold;2
+font-5 = OpenSymbol:style=Regular
+;STIX:style=Italic ;Consolas:pixelsize=11:weight=bold;2
 
 modules-left = i3
 ;modules-center = mpd
-modules-right = cpu memory wlan eth pulseaudio ext-battery int-battery time-toronto time-melbourne date
+modules-right = cpu memory wlan eth pulseaudio int-battery ext-battery time-toronto time-melbourne date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -72,6 +78,19 @@ tray-padding = 2
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
+[bar/default-hidpi]
+inherit = bar/default
+height = 54
+
+line-size = 5
+border-bottom-size = 4
+
+font-0 = fixed:pixelsize=22;4
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;4
+font-2 = siji:pixelsize=10;4
+font-3 = Font Awesome:style=Regular:size=18;4
+font-4 = fixed:pixelsize=22:weight=bold;4
 
 [module/base]
 format-padding = 1
@@ -127,7 +146,7 @@ format-underline = #9b59b6
 
 [module/wlan]
 type = internal/network
-interface = net1
+interface = wlp4s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
@@ -150,7 +169,7 @@ ramp-signal-foreground = ${colors.foreground-alt}
 [module/eth]
 inherit = module/base
 type = internal/network
-interface = enp0s3
+interface = enp0s31f6
 interval = 3.0
 
 format-connected-padding = 1
@@ -248,7 +267,7 @@ bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
 
-[module/ext-battery]
+[module/int-battery]
 type = internal/battery
 battery = BAT0
 adapter = ADP1
@@ -281,8 +300,9 @@ animation-discharging-2 = 
 animation-discharging-foreground = ${colors.foreground-alt}
 animation-discharging-framerate = 750
 
-[module/int-battery]
-inherit = module/ext-battery
+[module/ext-battery]
+inherit = module/int-battery
+battery = BAT1
 
 [module/temperature]
 type = internal/temperature

@@ -3,7 +3,4 @@
 	email = andreas@gerstmayr.me
 [core]
 	editor = vim
-[push]
-	default = simple
-[color]
-	ui = auto
+	excludesfile = ~/.gitignore_global

@@ -96,7 +96,7 @@ elif [[ "$OSTYPE" == linux* ]]; then
   export PATH=$PATH:$shared/misc/IT/shellscripts
 elif [[ "$OSTYPE" == "cygwin" ]]; then
 fi
-export PATH=$PATH:~/.npm/packages/bin
+export PATH=$PATH:~/.local/bin:~/.npm/packages/bin
 
 if [[ "$XDG_SESSION_DESKTOP" == "sway" ]]; then
   # will be started only once because of --start arg

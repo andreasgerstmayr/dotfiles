@@ -1,13 +1,13 @@
 .PHONY: git
 git:
 	ln -snf $$(pwd)/git/gitconfig ~/.gitconfig
-	ln -snf $$(pwd)/git/globalgitignore ~/.globalgitignore
+	ln -snf $$(pwd)/git/gitignore_global ~/.gitignore_global
 
 .PHONY: git-work
 git-work:
 	rm -f ~/.gitconfig
 	sed 's/andreas@gerstmayr.me/agerstmayr@redhat.com/' $$(pwd)/git/gitconfig > ~/.gitconfig
-	ln -snf $$(pwd)/git/globalgitignore ~/.globalgitignore
+	ln -snf $$(pwd)/git/gitignore_global ~/.gitignore_global
 
 .PHONY: vim
 vim:
