@@ -86,17 +86,15 @@ source $ZSH/oh-my-zsh.sh
 if [[ "$OSTYPE" == darwin* ]]; then
   local shared="$HOME/shared"
   export COPYFILE_DISABLE=true # don't add hidden files to tar archives
-  export PATH=$PATH:~/Library/Python/3.7/bin:$shared/misc/IT/shellscripts
+  export PATH=$PATH:~/Library/Python/3.7/bin
 elif [[ "$OSTYPE" == linux* ]]; then
   if grep -q Microsoft /proc/version; then
     local shared="/mnt/c/Users/Andreas/shared"
   else
     local shared="$HOME/shared"
   fi
-  export PATH=$PATH:$shared/misc/IT/shellscripts
-elif [[ "$OSTYPE" == "cygwin" ]]; then
 fi
-export PATH=$PATH:~/.local/bin:~/.npm/packages/bin
+export PATH=$PATH:~/.local/bin:~/.npm/packages/bin:$shared/misc/common/IT/shellscripts
 
 if [[ "$XDG_SESSION_DESKTOP" == "sway" ]]; then
   # will be started only once because of --start arg
