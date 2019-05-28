@@ -149,41 +149,18 @@ type = internal/network
 interface = wlp4s0
 interval = 3.0
 
-format-connected = <ramp-signal> <label-connected>
 format-connected-underline = #9f78e1
-label-connected = %essid%
-
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
-
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-foreground = ${colors.foreground-alt}
+format-connected-padding = ${module/base.format-padding}
+label-connected = %essid% 
 
 [module/eth]
-inherit = module/base
 type = internal/network
 interface = enp0s31f6
 interval = 3.0
 
-format-connected-padding = 1
 format-connected-underline = #2980b9
-;format-connected-prefix-foreground = ${colors.foreground-alt}
+format-connected-padding = ${module/base.format-padding}
 label-connected = %local_ip% 
-format-underline = #2980b9
-
-format-disconnected-padding = 1
-format-disconnected-underline = #f53c3c
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
 
 [module/date]
 inherit = module/base
@@ -201,12 +178,14 @@ format-underline = #64727D
 label = %date% %{T5}%time%%{T-} 
 
 [module/time-toronto]
+inherit = module/base
 type = custom/script
 exec = TZ=America/Toronto date +"CA %H:%M "
 interval = 30
 format-underline = #66cc99
 
 [module/time-melbourne]
+inherit = module/base
 type = custom/script
 exec = TZ=Australia/Melbourne date +"AUS %H:%M "
 interval = 30
@@ -273,32 +252,32 @@ battery = BAT0
 adapter = ADP1
 full-at = 98
 
-format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
+format-full = <label-full> <ramp-capacity>
+format-full-underline = #ffb52a
+format-full-padding = ${module/base.format-padding}
 
-format-discharging = <animation-discharging> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
+format-charging = <label-charging> <animation-charging>
+format-charging-underline = ${self.format-full-underline}
+format-charging-padding = ${module/base.format-padding}
 
-format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
+format-discharging = <label-discharging> <ramp-capacity>
+format-discharging-underline = ${self.format-full-underline}
+format-discharging-padding = ${module/base.format-padding}
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-foreground = ${colors.foreground-alt}
+;label-discharging = %time%
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
 animation-charging-framerate = 750
-
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-animation-discharging-foreground = ${colors.foreground-alt}
-animation-discharging-framerate = 750
 
 [module/ext-battery]
 inherit = module/int-battery
