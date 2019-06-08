@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Terminate already running bar instances
 killall -q polybar
 
@@ -7,10 +6,12 @@ killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # Launch bar
-polybar --list-monitors | while read monitor; do
+# first polybar gets the tray, therefore start polybar
+# on monitor with the highest resolution first
+polybar --list-monitors | sort -nr -k2 | while read monitor; do
     port=$(echo $monitor | cut -d":" -f1)
-    if echo $monitor | grep 3840 > /dev/null; then
-        MONITOR=$port polybar -vvv default-hidpi &
+    if echo $monitor | grep 3840x > /dev/null; then
+        MONITOR=$port polybar default-hidpi &
     else
         MONITOR=$port polybar default &
     fi

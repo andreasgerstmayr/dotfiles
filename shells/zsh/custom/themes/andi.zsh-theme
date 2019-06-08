@@ -51,9 +51,11 @@ function _andi_preexec() {
 # information back via tempfile.
 function _andi_precmd() {
   _andi_rv=$?
-  _andi_time_now=$(date +%s)
-  if [[ ! -z $_andi_cmd_start ]]; then
-    _andi_cmd_duration=$((_andi_time_now - _andi_cmd_start))
+
+  local time_now cmd_duration
+  if [[ -n $_andi_cmd_start ]]; then
+    time_now=$(date +%s)
+    cmd_duration=$((time_now - _andi_cmd_start))
     unset _andi_cmd_start # clear start time; required for empty commands
   fi
 
@@ -63,8 +65,8 @@ function _andi_precmd() {
 
     #
     echo -n $'\n'$_ANDI_PROMPT$' '$(git_super_status)$(virtualenv_prompt_info) > $_ANDI_ASYNC_PROMPT_FN
-    if [[ $_andi_cmd_duration -gt $_ANDI_PROMPT_TIME_TRESHOLD ]]; then
-      echo -n " took %{$fg[red]%}$(($_andi_cmd_duration/60))m%f" >> $_ANDI_ASYNC_PROMPT_FN
+    if [[ $cmd_duration -gt $_ANDI_PROMPT_TIME_TRESHOLD ]]; then
+      echo -n " took %{$fg[red]%}$(($cmd_duration/60))m%f" >> $_ANDI_ASYNC_PROMPT_FN
     fi
     if [[ x$_andi_rv != x0 ]]; then
       echo -n " exited %{$fg[red]%}$_andi_rv%f" >> $_ANDI_ASYNC_PROMPT_FN

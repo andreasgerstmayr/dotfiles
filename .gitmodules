@@ -1,7 +1,3 @@
-[submodule "tools/tmux/.tmux"]
-	path = tools/tmux/.tmux
-	url = https://github.com/gpakosz/.tmux.git
-	branch = master
 [submodule "tools/vim/bundle/vim-airline"]
 	path = tools/vim/bundle/vim-airline
 	url = https://github.com/vim-airline/vim-airline.git

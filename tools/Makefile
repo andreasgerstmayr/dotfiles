@@ -18,5 +18,4 @@ vim:
 
 .PHONY: tmux
 tmux:
-	ln -snf $$(pwd)/tmux/.tmux/.tmux.conf ~/.tmux.conf
-	ln -snf $$(pwd)/tmux/.tmux/.tmux.conf.local ~/.tmux.conf.local
+	ln -snf $$(pwd)/tmux/tmux.conf ~/.tmux.conf

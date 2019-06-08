@@ -125,3 +125,6 @@ rpm-extract() {
 
 # environment
 export LESS="-F -g -i -M -R -S -w -X -z-4"
+
+# disable autocompletion from /etc/hosts and known_hosts
+zstyle ':completion:*:ssh:*' hosts off

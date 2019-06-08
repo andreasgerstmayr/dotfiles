@@ -1,3 +1,4 @@
+#!/bin/bash
 if [ "$XDG_SESSION_DESKTOP" = "i3" ]; then
   if [ "$HOSTNAME" = "agerstmayr-thinkpad" ] && xrandr | grep "HDMI-2 connected" > /dev/null; then
     xrandr --output HDMI-2 --mode 3840x2160 --dpi 192 --left-of eDP-1 --primary \

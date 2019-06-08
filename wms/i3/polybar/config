@@ -52,14 +52,12 @@ module-margin-right = 1
 font-0 = fixed:pixelsize=11;2
 font-1 = unifont:fontformat=truetype:size=4:antialias=false;2
 font-2 = siji:pixelsize=5;2
-font-3 = Font Awesome:style=Regular:size=9;2
+font-3 = Font Awesome:style=Regular:size=9;1
 font-4 = fixed:pixelsize=11:weight=bold;2
-font-5 = OpenSymbol:style=Regular
-;STIX:style=Italic ;Consolas:pixelsize=11:weight=bold;2
 
 modules-left = i3
 ;modules-center = mpd
-modules-right = cpu memory wlan eth pulseaudio int-battery ext-battery time-toronto time-melbourne date powermenu
+modules-right = cpu memory wlan eth pulseaudio int-battery ext-battery time-sanfrancisco time-toronto time-melbourne date
 
 tray-position = right
 tray-padding = 2
@@ -93,7 +91,7 @@ font-3 = Font Awesome:style=Regular:size=18;4
 font-4 = fixed:pixelsize=22:weight=bold;4
 
 [module/base]
-format-padding = 1
+format-padding = 2
 
 [module/i3]
 type = internal/i3
@@ -177,19 +175,26 @@ format-underline = #64727D
 
 label = %date% %{T5}%time%%{T-} 
 
+[module/time-sanfrancisco]
+inherit = module/base
+type = custom/script
+exec = TZ=America/Los_Angeles date +"SF %H:%M "
+interval = 30
+format-underline = #66cc99
+
 [module/time-toronto]
 inherit = module/base
 type = custom/script
-exec = TZ=America/Toronto date +"CA %H:%M "
+exec = TZ=America/Toronto date +"TO %H:%M "
 interval = 30
-format-underline = #66cc99
+format-underline = #ffa000
 
 [module/time-melbourne]
 inherit = module/base
 type = custom/script
-exec = TZ=Australia/Melbourne date +"AUS %H:%M "
+exec = TZ=Australia/Melbourne date +"MEL %H:%M "
 interval = 30
-format-underline = #ffa000
+format-underline = #66cc99
 
 [module/pulseaudio]
 type = internal/pulseaudio
