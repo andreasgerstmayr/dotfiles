@@ -3,7 +3,6 @@ if [ "$XDG_SESSION_DESKTOP" = "i3" ]; then
   if [ "$HOSTNAME" = "agerstmayr-thinkpad" ] && xrandr | grep "HDMI-2 connected" > /dev/null; then
     xrandr --output HDMI-2 --mode 3840x2160 --dpi 192 --left-of eDP-1 --primary \
            --output eDP-1 --dpi 92
-    xrdb -merge <(echo "Xft.dpi: 192")
   fi
 
   xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1

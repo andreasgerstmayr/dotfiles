@@ -13,3 +13,4 @@ i3: polybar dunst
 	mkdir -p ~/.config/i3
 	ln -snf $$(pwd)/i3/config ~/.config/i3/config
 	ln -snf $$(pwd)/profile ~/.profile
+	ln -snf $$(pwd)/Xresources ~/.Xresources

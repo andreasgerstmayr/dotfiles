@@ -96,11 +96,6 @@ elif [[ "$OSTYPE" == linux* ]]; then
 fi
 export PATH=$PATH:~/.local/bin:~/.npm/packages/bin:$shared/misc/common/IT/shellscripts
 
-if [[ "$XDG_SESSION_DESKTOP" == "sway" ]]; then
-  # will be started only once because of --start arg
-  export $(/usr/bin/gnome-keyring-daemon --start --components=ssh 2>/dev/null)
-fi
-
 if [[ -S "$SSH_AUTH_SOCK" ]]; then
   ln -sf "$SSH_AUTH_SOCK" /tmp/ssh-agent-$USER
 fi
