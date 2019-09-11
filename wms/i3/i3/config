@@ -191,3 +191,6 @@ bindsym XF86MonBrightnessDown exec "light -U 10; notify-send 'Brightness' 'New v
 bindsym XF86AudioMute exec "pactl set-sink-mute $(pactl list short | grep RUNNING | cut -f1) toggle; notify-send 'Sound' \\"$(LC_ALL=C pactl list sinks | grep Mute | xargs)\\""
 bindsym XF86AudioRaiseVolume exec "pactl set-sink-volume $(pactl list short | grep RUNNING | cut -f1) +5%; notify-send 'Sound' \\"$(LC_ALL=C pactl list sinks | grep $'\tVolume' | xargs)\\""
 bindsym XF86AudioLowerVolume exec "pactl set-sink-volume $(pactl list short | grep RUNNING | cut -f1) -5%; notify-send 'Sound' \\"$(LC_ALL=C pactl list sinks | grep $'\tVolume' | xargs)\\""
+
+bindsym Print exec "scrot"
+bindsym --release Shift+Print exec "scrot -s"
