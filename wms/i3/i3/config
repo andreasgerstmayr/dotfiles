@@ -178,6 +178,9 @@ exec --no-startup-id compton -b # required for transparency
 # exec --no-startup-id dunst
 exec --no-startup-id nm-applet
 
+# misc startup
+exec --no-startup-id numlockx on
+
 # workspace assignments, auto floating
 for_window [class="keepassxc"] floating enable
 for_window [class="Pavucontrol"] floating enable
