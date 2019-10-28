@@ -1,8 +1,11 @@
 #!/bin/bash
 if [ "$XDG_SESSION_DESKTOP" = "i3" ]; then
-  if [ "$HOSTNAME" = "agerstmayr-thinkpad" ] && xrandr | grep "HDMI-2 connected" > /dev/null; then
-    xrandr --output HDMI-2 --mode 3840x2160 --dpi 192 --left-of eDP-1 --primary \
-           --output eDP-1 --dpi 92
+  if [ "$HOSTNAME" = "agerstmayr-thinkpad" ] &&
+    xrandr | grep "DP-1-1 connected" > /dev/null &&
+    xrandr | grep "DP-1-2 connected" > /dev/null; then
+    xrandr --output DP-1-1 --mode 3840x2160 --rate 30 --dpi 192 --left-of DP-1-2 --primary # left
+    xrandr --output DP-1-2 --mode 3840x2160 --rate 30 --dpi 192 --right-of DP-1-1 # middle
+    xrandr --output eDP-1  --auto                               --right-of DP-1-2 # right
   fi
 
   xinput set-prop "Synaptics TM3276-031" "libinput Natural Scrolling Enabled" 1
