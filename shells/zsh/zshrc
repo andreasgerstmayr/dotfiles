@@ -94,7 +94,7 @@ elif [[ "$OSTYPE" == linux* ]]; then
     local shared="$HOME/shared"
   fi
 fi
-export PATH=$PATH:~/.local/bin:~/.npm/packages/bin:$shared/misc/common/IT/shellscripts
+export PATH=$PATH:~/.local/bin:~/.npm/packages/bin:$shared/misc/roaming/IT/shellscripts
 
 if [[ -S "$SSH_AUTH_SOCK" ]]; then
   ln -sf "$SSH_AUTH_SOCK" /tmp/ssh-agent-$USER
