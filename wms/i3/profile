@@ -6,6 +6,9 @@ if [ "$XDG_SESSION_DESKTOP" = "i3" ]; then
     xrandr --output DP-1-1 --mode 3840x2160 --rate 30 --dpi 192 --left-of DP-1-2 --primary # left
     xrandr --output DP-1-2 --mode 3840x2160 --rate 30 --dpi 192 --right-of DP-1-1 # middle
     xrandr --output eDP-1  --auto                               --right-of DP-1-2 # right
+
+    dispwin -d 2 ~/shared/misc/roaming/IT/icc/U3277PQU_2.2_F-S_XYZLUT+MTX_reset+40brightness.icc
+    dispwin -d 3 ~/shared/misc/roaming/IT/icc/U3277PWQU_2.2_F-S_XYZLUT+MTX_reset+40brightness.icc
   fi
 
   xinput set-prop "Synaptics TM3276-031" "libinput Natural Scrolling Enabled" 1
