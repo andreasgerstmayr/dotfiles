@@ -1,6 +1,10 @@
 # My dotfiles
 
 ## Setup
+```
+git clone --recursive https://github.com/andreasgerstmayr/dotfiles.git .dotfiles
+```
+
 Take a look at the `Makefile` and install the things you want.
 
 ## Software
