@@ -177,7 +177,7 @@ gaps inner 10
 
 # daemons
 exec --no-startup-id compton -b # required for transparency
-# exec --no-startup-id dunst
+exec --no-startup-id dunst
 exec --no-startup-id nm-applet
 
 # misc startup

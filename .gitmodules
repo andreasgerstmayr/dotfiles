@@ -1,27 +1,21 @@
 [submodule "tools/vim/bundle/vim-airline"]
 	path = tools/vim/bundle/vim-airline
 	url = https://github.com/vim-airline/vim-airline.git
-	branch = master
 [submodule "tools/vim/bundle/cscope-maps"]
 	path = tools/vim/bundle/cscope-maps
 	url = https://github.com/joe-skb7/cscope-maps.git
-	branch = master
 [submodule "tools/vim/bundle/nerdtree"]
 	path = tools/vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
-	branch = master
 [submodule "tools/vim/bundle/fzf"]
 	path = tools/vim/bundle/fzf
 	url = https://github.com/junegunn/fzf.git
-	branch = master
 [submodule "tools/vim/bundle/fzf.vim"]
 	path = tools/vim/bundle/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
-	branch = master
 [submodule "tools/vim/bundle/tagbar"]
 	path = tools/vim/bundle/tagbar
 	url = https://github.com/majutsushi/tagbar.git
-	branch = master
 [submodule "tools/vim/bundle/vim-fugitive"]
 	path = tools/vim/bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git

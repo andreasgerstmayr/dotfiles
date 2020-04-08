@@ -112,6 +112,7 @@ ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 
 # directory bookmarks
 hash -d misc="$shared/misc"
+hash -d pcp="$HOME/redhat/dev/pcp"
 
 # aliases
 rpm-extract() {

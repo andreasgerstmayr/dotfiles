@@ -14,8 +14,10 @@ i3:
 	make -C wms/i3 i3
 	make -C wms/wallpapers fetch
 
-
 .PHONY: sway
 sway:
 	make -C wms/sway sway
 	make -C wms/wallpapers fetch
+
+refresh-submodules:
+	git submodule update --recursive --remote
