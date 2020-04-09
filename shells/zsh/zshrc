@@ -112,7 +112,6 @@ ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 
 # directory bookmarks
 hash -d misc="$shared/misc"
-hash -d pcp="$HOME/redhat/dev/pcp"
 
 # aliases
 rpm-extract() {
@@ -124,3 +123,5 @@ export LESS="-F -g -i -M -R -S -w -X -z-4"
 
 # disable autocompletion from /etc/hosts and known_hosts
 zstyle ':completion:*:ssh:*' hosts off
+
+source "${HOME}/.zshrc.local"
