@@ -94,7 +94,7 @@ elif [[ "$OSTYPE" == linux* ]]; then
     local shared="$HOME/shared"
   fi
 fi
-export PATH=$PATH:~/.local/bin:~/.npm/packages/bin:$shared/misc/roaming/IT/shellscripts
+export PATH="${HOME}/.local/bin:${PATH}:${HOME}/.npm/packages/bin:${shared}/misc/roaming/IT/shellscripts"
 
 if [[ -S "$SSH_AUTH_SOCK" ]]; then
   ln -sf "$SSH_AUTH_SOCK" /tmp/ssh-agent-$USER
@@ -111,7 +111,7 @@ ZSH_HIGHLIGHT_STYLES[path]=none
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 
 # directory bookmarks
-hash -d misc="$shared/misc"
+hash -d misc="${shared}/misc"
 
 # aliases
 rpm-extract() {
