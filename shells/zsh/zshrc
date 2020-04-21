@@ -72,14 +72,16 @@ plugins=( \
     git-prompt \
     history \
     last-working-dir \
+    fzf \
     zsh-completions \
     zsh-syntax-highlighting \
     history-substring-search \
 )
 
-source $ZSH/oh-my-zsh.sh
+# required for zsh-completions, TODO: improve performance
+autoload -U compinit && compinit
 
-# compinit # required for zsh-completions, TODO: improve performance
+source $ZSH/oh-my-zsh.sh
 
 
 # User configuration
