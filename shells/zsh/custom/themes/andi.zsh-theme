@@ -20,7 +20,7 @@ ZSH_THEME_VIRTUALENV_SUFFIX="%f"
 
 # This is the basic prompt that is always printed.  It will be
 # enclosed to make it newline.
-_ANDI_PROMPT='%B%{$fg[magenta]%}%n%f at %{$fg[yellow]%}%M%f in %{$fg[green]%}%~%f%'
+_ANDI_PROMPT='%B%{$fg[magenta]%}%n%f at %{$fg[yellow]%}%m%f in %{$fg[green]%}%~%f%'
 
 # This is the base prompt that is rendered sync.  It should be
 # fast to render as a result.  The extra whitespace before the
