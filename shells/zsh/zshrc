@@ -119,6 +119,7 @@ hash -d misc="${shared}/misc"
 rpm-extract() {
   rpm2cpio "$1" | cpio -idmv
 }
+alias gdiff="git diff --no-index"
 
 # environment
 export LESS="-F -g -i -M -R -S -w -X -z-4"
