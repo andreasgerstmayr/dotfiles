@@ -86,17 +86,22 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 if [[ "$OSTYPE" == darwin* ]]; then
-  local shared="$HOME/shared"
+  shared="$HOME/shared"
   export COPYFILE_DISABLE=true # don't add hidden files to tar archives
   export PATH=$PATH:~/Library/Python/3.7/bin
 elif [[ "$OSTYPE" == linux* ]]; then
   if grep -q Microsoft /proc/version; then
-    local shared="/mnt/c/Users/Andreas/shared"
+    shared="/mnt/c/Users/Andreas/shared"
   else
-    local shared="$HOME/shared"
+    shared="$HOME/shared"
   fi
 fi
-export PATH="${HOME}/.local/bin:${PATH}:${HOME}/.npm/packages/bin:${shared}/misc/roaming/IT/shellscripts"
+
+PATH="${PATH}:${HOME}/.local/bin" # pip
+PATH="${PATH}:${HOME}/.npm/packages/bin" # npm
+PATH="${PATH}:${HOME}/go/bin" # Go
+PATH="${PATH}:${shared}/misc/roaming/IT/shellscripts"
+export PATH=$PATH
 
 if [[ -S "$SSH_AUTH_SOCK" ]]; then
   ln -sf "$SSH_AUTH_SOCK" /tmp/ssh-agent-$USER
