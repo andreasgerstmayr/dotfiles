@@ -1,0 +1,29 @@
+#!/bin/bash
+#
+# note: script gets started three times
+#
+
+timer=$((60 * 60))
+
+reset_timer()
+{
+    timer=$((60 * 60))
+}
+
+trap "reset_timer" USR1
+while true; do
+    if [ "$timer" -gt 0 ]; then
+        date -u -d @$timer +"%H:%M "
+        timer=$((timer-1))
+
+        if [ "$timer" -eq 0 ] && [ "$(pgrep coffee-break | sort | head -n 1)" = $$ ]; then
+            notify-send -t 0 "Break" "☕ Take a break!"
+        fi
+    else
+        echo "BREAK"
+    fi
+
+    # small trick to not block processing of SIGUSR1
+    sleep 1 &
+    wait
+done

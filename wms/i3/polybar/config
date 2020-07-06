@@ -57,7 +57,7 @@ font-4 = fixed:pixelsize=11:weight=bold;2
 
 modules-left = i3
 ;modules-center = mpd
-modules-right = cpu memory wlan eth pulseaudio int-battery ext-battery time-sanfrancisco time-toronto time-melbourne date
+modules-right = cpu memory wlan eth pulseaudio int-battery ext-battery time-sanfrancisco time-toronto time-melbourne coffee-break date
 
 tray-position = right
 tray-padding = 2
@@ -195,6 +195,15 @@ type = custom/script
 exec = TZ=Australia/Melbourne date +"MEL %H:%M "
 interval = 30
 format-underline = #66cc99
+
+[module/coffee-break]
+inherit = module/base
+type = custom/script
+exec = ~/.dotfiles/wms/i3/polybar/scripts/coffee-break
+tail = true
+# send signal to every instance of the script (one per polybar)
+click-left = killall -s SIGUSR1 coffee-break
+format-underline = #9b59b6
 
 [module/pulseaudio]
 type = internal/pulseaudio
