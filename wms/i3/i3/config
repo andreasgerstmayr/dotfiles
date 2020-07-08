@@ -189,6 +189,9 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="SpeedCrunch"] floating enable
 for_window [class="Thunderbird" instance="Msgcompose"] floating enable
 
+for_window [class="Nautilus"] floating enable
+for_window [class="Eog"] floating enable
+
 # multimedia keys
 bindsym XF86MonBrightnessUp exec "light -A 10; notify-send 'Brightness' 'New value: '$(light)"
 bindsym XF86MonBrightnessDown exec "light -U 10; notify-send 'Brightness' 'New value: '$(light)"
