@@ -1,23 +1,17 @@
-.PHONY: shells
-shells:
-	make -C shells bash zsh
+cli:
+	make -C shells/bash
+	make -C shells/zsh
+	make -C tools/git
+	make -C tools/tmux
+	make -C tools/vim
 
-.PHONY: tools
-tools:
-	make -C tools git tmux vim
+xorg:
+	make -C wms/wallpapers
+	make -C wms/xorg
 
-.PHONY: cli
-cli: shells tools
-
-.PHONY: i3
-i3:
-	make -C wms/i3 i3
-	make -C wms/wallpapers fetch
-
-.PHONY: sway
-sway:
-	make -C wms/sway sway
-	make -C wms/wallpapers fetch
+wayland:
+	make -C wms/wallpapers
+	make -C wms/wayland
 
 refresh-submodules:
 	git submodule update --recursive --remote

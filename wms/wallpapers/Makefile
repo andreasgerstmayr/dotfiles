@@ -1,6 +1,6 @@
 WGET := wget -nc --content-disposition -q
 
-fetch:
+install:
 	$(WGET) https://unsplash.com/photos/-27Pzw5c_kU/download?force=true
 	$(WGET) https://unsplash.com/photos/5S9SeI-HFZA/download?force=true
 	$(WGET) https://unsplash.com/photos/62V7ntlKgL8/download?force=true
