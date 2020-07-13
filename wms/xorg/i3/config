@@ -164,7 +164,7 @@ bindsym $mod+r mode "resize"
 #        status_command i3status
 #        position top
 #}
-exec_always --no-startup-id $HOME/.dotfiles/wms/i3/polybar/launch.sh
+exec_always --no-startup-id $HOME/.dotfiles/wms/xorg/polybar/launch.sh
 
 # colors
 set $transparent #000000C0

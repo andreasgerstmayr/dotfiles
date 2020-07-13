@@ -199,7 +199,7 @@ format-underline = #66cc99
 [module/coffee-break]
 inherit = module/base
 type = custom/script
-exec = ~/.dotfiles/wms/i3/polybar/scripts/coffee-break
+exec = ~/.dotfiles/wms/xorg/polybar/scripts/coffee-break
 tail = true
 # send signal to every instance of the script (one per polybar)
 click-left = killall -s SIGUSR1 coffee-break
