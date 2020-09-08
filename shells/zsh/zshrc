@@ -125,6 +125,9 @@ rpm-extract() {
   rpm2cpio "$1" | cpio -idmv
 }
 alias gdiff="git diff --no-index"
+jsondiff() {
+  diff <(jq -S . "$1") <(jq -S . "$2")
+}
 
 # environment
 export LESS="-F -g -i -M -R -S -w -X -z-4"

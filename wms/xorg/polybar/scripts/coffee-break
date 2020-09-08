@@ -14,9 +14,10 @@ trap "reset_timer" USR1
 while true; do
     if [ "$timer" -gt 0 ]; then
         date -u -d @$timer +"%H:%M "
-        timer=$((timer-1))
+        timer=$((timer - 60))
 
-        if [ "$timer" -eq 0 ] && [ "$(pgrep coffee-break | sort | head -n 1)" = $$ ]; then
+        # && [ "$(pgrep coffee-break | sort | head -n 1)" = $$ ]
+        if [ "$timer" -eq 0 ]; then
             notify-send -t 0 "Break" "☕ Take a break!"
         fi
     else
@@ -24,6 +25,6 @@ while true; do
     fi
 
     # small trick to not block processing of SIGUSR1
-    sleep 1 &
+    sleep 60 &
     wait
 done
