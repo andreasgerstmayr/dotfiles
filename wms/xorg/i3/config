@@ -110,7 +110,7 @@ bindsym $mod+Shift+m move container to output right
 bindsym $mod+Shift+n move container to output left
 
 # assign workspace 8 to integrated monitor
-workspace $ws8 output eDP-1
+workspace $ws10 output eDP-1
 
 # split in horizontal orientation
 bindsym $mod+h split h
