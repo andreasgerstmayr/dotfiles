@@ -32,6 +32,9 @@ exec_always --no-startup-id feh --bg-fill --randomize .dotfiles/wms/wallpapers/*
 # start a terminal
 bindsym $mod+Return exec terminator
 
+# default orientation
+default_orientation vertical
+
 # kill focused window
 bindsym $mod+q kill
 
