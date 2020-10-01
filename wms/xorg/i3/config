@@ -108,9 +108,9 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 bindsym $mod+m focus output right
 bindsym $mod+n focus output left
 
-# move container to other monitor
-bindsym $mod+Shift+m move container to output right
-bindsym $mod+Shift+n move container to output left
+# move workspace to other monitor
+bindsym $mod+Shift+m move workspace to output right
+bindsym $mod+Shift+n move workspace to output left
 
 # assign workspace 8 to integrated monitor
 workspace $ws10 output eDP-1
