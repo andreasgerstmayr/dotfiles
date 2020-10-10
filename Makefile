@@ -13,5 +13,8 @@ wayland:
 	make -C wms/wallpapers
 	make -C wms/wayland
 
+pull:
+	git pull --recurse-submodules
+
 refresh-submodules:
 	git submodule update --recursive --remote
