@@ -187,14 +187,18 @@ exec --no-startup-id nm-applet
 exec --no-startup-id numlockx on
 
 # workspace assignments, auto floating
+# use xprop to get window class
 for_window [class="keepassxc"] floating enable
-for_window [class="Pavucontrol"] floating enable
+for_window [class="Pavucontrol"] floating enable # pulse audio control
 for_window [class="SpeedCrunch"] floating enable
 for_window [class="Thunderbird" instance="Msgcompose"] floating enable
 
-for_window [class="Nautilus"] floating enable
-for_window [class="Eog"] floating enable
-for_window [class="Evince"] floating enable
+for_window [class="Nautilus"] floating enable resize set 1920 1080 # file manager
+for_window [class="Eog"] floating enable # picture viewer
+for_window [class="Evince"] floating enable # PPF viewer
+for_window [class="V4l2ucp"] floating enable # webcam tool
+for_window [class="Totem"] floating enable # movie player
+for_window [class="vlc"] floating enable
 
 # multimedia keys
 bindsym XF86MonBrightnessUp exec "light -A 10; notify-send 'Brightness' 'New value: '$(light)"
