@@ -122,12 +122,15 @@ hash -d misc="${shared}/misc"
 
 # aliases
 alias gdiff="git diff --no-index"
-jsondiff() {
+json-diff() {
   a=$(mktemp)
   b=$(mktemp)
   jq -S . "$1" > "$a"
   jq -S . "$2" > "$b"
   gdiff "$a" "$b"
+}
+dir-diff() {
+  diff --color=always -r --exclude .git "$1" "$2" | less
 }
 rpm-diff() {
   a=$(mktemp)
