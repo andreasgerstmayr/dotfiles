@@ -97,6 +97,8 @@ elif [[ "$OSTYPE" == linux* ]]; then
   fi
 fi
 
+export VOLTA_HOME="${HOME}/.volta"
+PATH="${VOLTA_HOME}/bin:${PATH}" # volta needs to come before /usr/bin
 PATH="${PATH}:${HOME}/.local/bin" # pip
 PATH="${PATH}:${HOME}/.npm/packages/bin" # npm
 PATH="${PATH}:${HOME}/go/bin" # Go
