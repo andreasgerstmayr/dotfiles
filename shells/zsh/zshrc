@@ -100,7 +100,7 @@ fi
 PATH="${PATH}:${HOME}/.local/bin" # pip
 PATH="${PATH}:${HOME}/.npm/packages/bin" # npm
 PATH="${PATH}:${HOME}/go/bin" # Go
-PATH="${PATH}:${shared}/misc/roaming/IT/shellscripts"
+PATH="${PATH}:${shared}/andreas/roaming/IT/shellscripts"
 export PATH=$PATH
 
 if [[ -S "$SSH_AUTH_SOCK" ]]; then
