@@ -145,6 +145,14 @@ rpm-extract() {
   rpm2cpio "$1" | cpio -idmv
 }
 
+git-show-header() {
+  for c in "$@"; do git show -q $c; done
+}
+
+git-format-patches() {
+  for c in "$@"; do git format-patch --stdout -1 $c; done
+}
+
 if [ $commands[kubectl] ]; then
   # lazy load kubectl auto-completions on first run
   kubectl() {
