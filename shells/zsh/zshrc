@@ -145,6 +145,11 @@ rpm-extract() {
   rpm2cpio "$1" | cpio -idmv
 }
 
+unzip-mkdir() {
+  # https://stackoverflow.com/a/8108058
+  for f in *.zip; do unzip -d "${f%*.zip}" "$f"; done
+}
+
 git-show-header() {
   for c in "$@"; do git show -q $c; done
 }
