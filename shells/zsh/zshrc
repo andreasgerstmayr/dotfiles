@@ -173,6 +173,10 @@ ku-apply() {
   kustomize build "$1" | kubectl apply -f -
 }
 
+upgrade-debuginfo() {
+  dnf debuginfo-install --skip-broken $(dnf list installed \*-debuginfo \*-debugsource | tail -n +2 | sed -E 's/-debug(info|source)//' | awk '{print $1}')
+}
+
 # umask
 umask 022
 
