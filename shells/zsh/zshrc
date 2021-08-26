@@ -108,6 +108,7 @@ PATH="${VOLTA_HOME}/bin:${PATH}" # volta needs to come before /usr/bin
 PATH="${PATH}:${HOME}/.local/bin" # pip
 PATH="${PATH}:${HOME}/.npm/packages/bin" # npm
 PATH="${PATH}:${HOME}/go/bin" # Go
+PATH="${PATH}:${HOME}/.dotfiles/scripts"
 PATH="${PATH}:${shared}/andreas/roaming/IT/shellscripts"
 export PATH=$PATH
 export LESS="-F -g -i -M -R -S -w -X -z-4"
@@ -131,6 +132,13 @@ json-diff() {
   b=$(mktemp)
   jq -S . "$1" > "$a"
   jq -S . "$2" > "$b"
+  gdiff "$a" "$b"
+}
+text-diff() {
+  a=$(mktemp)
+  b=$(mktemp)
+  normalize-text "$1" > "$a"
+  normalize-text "$2" > "$b"
   gdiff "$a" "$b"
 }
 dir-diff() {
@@ -171,10 +179,6 @@ fi
 alias k="kubectl"
 ku-apply() {
   kustomize build "$1" | kubectl apply -f -
-}
-
-upgrade-debuginfo() {
-  dnf debuginfo-install --skip-broken $(dnf list installed \*-debuginfo \*-debugsource | tail -n +2 | sed -E 's/-debug(info|source)//' | awk '{print $1}')
 }
 
 # umask
