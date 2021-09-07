@@ -73,6 +73,7 @@ plugins=( \
     history \
     last-working-dir \
     fzf \
+    zsh-autosuggestions \
     zsh-completions \
     zsh-syntax-highlighting \
     history-substring-search \

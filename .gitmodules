@@ -28,3 +28,6 @@
 [submodule "shells/zsh/custom/plugins/zsh-completions"]
 	path = shells/zsh/custom/plugins/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions.git
+[submodule "shells/zsh/custom/plugins/zsh-autosuggestions"]
+	path = shells/zsh/custom/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions.git
