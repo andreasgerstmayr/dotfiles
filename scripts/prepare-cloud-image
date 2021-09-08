@@ -1,0 +1,72 @@
+#!/bin/bash -eu
+
+prepare_image ()
+{
+    image_path=$1
+    os_variant=$2
+    image_name=${image_path%.img}
+    image_qcow=${image_name}.qcow2
+
+    echo Copying image to "${image_qcow}"...
+    cp "${image_path}" "${image_qcow}"
+
+    echo
+    echo Resizing image to 10 GB...
+    qemu-img resize "${image_qcow}" 10G
+
+    echo
+    echo Setting root password...
+    virt-customize -a "${image_qcow}" --root-password password:root --uninstall cloud-init
+
+    echo
+    echo Configuring VM...
+    virt-install \
+        --name "${image_name}" \
+        --vcpus 2 \
+        --ram 2048 \
+        --file ~/.local/share/libvirt/images/"${image_qcow}" \
+        --os-type linux \
+        --os-variant "${os_variant}" \
+        --network bridge:virbr0 \
+        --import
+
+    echo
+    echo Connecting to VM, please run the following commands:
+    cat <<EOF
+growpart /dev/vda 1
+resize2fs /dev/vda1
+cat <<EOF | tee /etc/netplan/01-netcfg.yaml
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp1s0:
+      dhcp4: true
+EOF
+netplan apply
+dpkg-reconfigure openssh-server
+sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+systemctl restart sshd
+ip a s dev enp1s0
+EOF
+    virsh console "${image_name}"
+
+    echo
+    echo Now copy the SSH pubkey
+    ssh-copy-id root@IP
+}
+
+prepare_system ()
+{
+    echo ssh
+}
+
+if [ $# -eq 0 ]; then
+    echo "usage: $0 image|ip"
+    exit 1
+elif [[ "$1" == *.img ]]; then
+    prepare_image "$1"
+else
+    prepare_system "$1"
+fi
