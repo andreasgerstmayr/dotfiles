@@ -9,7 +9,7 @@
     foreground_color = "#f2f2f2"
     show_titlebar = False
     scrollback_lines = 5000
-    palette = "#3d3846:#e62929:#64ef5b:#fc951e:#1c74c5:#e4007d:#55ddff:#ffffff:#77767b:#e53e41:#94ef8e:#fcad53:#3f9cf0:#fa68ad:#97eaff:#d3d3d3"
+    palette = "#5e5c64:#e62929:#64ef5b:#fc951e:#1c74c5:#e4007d:#55ddff:#ffffff:#77767b:#e53e41:#94ef8e:#fcad53:#3f9cf0:#fa68ad:#97eaff:#d3d3d3"
     use_custom_command = True
     custom_command = TERM=xterm-256color zsh
     use_system_font = False
