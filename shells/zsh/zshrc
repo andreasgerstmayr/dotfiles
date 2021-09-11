@@ -123,6 +123,14 @@ fix-dir-perms() {
   find "$1" -type d -print0 | xargs -0 chmod 0755
   find "$1" -type f -print0 | xargs -0 chmod 0644
 }
+find-unusual-perms() {
+  echo Unusual directory permissions:
+  for f in $(find "$1" -type d ! \( -perm 0755 -user $(id -u) -group $(id -g) \)); do ls -ld $f; done
+
+  echo
+  echo Unusual file permissions:
+  for f in $(find "$1" -type f ! \( -perm 0644 -user $(id -u) -group $(id -g) \)); do ls -l $f; done
+}
 dusch() {
   du -sch "$@" | sort -rh | head
 }
