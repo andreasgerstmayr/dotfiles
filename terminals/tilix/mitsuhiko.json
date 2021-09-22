@@ -1,11 +1,12 @@
 {
-    "name": "Dark",
+    "name": "Dark (mitsuhiko)",
     "comment": "Taken from github.com/mitsuhiko/dotfiles",
     "use-theme-colors": false,
+    "use-bold-color": false,
     "foreground-color": "#F2F2F2",
     "background-color": "#110F1D",
     "palette": [
-        "#000000",
+        "#5E5C64",
         "#E62929",
         "#64EF5B",
         "#FC951E",
@@ -13,7 +14,7 @@
         "#E4007D",
         "#55DDFF",
         "#FFFFFF",
-        "#1C1C1C",
+        "#77767B",
         "#E53E41",
         "#94EF8E",
         "#FCAD53",

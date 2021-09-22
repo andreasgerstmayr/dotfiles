@@ -1,0 +1,39 @@
+[/]
+enable-wide-handle=false
+prompt-on-close=false
+sidebar-on-right=false
+terminal-title-show-when-single=false
+terminal-title-style='small'
+use-tabs=false
+
+[profiles]
+list=['2b7c4080-0ddd-46c5-8f23-563fd3ba789d', '9c1ad3c6-3714-47bf-8e7b-ce08f7a421d1']
+
+[profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d]
+background-color='#110F1D'
+badge-color-set=false
+bold-color-set=false
+bold-is-bright=false
+cursor-colors-set=false
+font='Consolas 13'
+foreground-color='#F2F2F2'
+highlight-colors-set=false
+login-shell=false
+palette=['#5E5C64', '#E62929', '#64EF5B', '#FC951E', '#1C74C5', '#E4007D', '#55DDFF', '#FFFFFF', '#77767B', '#E53E41', '#94EF8E', '#FCAD53', '#3F9CF0', '#FA68AD', '#97EAFF', '#D3D3D3']
+terminal-bell='none'
+use-system-font=false
+use-theme-colors=false
+visible-name='Standard'
+
+[profiles/9c1ad3c6-3714-47bf-8e7b-ce08f7a421d1]
+background-color='#300A24'
+badge-color='#AC7EA8'
+badge-color-set=false
+bold-color-set=false
+bold-is-bright=false
+cursor-colors-set=false
+foreground-color='#FFFFFF'
+highlight-colors-set=false
+palette=['#000000', '#CC0000', '#4D9A05', '#C3A000', '#3464A3', '#754F7B', '#05979A', '#D3D6CF', '#545652', '#EF2828', '#89E234', '#FBE84F', '#729ECF', '#AC7EA8', '#34E2E2', '#EDEDEB']
+use-theme-colors=true
+visible-name='Light'
