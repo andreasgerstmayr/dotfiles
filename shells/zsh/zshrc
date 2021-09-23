@@ -125,11 +125,11 @@ fix-dir-perms() {
 }
 find-unusual-perms() {
   echo Unusual directory permissions:
-  for f in $(find "$1" -type d ! \( -perm 0755 -user $(id -u) -group $(id -g) \)); do ls -ld $f; done
+  for f in $(find "$1" -type d ! \( -perm 0755 -user $(id -u) -group $(id -g) \)); do ls -ld "$f"; done
 
   echo
   echo Unusual file permissions:
-  for f in $(find "$1" -type f ! \( -perm 0644 -user $(id -u) -group $(id -g) \)); do ls -l $f; done
+  for f in $(find "$1" -type f ! \( -perm 0644 -user $(id -u) -group $(id -g) \)); do ls -l "$f"; done
 }
 dusch() {
   du -sch "$@" | sort -rh | head
