@@ -109,6 +109,7 @@ PATH="${VOLTA_HOME}/bin:${PATH}" # volta needs to come before /usr/bin
 PATH="${PATH}:${HOME}/.local/bin" # pip
 PATH="${PATH}:${HOME}/.npm/packages/bin" # npm
 PATH="${PATH}:${HOME}/go/bin" # Go
+PATH="${PATH}:${HOME}/.krew/bin" # kubectl plugin manager
 PATH="${PATH}:${HOME}/.dotfiles/scripts"
 PATH="${PATH}:${shared}/andreas/roaming/IT/shellscripts"
 export PATH=$PATH
@@ -119,18 +120,19 @@ if [[ -S "$SSH_AUTH_SOCK" ]]; then
 fi
 
 # aliases and functions
-fix-dir-perms() {
-  find "$1" -type d -print0 | xargs -0 chmod 0755
-  find "$1" -type f -print0 | xargs -0 chmod 0644
-}
-find-unusual-perms() {
+check-umask() {
   echo Unusual directory permissions:
-  for f in $(find "$1" -type d ! \( -perm 0755 -user $(id -u) -group $(id -g) \)); do ls -ld "$f"; done
+  find "$1" -type d ! \( -perm 0755 -user $(id -u) -group $(id -g) \) -exec ls -ld "{}" \;
 
   echo
   echo Unusual file permissions:
-  for f in $(find "$1" -type f ! \( -perm 0644 -user $(id -u) -group $(id -g) \)); do ls -l "$f"; done
+  find "$1" -type f ! \( -perm 0644 -user $(id -u) -group $(id -g) \) -exec ls -l "{}" \;
 }
+fix-umask() {
+  find "$1" -type d -print0 | xargs -0 chmod 0755
+  find "$1" -type f -print0 | xargs -0 chmod 0644
+}
+
 dusch() {
   du -sch "$@" | sort -rh | head
 }
@@ -164,7 +166,6 @@ rpm-diff() {
 rpm-extract() {
   rpm2cpio "$1" | cpio -idmv
 }
-
 unzip-mkdir() {
   # https://stackoverflow.com/a/8108058
   for f in "$@"; do unzip -d "${f%*.zip}" "$f"; done
@@ -186,9 +187,6 @@ if [ $commands[kubectl] ]; then
   }
 fi
 alias k="kubectl"
-ku-apply() {
-  kustomize build "$1" | kubectl apply -f -
-}
 
 # umask
 umask 022
