@@ -111,7 +111,7 @@ PATH="${PATH}:${HOME}/.npm/packages/bin" # npm
 PATH="${PATH}:${HOME}/go/bin" # Go
 PATH="${PATH}:${HOME}/.krew/bin" # kubectl plugin manager
 PATH="${PATH}:${HOME}/.dotfiles/scripts"
-PATH="${PATH}:${shared}/andreas/roaming/IT/shellscripts"
+PATH="${PATH}:${shared}/roaming/IT/shellscripts"
 export PATH=$PATH
 export LESS="-F -g -i -M -R -S -w -X -z-4"
 
