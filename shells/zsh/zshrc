@@ -73,6 +73,7 @@ plugins=( \
     history \
     last-working-dir \
     fzf \
+    kubectl \
     zsh-autosuggestions \
     zsh-completions \
     zsh-syntax-highlighting \
@@ -180,16 +181,6 @@ git-show-header() {
 git-format-patches() {
   for c in "$@"; do git format-patch --stdout -1 $c; done
 }
-
-if [ $commands[kubectl] ]; then
-  # lazy load kubectl auto-completions on first run
-  kubectl() {
-    unfunction "$0"
-    source <(kubectl completion zsh)
-    $0 "$@"
-  }
-fi
-alias k="kubectl"
 
 # umask
 umask 022
