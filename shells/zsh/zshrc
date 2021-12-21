@@ -74,6 +74,7 @@ plugins=( \
     last-working-dir \
     fzf \
     kubectl \
+    asdf \
     zsh-autosuggestions \
     zsh-completions \
     zsh-syntax-highlighting \
