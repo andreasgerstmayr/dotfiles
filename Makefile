@@ -1,6 +1,7 @@
 # This is a self-documenting Makefile, see https://www.thapaliya.com/en/writings/well-documented-makefiles/
 default: help
 
+
 ##@ Targets
 
 cli: ## cli tools
@@ -21,7 +22,10 @@ wayland: ## wayland environment
 pull: ## update dotfiles repo
 	git pull --recurse-submodules
 
-refresh-submodules: ## update submodules
+update-submodules: ## update submodules from this repository
+	git submodule update --recursive
+
+refresh-submodules: ## update submodules from remote
 	git submodule update --recursive --remote
 
 

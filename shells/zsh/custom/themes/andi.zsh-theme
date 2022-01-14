@@ -1,5 +1,8 @@
 #
-# Theme based on mitsuhikos prompt: https://github.com/mitsuhiko/dotfiles
+# Theme based on mitsuhikos prompt: https://github.com/mitsuhiko/dotfiles/blob/master/zsh/custom/themes/mitsuhiko.zsh-theme
+#
+# %f ... resets foreground color
+# %b ... resets bold
 #
 
 setopt prompt_subst
@@ -26,7 +29,10 @@ _ANDI_PROMPT='%B%{$fg[magenta]%}%n%f at %{$fg[yellow]%}%m%f in %{$fg[green]%}%~%
 # fast to render as a result.  The extra whitespace before the
 # newline is necessary to avoid some rendering bugs.
 PROMPT=$'\n'$_ANDI_PROMPT$' \n$%b '
-RPROMPT='%B[%*]%b'
+
+local _lineup=$'\e[1A'
+local _linedown=$'\e[1B'
+RPROMPT=%{${_lineup}%}'%B[%*]%b'%{${_linedown}%}
 
 # The pid of the async prompt process and the communication file
 _ANDI_ASYNC_PROMPT=0
