@@ -114,6 +114,7 @@ PATH="${VOLTA_HOME}/bin:$PATH" # volta needs to come before /usr/bin
 PATH="$PATH:$HOME/.local/bin" # pip
 PATH="$PATH:$HOME/.npm/packages/bin" # npm
 PATH="$PATH:$HOME/go/bin" # Go
+PATH="$PATH:$HOME/.cargo/bin" # Rust
 PATH="$PATH:$HOME/.krew/bin" # kubectl plugin manager
 PATH="$PATH:$HOME/.dotfiles/scripts"
 PATH="$PATH:$shared/roaming/IT/shellscripts"
@@ -169,8 +170,27 @@ dir-diff() {
 rpm-diff() {
   a=$(mktemp)
   b=$(mktemp)
-  rpm -qlpv "$1" | awk '{print $NF " " $1 " " $3 " " $4}' | sort > "$a"
-  rpm -qlpv "$2" | awk '{print $NF " " $1 " " $3 " " $4}' | sort > "$b"
+  rpm -qlpv "$1" | awk '{print $NF " " $5 " " $1 " " $3 " " $4}' | sort > "$a"
+  rpm -qlpv "$2" | awk '{print $NF " " $5 " " $1 " " $3 " " $4}' | sort > "$b"
+  gdiff "$a" "$b"
+}
+tar-diff() {
+  a=$(mktemp)
+  b=$(mktemp)
+  if [[ "$1" == "--raw" ]]; then
+    shift
+    tar -tvf "$1" > "$a"
+    tar -tvf "$2" > "$b"
+  elif [[ "$1" == "--no-perms" ]]; then
+    shift
+    AWK='{sub("[^/]+/","",$NF); print $NF " " $3}'
+    tar -tvf "$1" | awk "$AWK" | sort > "$a"
+    tar -tvf "$2" | awk "$AWK" | sort > "$b"
+  else
+    AWK='{sub("[^/]+/","",$NF); print $NF " " $3 " " $1 " " $2}'
+    tar -tvf "$1" | awk "$AWK" | sort > "$a"
+    tar -tvf "$2" | awk "$AWK" | sort > "$b"
+  fi
   gdiff "$a" "$b"
 }
 
