@@ -183,11 +183,11 @@ tar-diff() {
     tar -tvf "$2" > "$b"
   elif [[ "$1" == "--no-perms" ]]; then
     shift
-    AWK='{sub("[^/]+/","",$NF); print $NF " " $3}'
+    AWK='{F=substr($0,index($0,$6)); sub("[^/]+/","",F); print F " " $3}'
     tar -tvf "$1" | awk "$AWK" | sort > "$a"
     tar -tvf "$2" | awk "$AWK" | sort > "$b"
   else
-    AWK='{sub("[^/]+/","",$NF); print $NF " " $3 " " $1 " " $2}'
+    AWK='{F=substr($0,index($0,$6)); sub("[^/]+/","",F); print F " " $3 " " $1 " " $2}'
     tar -tvf "$1" | awk "$AWK" | sort > "$a"
     tar -tvf "$2" | awk "$AWK" | sort > "$b"
   fi
