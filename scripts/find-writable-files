@@ -1,0 +1,4 @@
+#!/bin/bash -eu
+uid=$1
+gid=$2
+find . \( -user "$uid" -perm -u=w \) -o \( -group "$gid" -perm -g=w \) -o \( -perm -o=w \)
