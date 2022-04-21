@@ -1,0 +1,6 @@
+#!/bin/bash -eu
+a=$(mktemp)
+b=$(mktemp)
+rpm -qlpv "$1" | awk '{print $NF " " $5 " " $1 " " $3 " " $4}' | sort > "$a"
+rpm -qlpv "$2" | awk '{print $NF " " $5 " " $1 " " $3 " " $4}' | sort > "$b"
+git diff --no-index "$a" "$b"

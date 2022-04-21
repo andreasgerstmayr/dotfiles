@@ -1,0 +1,6 @@
+#!/bin/bash -eu
+a=$(mktemp)
+b=$(mktemp)
+normalize-text "$1" > "$a"
+normalize-text "$2" > "$b"
+git diff --no-index "$a" "$b"

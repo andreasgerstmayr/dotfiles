@@ -1,0 +1,6 @@
+#!/bin/bash -eu
+a=$(mktemp)
+b=$(mktemp)
+jq -S . "$1" > "$a"
+jq -S . "$2" > "$b"
+git diff --no-index "$a" "$b"

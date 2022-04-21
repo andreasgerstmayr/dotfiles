@@ -150,54 +150,14 @@ dusch() {
 }
 
 alias gdiff="git diff --no-index"
-json-diff() {
-  a=$(mktemp)
-  b=$(mktemp)
-  jq -S . "$1" > "$a"
-  jq -S . "$2" > "$b"
-  gdiff "$a" "$b"
-}
-text-diff() {
-  a=$(mktemp)
-  b=$(mktemp)
-  normalize-text "$1" > "$a"
-  normalize-text "$2" > "$b"
-  gdiff "$a" "$b"
-}
 dir-diff() {
-  diff --color=always -r --exclude .git "$1" "$2" | less
-}
-rpm-diff() {
-  a=$(mktemp)
-  b=$(mktemp)
-  rpm -qlpv "$1" | awk '{print $NF " " $5 " " $1 " " $3 " " $4}' | sort > "$a"
-  rpm -qlpv "$2" | awk '{print $NF " " $5 " " $1 " " $3 " " $4}' | sort > "$b"
-  gdiff "$a" "$b"
-}
-tar-diff() {
-  a=$(mktemp)
-  b=$(mktemp)
-  if [[ "$1" == "--raw" ]]; then
-    shift
-    tar -tvf "$1" > "$a"
-    tar -tvf "$2" > "$b"
-  elif [[ "$1" == "--no-perms" ]]; then
-    shift
-    AWK='{F=substr($0,index($0,$6)); sub("[^/]+/","",F); print F " " $3}'
-    tar -tvf "$1" | awk "$AWK" | sort > "$a"
-    tar -tvf "$2" | awk "$AWK" | sort > "$b"
-  else
-    AWK='{F=substr($0,index($0,$6)); sub("[^/]+/","",F); print F " " $3 " " $1 " " $2}'
-    tar -tvf "$1" | awk "$AWK" | sort > "$a"
-    tar -tvf "$2" | awk "$AWK" | sort > "$b"
-  fi
-  gdiff "$a" "$b"
+  diff --color=always -r --exclude .git "$1" "$2"
 }
 
 rpm-extract() {
   rpm2cpio "$1" | cpio -idmv
 }
-unzip-mkdir() {
+unzip-mkdirs() {
   # https://stackoverflow.com/a/8108058
   for f in "$@"; do unzip -d "${f%*.zip}" "$f"; done
 }
