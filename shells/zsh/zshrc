@@ -126,25 +126,6 @@ if [[ -S "$SSH_AUTH_SOCK" ]]; then
 fi
 
 # aliases and functions
-check-perm() {
-  uid="${2:-$(id -u)}"
-  gid="${3:-$(id -g)}"
-
-  echo Unusual directory permissions:
-  find "$1" -type d ! \( -perm 00755 -user $uid -group $gid \) -exec ls -ld "{}" \+
-
-  echo
-  echo Unusual file permissions:
-  find "$1" -type f ! \( -perm 00644 -user $uid -group $gid \) -exec ls -l "{}" \+
-}
-fix-perm() {
-  uid="${2:-$(id -u)}"
-  gid="${3:-$(id -g)}"
-
-  find "$1" -type d -exec sudo chown $uid:$gid "{}" \+ -exec chmod 00755 "{}" \+
-  find "$1" -type f -exec sudo chown $uid:$gid "{}" \+ -exec chmod 00644 "{}" \+
-}
-
 dusch() {
   du -sch "$@" | sort -rh | head
 }

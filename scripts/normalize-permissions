@@ -1,0 +1,30 @@
+#!/bin/bash -eu
+path="${1:-.}"
+uid="${2:-$(id -u)}"
+gid="${3:-$(id -g)}"
+
+echo "Normalizing permissions of $path"
+echo "  - user: $uid:$gid"
+echo "  - 755 for directories"
+echo "  - 644 for files"
+
+# Dry Run
+echo
+echo Searching for unusual directory permissions...
+find "$path" -type d ! '(' -perm 00755 -user "$uid" -group "$gid" ')' -exec ls -ld "{}" \+
+
+echo
+echo Searching for unusual file permissions...
+find "$path" -type f ! '(' -perm 00644 -user "$uid" -group "$gid" ')' -exec ls -l "{}" \+
+
+# Ask for confirmation
+echo && echo
+read -r -p "Fix permissions? [y/N] " confirm
+if [[ ! $confirm == y ]]; then
+  exit 1
+fi
+
+# Fix permissions
+echo Fixing permissions...
+find "$path" -type d ! '(' -perm 00755 -user "$uid" -group "$gid" ')' -exec sudo chown "$uid:$gid" "{}" \+ -exec chmod 00755 "{}" \+
+find "$path" -type f ! '(' -perm 00644 -user "$uid" -group "$gid" ')' -exec sudo chown "$uid:$gid" "{}" \+ -exec chmod 00644 "{}" \+

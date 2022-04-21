@@ -1,4 +1,8 @@
 #!/bin/bash -eu
-uid=$1
-gid=$2
-find . \( -user "$uid" -perm -u=w \) -o \( -group "$gid" -perm -g=w \) -o \( -perm -o=w \)
+path="${1:-.}"
+uid="${2:-$(id -u)}"
+gid="${3:-$(id -g)}"
+
+find "$path" '(' -user "$uid" -perm -u=w ')' -o \
+             '(' -group "$gid" -perm -g=w ')' -o \
+             '(' -perm -o=w ')'
