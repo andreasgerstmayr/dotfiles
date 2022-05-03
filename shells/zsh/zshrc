@@ -132,7 +132,7 @@ dusch() {
 
 alias gdiff="git diff --no-index"
 dir-diff() {
-  diff --color=always -r --exclude .git "$1" "$2"
+  diff --color=always -r --exclude .git "$1" "$2" | less
 }
 
 rpm-extract() {
