@@ -101,6 +101,10 @@ zstyle ':completion:*:ssh:*' hosts off
 # env vars
 if [[ "$OSTYPE" == darwin* ]]; then
   export COPYFILE_DISABLE=true # don't add hidden files to tar archives
+
+  # use Ruby from homebrew
+  PATH=/usr/local/opt/ruby/bin:$PATH
+  PATH=$PATH:$(gem environment gemdir)/bin
 elif [[ "$OSTYPE" == linux* ]]; then
 fi
 
