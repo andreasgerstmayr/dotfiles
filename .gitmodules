@@ -1,5 +1,5 @@
 [submodule "tools/vim/bundle/vim-airline"]
-	path = tools/vim/bundle/vim-airline
+	path = tools/vim/pack/dist/start/vim-airline
 	url = https://github.com/vim-airline/vim-airline.git
 [submodule "shells/zsh/oh-my-zsh"]
 	path = shells/zsh/oh-my-zsh

@@ -88,14 +88,14 @@ source $ZSH/oh-my-zsh.sh
 # zsh options
 setopt rm_star_silent # disable verification message for rm with *
 
-# zsh plugin options
+# zsh plugin options (remove underline)
 ZSH_HIGHLIGHT_STYLES[path]=none
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 
 # disable autocompletion from /etc/hosts and known_hosts
 zstyle ':completion:*:ssh:*' hosts off
 
-# env vars
+# env vars per system
 if [[ "$OSTYPE" == darwin* ]]; then
   export COPYFILE_DISABLE=true # don't add hidden files to tar archives
 
@@ -116,10 +116,6 @@ PATH="$PATH:$HOME/.krew/bin" # kubectl plugin manager
 PATH="$PATH:$HOME/.dotfiles/scripts"
 export PATH=$PATH
 export LESS="-F -g -i -M -R -S -w -X -z-4"
-
-if [[ -S "$SSH_AUTH_SOCK" ]]; then
-  ln -sf "$SSH_AUTH_SOCK" /tmp/ssh-agent-$USER
-fi
 
 # aliases and functions
 dusch() {
