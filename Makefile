@@ -5,7 +5,6 @@ default: help
 ##@ Targets
 
 cli: ## cli tools
-	make -C shells/bash
 	make -C shells/zsh
 	make -C tools/git
 	make -C tools/tmux
