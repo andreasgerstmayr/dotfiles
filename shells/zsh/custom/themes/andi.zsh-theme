@@ -52,6 +52,12 @@ function _andi_preexec() {
   _andi_cmd_start=$(date +%s)
 }
 
+function _andi_minikube() {
+  if [ -n "$MINIKUBE_ACTIVE_DOCKERD" ]; then
+    echo " docker:%{$fg[yellow]%}minikube%f"
+  fi
+}
+
 # This here implements the async handling of the prompt.  It
 # runs the expensive git parts in a subprocess and passes the
 # information back via tempfile.
@@ -70,7 +76,7 @@ function _andi_precmd() {
     precmd_update_git_vars
 
     #
-    echo -n $'\n'$_ANDI_PROMPT$' '$(git_super_status)$(virtualenv_prompt_info) > $_ANDI_ASYNC_PROMPT_FN
+    echo -n $'\n'$_ANDI_PROMPT$' '$(git_super_status)$(_andi_minikube) > $_ANDI_ASYNC_PROMPT_FN
     if [[ $cmd_duration -gt $_ANDI_PROMPT_TIME_TRESHOLD ]]; then
       echo -n " took %{$fg[red]%}$(($cmd_duration/60))m%f" >> $_ANDI_ASYNC_PROMPT_FN
     fi
