@@ -1,6 +1,9 @@
 "" indent new line like the previous one
 set autoindent
 
+"" enable syntax highlighting
+syntax on
+
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
