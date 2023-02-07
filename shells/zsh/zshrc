@@ -115,6 +115,7 @@ PATH="$PATH:$HOME/.cargo/bin" # Rust
 PATH="$PATH:$HOME/.dotfiles/scripts"
 export PATH=$PATH
 export LESS="-F -g -i -M -R -S -w -X -z-4"
+export GOPROXY=https://proxy.golang.org,direct
 
 # aliases and functions
 dusch() {
@@ -139,6 +140,10 @@ git-show-header() {
 }
 git-format-patches() {
   for c in "$@"; do git format-patch --stdout -1 $c; done
+}
+
+yarn-why() {
+  yarn why "$@" | grep -P "depends on it|Hoisted from" | grep -oP '(?<=").*(?=")' | sort
 }
 
 # umask
