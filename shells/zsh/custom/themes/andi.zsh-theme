@@ -58,6 +58,17 @@ function _andi_minikube() {
   fi
 }
 
+function _andi_kubectx() {
+  local kubectx
+  kubectx=$(kubectx_prompt_info)
+  if [[ -z "${kubectx}" || "${kubectx}" == "minikube" ]]; then
+  elif [[ "${kubectx}" == *observability* ]]; then
+    echo " kube:%{$fg[yellow]%}devcluster%f"
+  else
+    echo " kube:%{$fg[yellow]%}${kubectx}%f"
+  fi
+}
+
 # This here implements the async handling of the prompt.  It
 # runs the expensive git parts in a subprocess and passes the
 # information back via tempfile.
@@ -76,7 +87,7 @@ function _andi_precmd() {
     precmd_update_git_vars
 
     #
-    echo -n $'\n'$_ANDI_PROMPT$' '$(git_super_status)$(_andi_minikube) > $_ANDI_ASYNC_PROMPT_FN
+    echo -n $'\n'$_ANDI_PROMPT$' '$(git_super_status)$(_andi_minikube)$(_andi_kubectx) > $_ANDI_ASYNC_PROMPT_FN
     if [[ $cmd_duration -gt $_ANDI_PROMPT_TIME_TRESHOLD ]]; then
       echo -n " took %{$fg[red]%}$(($cmd_duration/60))m%f" >> $_ANDI_ASYNC_PROMPT_FN
     fi
