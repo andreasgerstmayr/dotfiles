@@ -8,6 +8,7 @@
 setopt prompt_subst
 
 export LSCOLORS=ExGxFxDxCxHxHxCbCeEbEb
+export CLICOLOR=1
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[blue]%}git%f:"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%B"
