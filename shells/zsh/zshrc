@@ -115,7 +115,7 @@ PATH="$PATH:$HOME/go/bin" # Go
 PATH="$PATH:$HOME/.cargo/bin" # Rust
 PATH="$PATH:$HOME/.dotfiles/scripts"
 export PATH=$PATH
-export LESS="-F -g -i -M -R -S -w -X -z-4"
+export LESS="-F -g -i -M -R -S -w -X -z-4 -x4"
 export GOPROXY=https://proxy.golang.org,direct
 
 # aliases and functions
