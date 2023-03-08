@@ -1,0 +1,10 @@
+#!/bin/bash
+
+ip=$(minikube ip)
+iface=$(ip r | grep $ip | awk '{print $NF}')
+
+sudo resolvectl dns    $iface 10.96.0.10
+sudo resolvectl domain $iface cluster.local
+
+echo "✅ DNS requests for *.cluster.local are now resolved through the CoreDNS instance of the minikube cluster."
+echo "Don't forget to route cluster traffic through minikube by running 'minikube tunnel'."
