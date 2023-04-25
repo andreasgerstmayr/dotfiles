@@ -73,6 +73,7 @@ plugins=( \
     history \
     last-working-dir \
     fzf \
+    direnv \
     kubectl \
     kubectx \
     zsh-autosuggestions \
@@ -145,6 +146,22 @@ git-format-patches() {
 
 yarn-why() {
   yarn why "$@" | grep -P "depends on it|Hoisted from" | grep -oP '(?<=").*(?=")' | sort
+}
+
+clean-history() {
+  local DROP_REGEX="oc login|docker login|base64|pass|token"
+
+  echo Dropping the following from the history:
+  grep -Ei "$DROP_REGEX" ~/.zsh_history
+  grep -Eiv "$DROP_REGEX" ~/.zsh_history | sponge ~/.zsh_history
+  chmod 0600 ~/.zsh_history
+  fc -R
+  echo Done.
+}
+
+set-title() {
+  DISABLE_AUTO_TITLE=true
+  print -Pn "\e]2;$*\a"
 }
 
 # umask
