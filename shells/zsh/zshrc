@@ -164,6 +164,13 @@ set-title() {
   print -Pn "\e]2;$*\a"
 }
 
+log-cmd() {
+  {
+    echo "\$ $*"
+    "$@"
+  } |& tee "output-$(date +%s).log"
+}
+
 # umask
 umask 022
 

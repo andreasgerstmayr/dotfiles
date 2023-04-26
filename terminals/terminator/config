@@ -1,10 +1,11 @@
 [global_config]
+  enabled_plugins = ActivityWatch, InactivityWatch
 [keybindings]
 [profiles]
   [[default]]
     background_color = "#110f1d"
     background_darkness = 0.97
-    cursor_color = "#7f7f7f"
+    background_image = None
     font = Consolas 13
     foreground_color = "#f2f2f2"
     show_titlebar = False
@@ -13,7 +14,6 @@
     use_custom_command = True
     custom_command = TERM=xterm-256color zsh
     use_system_font = False
-    background_image = None
 [layouts]
   [[default]]
     [[[child1]]]
@@ -23,3 +23,5 @@
       parent = ""
       type = Window
 [plugins]
+  [[InactivityWatch]]
+    inactive_period = 600
