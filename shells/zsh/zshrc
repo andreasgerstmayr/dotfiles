@@ -171,6 +171,22 @@ log-cmd() {
   } |& tee "output-$(date +%s).log"
 }
 
+loop-cmd() {
+  while true; do date; eval "$@"; echo "---\n"; sleep 1; done
+}
+
+check-flaky() {
+  local i=1
+  while true
+  do
+    echo && echo "Run #$i"
+    "$@" || break
+    ((i++))
+  done
+
+  echo "Failed on the $i. run."
+}
+
 # umask
 umask 022
 
