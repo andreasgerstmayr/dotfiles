@@ -164,11 +164,29 @@ set-title() {
   print -Pn "\e]2;$*\a"
 }
 
-log-cmd() {
-  {
-    echo "\$ $*"
-    "$@"
-  } |& tee "output-$(date +%s).log"
+log-bash-session() {
+  local output="output-$(date +%s).log"
+  LC_ALL=C PS1='\n\$ ' script "$output"
+  # drop first two lines (Script started on ... + newline)
+  sed -i '1,2d' "$output"
+  # drop last 5 lines (newline, last prompt, "exit", newline, Script done on ...)
+  sed -i '$d' "$output"
+  sed -i '$d' "$output"
+  sed -i '$d' "$output"
+  sed -i '$d' "$output"
+  sed -i '$d' "$output"
+}
+
+log-cmds() {
+  local output="output-$(date +%s).log"
+  for cmd in "$@"
+  do
+    {
+      echo "\$ $cmd"
+      eval "$cmd"
+      echo
+    } |& tee -a "$output"
+  done
 }
 
 loop-cmd() {
