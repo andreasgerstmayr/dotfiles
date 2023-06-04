@@ -1,0 +1,79 @@
+#!/bin/bash -eu
+
+tool_diff() {
+  local tool=$1
+
+  local tmpA=$(mktemp)
+  local tmpB=$(mktemp)
+  "$tool" "$a" > "$tmpA"
+  "$tool" "$b" > "$tmpB"
+  git diff --no-index "$tmpA" "$tmpB" || true
+
+  rm "$tmpA" "$tmpB"
+}
+exif() {
+  exiftool "$1" | grep -Ev "File Name|Directory|File Modification Date/Time|File Access Date/Time|File Inode Change Date/Time"
+}
+
+img_diff() {
+  local tmpA=$(mktemp)
+  local tmpB=$(mktemp)
+
+  cp "$a" "$tmpA"
+  cp "$b" "$tmpB"
+  exiftool -q -all= "$tmpA" 2>&1 | grep -v "Warning: ICC_Profile deleted" || true
+  exiftool -q -all= "$tmpB" 2>&1 | grep -v "Warning: ICC_Profile deleted" || true
+  cmp "$tmpA" "$tmpB"
+
+  rm "$tmpA" "$tmpB"
+}
+
+file_diff() {
+  local cmp=$1
+  local a=$2
+  local b=$3
+
+  case "$cmp" in
+    exif) tool_diff exif ;;
+    img)  img_diff ;;
+    *) echo "Unknown tool: $cmp" ;;
+  esac
+}
+
+dir_diff() {
+  local cmp=$1
+  local a=$2
+  local b=$3
+
+  local tmpA=$(mktemp)
+  local tmpB=$(mktemp)
+  (cd "$a"; find . -type f) > "$tmpA"
+  (cd "$b"; find . -type f) > "$tmpB"
+
+  # A \ B
+  sort "$tmpB" "$tmpB" "$tmpA" | uniq -u | while IFS= read -r line
+  do
+    echo "Only in $a: $line"
+  done
+
+  # B \ A
+  sort "$tmpA" "$tmpA" "$tmpB" | uniq -u | while IFS= read -r line
+  do
+    echo "Only in $b: $line"
+  done
+
+  # A & B
+  sort "$tmpA" "$tmpB" | uniq -d | while IFS= read -r line
+  do
+    echo "Comparing $line..."
+    file_diff "$cmp" "$a/$line" "$b/$line"
+  done
+
+  rm "$tmpA" "$tmpB"
+}
+
+if [ -d "$2" ]; then
+  dir_diff "$@"
+else
+  file_diff "$@"
+fi

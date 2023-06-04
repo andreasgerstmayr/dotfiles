@@ -1,2 +1,0 @@
-#!/bin/bash -eu
-diff --color <(exiftool "$1") <(exiftool "$2")
