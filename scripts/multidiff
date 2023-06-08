@@ -12,7 +12,7 @@ tool_diff() {
   rm "$tmpA" "$tmpB"
 }
 exif() {
-  exiftool "$1" | grep -Ev "File Name|Directory|File Modification Date/Time|File Access Date/Time|File Inode Change Date/Time"
+  exiftool -api requesttags=ImageDataMD5 "$1" | grep -Ev "File Name|Directory|File Modification Date/Time|File Access Date/Time|File Inode Change Date/Time"
 }
 
 img_diff() {

@@ -1,0 +1,196 @@
+#!/usr/bin/env python3
+import os
+import sys
+import subprocess
+import shlex
+import traceback
+import argparse
+from datetime import datetime
+from collections import namedtuple
+
+class Color:
+    yellow = "\033[93m"
+    end = "\033[0m"
+
+
+Snapshot = namedtuple("Snapshot", ["name", "used", "creation"])
+SnapshotDiff = namedtuple("SnapshotDiff", ["change", "type", "source", "dest"])
+
+
+def zfs_get_filesystem(args, path: str):
+    pargs = ["df", path]
+
+    if args.verbose >= 2:
+        print("running command:", shlex.join(pargs))
+    p = subprocess.run(pargs, check=True, stdout=subprocess.PIPE, text=True)
+
+    return p.stdout.splitlines()[-1].split(" ")[0]
+
+
+def zfs_get_file_of_snapshot(path, snapshot: str):
+    fs, snap = snapshot.split("@")
+    return path.replace(fs, f"{fs}/.zfs/snapshot/{snap}")
+
+
+def zfs_list_snapshots(args, fs: str):
+    # do not print header, show snapshots, show name and used, sort by creation
+    pargs = [
+        "zfs",
+        "list",
+        "-H",
+        "-t",
+        "snapshot",
+        "-o",
+        "name,used,creation",
+        "-S",
+        "creation",
+        fs,
+    ]
+
+    if args.verbose >= 2:
+        print("running command:", shlex.join(pargs))
+    p = subprocess.run(pargs, check=True, stdout=subprocess.PIPE, text=True)
+
+    snapshots = []
+    for line in p.stdout.splitlines():
+        name, used, creation = line.split("\t")
+        snapshots.append(
+            Snapshot(
+                name=name,
+                used=used,
+                creation=datetime.strptime(creation, "%a %b %d %H:%M %Y").astimezone(),
+            )
+        )
+    return snapshots
+
+
+def zfs_diff_snapshots(args, snapshot1: str, snapshot2: str):
+    # show file type, do not print header, do not escape non-ASCII
+    pargs = ["zfs", "diff", "-F", "-Hh", snapshot1] + ([snapshot2] if snapshot2 else [])
+
+    if args.verbose >= 2:
+        print("running command:", shlex.join(pargs))
+    p = subprocess.run(pargs, check=True, stdout=subprocess.PIPE, text=True)
+
+    diffs = []
+    for line in p.stdout.splitlines():
+        spl = line.split("\t")
+        if spl[0] == "R":  # renamed
+            diffs.append(SnapshotDiff(spl[0], spl[1], spl[2], spl[3]))
+        elif spl[0] in ["M", "+", "-"]:  # modified, created, removed
+            diffs.append(SnapshotDiff(spl[0], spl[1], spl[2], ""))
+    return diffs
+
+
+def _zgit_snapshot_header(snapshot: Snapshot):
+    print(f"{Color.yellow}snapshot {snapshot.name}{Color.end}")
+    print(f"Date:    {datetime.strftime(snapshot.creation,'%a %b %d %H:%M:%S %Y %z')}")
+    print()
+
+
+def _zgit_diff(args, snapshotA: str, snapshotB: str = None):
+    diffs = zfs_diff_snapshots(args, snapshotA, snapshotB)
+    for diff in diffs:
+        if args.verbose >= 1:
+            print(diff)
+        if diff.change == "M" and diff.type == "F":
+            fileA = zfs_get_file_of_snapshot(diff.source, snapshotA)
+            if snapshotB:
+                fileB = zfs_get_file_of_snapshot(diff.source, snapshotB)
+            else:
+                fileB = diff.source
+
+            pargs = shlex.split(args.diff) + [fileA, fileB]
+            if args.verbose >= 2:
+                print("running command:", shlex.join(pargs))
+            sys.stdout.flush()
+            subprocess.run(pargs, stdout=sys.stdout)
+
+
+def zgit_log(args):
+    pwd = os.getcwd()
+    fs = zfs_get_filesystem(args, pwd)
+    snapshots = zfs_list_snapshots(args, fs)
+
+    for i in range(len(snapshots)):
+        if snapshots[i].used == "0B":
+            continue
+
+        _zgit_snapshot_header(snapshots[i])
+        if args.patch:
+            _zgit_diff(args, snapshots[i + 1].name, snapshots[i].name)
+            print()
+
+
+def zgit_show(args):
+    pwd = os.getcwd()
+    fs = zfs_get_filesystem(args, pwd)
+    snapshots = zfs_list_snapshots(args, fs)
+
+    for i in range(len(snapshots)):
+        if snapshots[i].name == args.snapshot:
+            _zgit_snapshot_header(snapshots[i])
+            _zgit_diff(args, snapshots[i + 1].name, snapshots[i].name)
+            break
+    else:
+        print("Snapshot not found")
+
+
+def zgit_status(args):
+    pwd = os.getcwd()
+    fs = zfs_get_filesystem(args, pwd)
+    snapshots = zfs_list_snapshots(args, fs)
+    _zgit_diff(args, snapshots[0].name)
+
+
+def zgit_diff(args):
+    _zgit_diff(args, args.snapshot, args.snapshot2)
+
+
+def main():
+    parser = argparse.ArgumentParser(description="zgit allows analysing ZFS snapshots like git repositories.")
+    parser.add_argument(
+        "--diff", default="git --no-pager diff --no-index --color=always", help="use a custom diff program. default: git diff"
+    )
+    parser.add_argument("--pager", default="less", help="use a custom pager. default: less")
+    parser.add_argument("-v", "--verbose", action="count", default=0,help="increase verbosity of program output")
+    subparsers = parser.add_subparsers(dest="command")
+
+    log = subparsers.add_parser("log", help="list all non empty snapshots")
+    log.add_argument("-p", "--patch", action="store_true")
+    log.set_defaults(func=zgit_log)
+
+    show = subparsers.add_parser("show", help="show changes of a snapshot")
+    show.add_argument("snapshot")
+    show.set_defaults(func=zgit_show)
+
+    diff = subparsers.add_parser("diff", help="show diff between two snapshots (if only given one argument, show diff between status and working copy)")
+    diff.add_argument("snapshot")
+    diff.add_argument("snapshot2", nargs="?")
+    diff.set_defaults(func=zgit_diff)
+
+    status = subparsers.add_parser("status", help="show changes in working copy")
+    status.set_defaults(func=zgit_status)
+
+    args = parser.parse_args()
+    if "func" in args:
+        try:
+            with subprocess.Popen(args.pager, stdin=subprocess.PIPE, text=True) as p:
+                sys.stdout = p.stdin
+                args.stdout = p.stdin
+                args.func(args)
+        except KeyboardInterrupt:
+            pass
+        except Exception as e:
+            if args.verbose > 0:
+                traceback.print_exc()
+            else:
+                print(e,file=sys.stderr)
+            sys.exit(1)
+    else:
+        parser.print_help()
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
