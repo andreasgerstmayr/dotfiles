@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.dotfiles/shells/zsh/oh-my-zsh"
+export ZSH="$HOME/.dotfiles/apps/zsh/oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -61,7 +61,7 @@ DISABLE_MAGIC_FUNCTIONS=true
 HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM="$HOME/.dotfiles/shells/zsh/custom"
+ZSH_CUSTOM="$HOME/.dotfiles/apps/zsh/custom"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
@@ -106,6 +106,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
   PATH="$PATH:$HOME/Library/Python/3.11/bin" # pip3 install --user
 elif [[ "$OSTYPE" == linux* ]]; then
   export EDITOR=vim
+  test -d /home/linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
 export VOLTA_HOME="$HOME/.volta"
@@ -120,6 +121,8 @@ export LESS="-F -g -i -M -R -S -w -X -z-4 -x4"
 export GOPROXY=https://proxy.golang.org,direct
 
 # aliases and functions
+command -v code > /dev/null || alias code="flatpak run com.visualstudio.code --ozone-platform=wayland --enable-features=WaylandWindowDecorations"
+
 dusch() {
   du -sch "$@" | sort -rh | head
 }

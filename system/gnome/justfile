@@ -1,0 +1,7 @@
+default: gnome dash-to-dock
+
+gnome:
+	dconf load / < gnome
+
+dash-to-dock:
+	dconf load / < dash-to-dock

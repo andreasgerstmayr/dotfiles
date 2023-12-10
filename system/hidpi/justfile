@@ -1,0 +1,19 @@
+default:
+	@just --list
+
+firefox-hide-rpm:
+	printf '[Desktop Entry]\nNoDisplay=true\n' > ~/.local/share/applications/firefox.desktop
+
+firefox-hidpi:
+	sudo flatpak override --env MOZ_ENABLE_WAYLAND=1 org.mozilla.firefox
+
+thunderbird-hidpi:
+	sudo flatpak override --env MOZ_ENABLE_WAYLAND=1 org.mozilla.Thunderbird
+
+vscode-hidpi:
+	sudo flatpak override --socket=wayland com.visualstudio.code
+	ln -snf $(pwd)/com.visualstudio.code.desktop ~/.local/share/applications/com.visualstudio.code.desktop
+	ln -snf $(pwd)/com.visualstudio.code-url-handler.desktop ~/.local/share/applications/com.visualstudio.code-url-handler.desktop
+
+obsidian-hidpi:
+	sudo flatpak override --socket=wayland md.obsidian.Obsidian

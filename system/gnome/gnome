@@ -1,0 +1,50 @@
+[org/gnome/desktop/interface]
+enable-hot-corners=false
+clock-show-weekday=true
+
+[org/gnome/desktop/privacy]
+report-technical-problems=false
+
+[org/gnome/desktop/wm/preferences]
+num-workspaces=6
+
+[org/gnome/mutter]
+dynamic-workspaces=false
+experimental-features=['scale-monitor-framebuffer']
+
+[org/gtk/gtk4/settings/file-chooser]
+sort-directories-first=true
+
+[org/gnome/shell/keybindings]
+switch-to-application-1=@as []
+switch-to-application-2=@as []
+switch-to-application-3=@as []
+switch-to-application-4=@as []
+switch-to-application-5=@as []
+switch-to-application-6=@as []
+
+[org/gnome/desktop/wm/keybindings]
+close=['<Super>q']
+move-to-workspace-1=['<Shift><Super>1']
+move-to-workspace-2=['<Shift><Super>2']
+move-to-workspace-3=['<Shift><Super>3']
+move-to-workspace-4=['<Shift><Super>4']
+move-to-workspace-5=['<Shift><Super>5']
+move-to-workspace-6=['<Shift><Super>6']
+switch-to-workspace-1=['<Super>1']
+switch-to-workspace-2=['<Super>2']
+switch-to-workspace-3=['<Super>3']
+switch-to-workspace-4=['<Super>4']
+switch-to-workspace-5=['<Super>5']
+switch-to-workspace-6=['<Super>6']
+
+[org/gnome/settings-daemon/plugins/media-keys]
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+binding='<Super>Return'
+command='terminator'
+name='terminator'
+
+[org/gnome/nautilus/preferences]
+default-folder-viewer='list-view'

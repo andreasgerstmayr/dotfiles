@@ -1,0 +1,9 @@
+{
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "workbench.colorTheme": "Default Dark+",
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "gitlens.currentLine.enabled": false,
+    "gitlens.codeLens.enabled": false
+}

@@ -5,7 +5,7 @@ consolas:
 
 install: consolas
 	mkdir -p ~/.config/tilix/schemes
-	ln -snf $$(pwd)/mitsuhiko.json ~/.config/tilix/schemes/mitsuhiko.json
+	ln -snf $(pwd)/mitsuhiko.json ~/.config/tilix/schemes/mitsuhiko.json
 
 save-config:
 	dconf dump /com/gexperts/Tilix/ > tilix.dconf

@@ -1,15 +1,15 @@
-[submodule "tools/vim/bundle/vim-airline"]
-	path = tools/vim/pack/dist/start/vim-airline
+[submodule "apps/vim/bundle/vim-airline"]
+	path = apps/vim/pack/dist/start/vim-airline
 	url = https://github.com/vim-airline/vim-airline.git
-[submodule "shells/zsh/oh-my-zsh"]
-	path = shells/zsh/oh-my-zsh
+[submodule "apps/zsh/oh-my-zsh"]
+	path = apps/zsh/oh-my-zsh
 	url = https://github.com/ohmyzsh/oh-my-zsh.git
-[submodule "shells/zsh/custom/plugins/zsh-syntax-highlighting"]
-	path = shells/zsh/custom/plugins/zsh-syntax-highlighting
+[submodule "apps/zsh/custom/plugins/zsh-syntax-highlighting"]
+	path = apps/zsh/custom/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
-[submodule "shells/zsh/custom/plugins/zsh-completions"]
-	path = shells/zsh/custom/plugins/zsh-completions
+[submodule "apps/zsh/custom/plugins/zsh-completions"]
+	path = apps/zsh/custom/plugins/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions.git
-[submodule "shells/zsh/custom/plugins/zsh-autosuggestions"]
-	path = shells/zsh/custom/plugins/zsh-autosuggestions
+[submodule "apps/zsh/custom/plugins/zsh-autosuggestions"]
+	path = apps/zsh/custom/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git

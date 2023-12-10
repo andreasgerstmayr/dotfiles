@@ -5,18 +5,7 @@
 git clone --recursive https://github.com/andreasgerstmayr/dotfiles.git .dotfiles
 ```
 
-Take a look at the `Makefile` and install the things you want.
-
-## Software
-* zsh
-* terminator
-
-## WM
-* i3-gaps, polybar, rofi, feh, dunst, compton
-* sway, waybar, rofi, mako
-
-## Fonts
-* Consolas
+Take a look at the `justfile` and install the things you want.
 
 ## Credits
 * https://github.com/mitsuhiko/dotfiles
