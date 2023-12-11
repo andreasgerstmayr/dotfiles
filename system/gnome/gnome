@@ -10,10 +10,6 @@ num-workspaces=6
 
 [org/gnome/mutter]
 dynamic-workspaces=false
-experimental-features=['scale-monitor-framebuffer']
-
-[org/gtk/gtk4/settings/file-chooser]
-sort-directories-first=true
 
 [org/gnome/shell/keybindings]
 switch-to-application-1=@as []
@@ -48,3 +44,6 @@ name='terminator'
 
 [org/gnome/nautilus/preferences]
 default-folder-viewer='list-view'
+
+[org/gtk/gtk4/settings/file-chooser]
+sort-directories-first=true

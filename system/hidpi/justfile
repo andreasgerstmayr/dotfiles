@@ -1,6 +1,8 @@
-default:
-	@just --list
+# enable fractional scaling in gnome
+gnome-hidpi:
+	dconf load / < gnome-hidpi
 
+# hide application icon of Firefox RPM package
 firefox-hide-rpm:
 	printf '[Desktop Entry]\nNoDisplay=true\n' > ~/.local/share/applications/firefox.desktop
 

@@ -5,7 +5,7 @@
 git clone --recursive https://github.com/andreasgerstmayr/dotfiles.git .dotfiles
 ```
 
-Take a look at the `justfile` and install the things you want.
+Run `just` and install the things you want.
 
 ## Credits
 * https://github.com/mitsuhiko/dotfiles

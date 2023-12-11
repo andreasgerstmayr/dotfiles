@@ -1,5 +1,3 @@
-default: gnome dash-to-dock
-
 gnome:
 	dconf load / < gnome
 
