@@ -1,21 +1,19 @@
+all: gnome firefox thunderbird vscode obsidian
+
 # enable fractional scaling in gnome
-gnome-hidpi:
+gnome:
 	dconf load / < gnome-hidpi
 
-# hide application icon of Firefox RPM package
-firefox-hide-rpm:
-	printf '[Desktop Entry]\nNoDisplay=true\n' > ~/.local/share/applications/firefox.desktop
+firefox:
+	flatpak --user override --env MOZ_ENABLE_WAYLAND=1 org.mozilla.firefox
 
-firefox-hidpi:
-	sudo flatpak override --env MOZ_ENABLE_WAYLAND=1 org.mozilla.firefox
+thunderbird:
+	flatpak --user override --env MOZ_ENABLE_WAYLAND=1 org.mozilla.Thunderbird
 
-thunderbird-hidpi:
-	sudo flatpak override --env MOZ_ENABLE_WAYLAND=1 org.mozilla.Thunderbird
-
-vscode-hidpi:
-	sudo flatpak override --socket=wayland com.visualstudio.code
+vscode:
+	flatpak --user override --socket=wayland com.visualstudio.code
 	ln -snf $(pwd)/com.visualstudio.code.desktop ~/.local/share/applications/com.visualstudio.code.desktop
 	ln -snf $(pwd)/com.visualstudio.code-url-handler.desktop ~/.local/share/applications/com.visualstudio.code-url-handler.desktop
 
-obsidian-hidpi:
-	sudo flatpak override --socket=wayland md.obsidian.Obsidian
+obsidian:
+	flatpak --user override --socket=wayland md.obsidian.Obsidian
