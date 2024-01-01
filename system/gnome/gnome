@@ -47,3 +47,6 @@ default-folder-viewer='list-view'
 
 [org/gtk/gtk4/settings/file-chooser]
 sort-directories-first=true
+
+[org/gnome/shell]
+favorite-apps=['org.gnome.Nautilus.desktop', 'org.mozilla.firefox.desktop', 'org.mozilla.Thunderbird.desktop', 'terminator.desktop', 'org.gnome.Software.desktop', 'com.spotify.Client.desktop', 'org.keepassxc.KeePassXC.desktop', 'md.obsidian.Obsidian.desktop']

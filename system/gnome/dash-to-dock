@@ -1,5 +1,5 @@
 [org/gnome/shell/extensions/dash-to-dock]
-click-action='minimize'
+click-action='previews'
 custom-theme-shrink=true
 dock-fixed=true
 hot-keys=false
@@ -7,6 +7,3 @@ running-indicator-dominant-color=true
 running-indicator-style='SEGMENTED'
 show-apps-at-top=true
 show-trash=false
-
-[org/gnome/shell]
-favorite-apps=['org.gnome.Nautilus.desktop', 'org.mozilla.firefox.desktop', 'org.mozilla.Thunderbird.desktop', 'terminator.desktop', 'org.gnome.Software.desktop', 'com.spotify.Client.desktop', 'org.keepassxc.KeePassXC.desktop', 'md.obsidian.Obsidian.desktop']

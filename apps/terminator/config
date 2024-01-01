@@ -1,6 +1,7 @@
 [global_config]
   enabled_plugins = ActivityWatch, InactivityWatch
 [keybindings]
+  paste = <Primary>v
 [profiles]
   [[default]]
     background_color = "#110f1d"
