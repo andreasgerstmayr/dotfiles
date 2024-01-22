@@ -1,4 +1,4 @@
-all: gnome firefox thunderbird vscode obsidian
+all: gnome firefox thunderbird obsidian
 
 # enable fractional scaling in gnome
 gnome:
@@ -9,11 +9,6 @@ firefox:
 
 thunderbird:
 	flatpak --user override --env MOZ_ENABLE_WAYLAND=1 org.mozilla.Thunderbird
-
-vscode:
-	flatpak --user override --socket=wayland com.visualstudio.code
-	ln -snf $(pwd)/com.visualstudio.code.desktop ~/.local/share/applications/com.visualstudio.code.desktop
-	ln -snf $(pwd)/com.visualstudio.code-url-handler.desktop ~/.local/share/applications/com.visualstudio.code-url-handler.desktop
 
 obsidian:
 	flatpak --user override --socket=wayland md.obsidian.Obsidian

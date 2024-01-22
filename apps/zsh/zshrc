@@ -109,6 +109,10 @@ elif [[ "$OSTYPE" == linux* ]]; then
   test -d /home/linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
+if [[ "$HOSTNAME" == "andreas-thinkpad" ]]; then
+  alias code="/usr/bin/code --ozone-platform=wayland --enable-features=WaylandWindowDecorations"
+fi
+
 export VOLTA_HOME="$HOME/.volta"
 PATH="${VOLTA_HOME}/bin:$PATH" # volta needs to come before /usr/bin
 PATH="$PATH:$HOME/.local/bin" # pip
@@ -121,8 +125,6 @@ export LESS="-F -g -i -M -R -S -w -X -z-4 -x4"
 export GOPROXY=https://proxy.golang.org,direct
 
 # aliases and functions
-command -v code > /dev/null || alias code="flatpak run com.visualstudio.code --ozone-platform=wayland --enable-features=WaylandWindowDecorations"
-
 dusch() {
   du -sch "$@" | sort -rh | head
 }

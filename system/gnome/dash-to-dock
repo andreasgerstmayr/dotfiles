@@ -7,3 +7,4 @@ running-indicator-dominant-color=true
 running-indicator-style='SEGMENTED'
 show-apps-at-top=true
 show-trash=false
+isolate-workspaces=true

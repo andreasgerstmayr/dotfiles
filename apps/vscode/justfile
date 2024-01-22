@@ -1,13 +1,5 @@
-default:
-	just --list
-
-vscode-rpm:
+vscode:
 	ln -snf $(pwd)/settings.json ~/.config/Code/User/settings.json
 
-vscode-flatpak:
-	ln -snf $(pwd)/settings.json ~/.var/app/com.visualstudio.code/config/Code/User/settings.json
-
-vscode-flatpak-exts:
-	for ext in eamodio.gitlens EditorConfig.EditorConfig; do flatpak run com.visualstudio.code --install-extension $ext; done
-	@echo
-	@echo Manually disable "inline blame" and "Git CodeLens"!
+vscode-exts:
+	for ext in eamodio.gitlens EditorConfig.EditorConfig; do code --install-extension $ext; done
