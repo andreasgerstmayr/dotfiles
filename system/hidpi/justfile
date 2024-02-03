@@ -12,3 +12,6 @@ thunderbird:
 
 obsidian:
 	flatpak --user override --socket=wayland md.obsidian.Obsidian
+
+chromium:
+	ln -snf $(pwd)/chromium-flags.conf ~/.var/app/org.chromium.Chromium/config
