@@ -1,4 +1,4 @@
-all: gnome firefox thunderbird obsidian
+all: gnome firefox thunderbird obsidian chromium
 
 # enable fractional scaling in gnome
 gnome:
@@ -14,4 +14,4 @@ obsidian:
 	flatpak --user override --socket=wayland md.obsidian.Obsidian
 
 chromium:
-	ln -snf $(pwd)/chromium-flags.conf ~/.var/app/org.chromium.Chromium/config
+	ln -snf `pwd`/chromium-flags.conf ~/.var/app/org.chromium.Chromium/config

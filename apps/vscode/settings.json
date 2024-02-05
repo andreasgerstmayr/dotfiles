@@ -7,6 +7,7 @@
     "gitlens.currentLine.enabled": false,
     "gitlens.codeLens.enabled": false,
     "diffEditor.renderSideBySide": false,
+    "terminal.integrated.defaultProfile.linux": "zsh",
     "terminal.integrated.cursorBlinking": true,
     "terminal.integrated.drawBoldTextInBrightColors": false,
     "workbench.colorCustomizations": {
@@ -28,5 +29,8 @@
         "terminal.ansiBrightMagenta": "#fa68ad",
         "terminal.ansiBrightCyan": "#97eaff",
         "terminal.ansiBrightWhite": "#d3d3d3"
-    }
+    },
+    "dotfiles.repository": "andreasgerstmayr/dotfiles",
+    "dotfiles.targetPath": "~/.dotfiles",
+    "dotfiles.installCommand": "make submodules-update-local cli"
 }

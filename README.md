@@ -5,7 +5,7 @@
 git clone --recursive https://github.com/andreasgerstmayr/dotfiles.git .dotfiles
 ```
 
-Run `just` and install the things you want.
+Run `make` and install the things you want.
 
 ## Credits
 * https://github.com/mitsuhiko/dotfiles
