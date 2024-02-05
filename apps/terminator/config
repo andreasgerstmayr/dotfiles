@@ -5,7 +5,6 @@
 [profiles]
   [[default]]
     background_color = "#110f1d"
-    background_darkness = 0.97
     background_image = None
     font = Consolas 13
     foreground_color = "#f2f2f2"
