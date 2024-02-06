@@ -11,8 +11,8 @@
     "terminal.integrated.cursorBlinking": true,
     "terminal.integrated.drawBoldTextInBrightColors": false,
     "workbench.colorCustomizations": {
-        "terminal.foreground": "#f2f2f2",
-        "terminal.background": "#110f1d",
+        //"terminal.foreground": "#f2f2f2",
+        //"terminal.background": "#110f1d",
         "terminal.ansiBlack": "#5e5c64",
         "terminal.ansiRed": "#e62929",
         "terminal.ansiGreen": "#64ef5b",
