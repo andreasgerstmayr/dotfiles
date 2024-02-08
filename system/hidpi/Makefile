@@ -1,4 +1,4 @@
-all: gnome firefox thunderbird obsidian chromium
+all: gnome firefox thunderbird obsidian chromium vscode
 
 # enable fractional scaling in gnome
 gnome:
@@ -15,3 +15,6 @@ obsidian:
 
 chromium:
 	ln -snf `pwd`/chromium-flags.conf ~/.var/app/org.chromium.Chromium/config
+
+vscode:
+	ln -snf `pwd`/code.desktop ~/.local/share/applications/code.desktop

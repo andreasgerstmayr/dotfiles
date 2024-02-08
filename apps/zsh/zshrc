@@ -110,7 +110,7 @@ elif [[ "$OSTYPE" == linux* ]]; then
 fi
 
 if [[ "$HOSTNAME" == "andreas-thinkpad" ]]; then
-  alias code="/usr/bin/code --ozone-platform=wayland --enable-features=WaylandWindowDecorations"
+  alias code="/usr/bin/code --ozone-platform=wayland"
 fi
 
 export VOLTA_HOME="$HOME/.volta"
