@@ -1,0 +1,15 @@
+#!/bin/bash
+
+kubectl apply -f - > /dev/null << EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  name: k8sdbg
+spec:
+  containers:
+  - name: k8sdbg
+    image: ghcr.io/andreasgerstmayr/homelab/k8sdbg:latest
+EOF
+kubectl wait --for=condition=Ready pod/k8sdbg > /dev/null
+
+kubectl exec k8sdbg -- "$@"
