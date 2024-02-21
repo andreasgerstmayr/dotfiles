@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eu
 
 kubectl apply -f - > /dev/null << EOF
 apiVersion: v1
@@ -12,4 +13,4 @@ spec:
 EOF
 kubectl wait --for=condition=Ready pod/k8sdbg > /dev/null
 
-kubectl exec k8sdbg -- "$@"
+exec kubectl exec -it k8sdbg -- "$@"
