@@ -125,6 +125,7 @@ export LESS="-F -g -i -M -R -S -w -X -z-4 -x4"
 export GOPROXY=https://proxy.golang.org,direct
 
 # aliases and functions
+## files
 dusch() {
   du -sch "$@" | sort -rh | head
 }
@@ -134,25 +135,27 @@ dir-diff() {
   diff --color=always -r --exclude .git "$1" "$2" | less
 }
 
+## tools
 rpm-extract() {
   rpm2cpio "$1" | cpio -idmv
 }
+
 unzip-mkdirs() {
   # https://stackoverflow.com/a/8108058
   for f in "$@"; do unzip -d "${f%*.zip}" "$f"; done
 }
 
-git-show-header() {
-  for c in "$@"; do git show -q $c; done
+exif-no-date() {
+  exiftool -if 'not $datetimeoriginal' -p '$directory/$filename' -r "$@"
 }
-git-format-patches() {
-  for c in "$@"; do git format-patch --stdout -1 $c; done
+exif-filename-to-date() {
+  exiftool -if 'not $datetimeoriginal' '-alldates<filename' -overwrite_original -r "$@"
+}
+exif-directory-to-date() {
+  exiftool -if 'not $datetimeoriginal' '-alldates<${directory;s/.*(\d\d\d\d)-(\d\d)-(\d\d).*/$1:$2:$3/} 00:00:00' -overwrite_original -r "$@"
 }
 
-yarn-why() {
-  yarn why "$@" | grep -P "depends on it|Hoisted from" | grep -oP '(?<=").*(?=")' | sort
-}
-
+## bash
 clean-history() {
   local DROP_REGEX="oc login|docker login|base64|pass|token"
 
@@ -167,47 +170,6 @@ clean-history() {
 set-title() {
   DISABLE_AUTO_TITLE=true
   print -Pn "\e]2;$*\a"
-}
-
-log-bash-session() {
-  local output="output-$(date +%s).log"
-  LC_ALL=C PS1='\n\$ ' script "$output"
-  # drop first two lines (Script started on ... + newline)
-  sed -i '1,2d' "$output"
-  # drop last 5 lines (newline, last prompt, "exit", newline, Script done on ...)
-  sed -i '$d' "$output"
-  sed -i '$d' "$output"
-  sed -i '$d' "$output"
-  sed -i '$d' "$output"
-  sed -i '$d' "$output"
-}
-
-log-cmds() {
-  local output="output-$(date +%s).log"
-  for cmd in "$@"
-  do
-    {
-      echo "\$ $cmd"
-      eval "$cmd"
-      echo
-    } |& tee -a "$output"
-  done
-}
-
-loop-cmd() {
-  while true; do date; eval "$@"; echo "---\n"; sleep 1; done
-}
-
-check-flaky() {
-  local i=1
-  while true
-  do
-    echo && echo "Run #$i"
-    "$@" || break
-    ((i++))
-  done
-
-  echo "Failed on the $i. run."
 }
 
 # umask
