@@ -106,7 +106,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
   PATH="$PATH:$HOME/Library/Python/3.11/bin" # pip3 install --user
 elif [[ "$OSTYPE" == linux* ]]; then
   export EDITOR=vim
-  test -d /home/linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  #test -d /home/linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
 if [[ "$HOSTNAME" == "andreas-thinkpad" ]]; then
