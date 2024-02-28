@@ -1,7 +1,17 @@
 #!/bin/bash
 set -eu
 
-kubectl apply -f - > /dev/null << EOF
+namespace="default"
+
+while getopts "n:" flag
+do
+  case "${flag}" in
+    n) namespace=${OPTARG};;
+  esac
+done
+shift "$((OPTIND-1))"
+
+kubectl -n "${namespace}" apply -f - > /dev/null << EOF
 apiVersion: v1
 kind: Pod
 metadata:
@@ -11,6 +21,6 @@ spec:
   - name: kubedebug
     image: ghcr.io/andreasgerstmayr/homelab/kubedebug:latest
 EOF
-kubectl wait --for=condition=Ready pod/kubedebug > /dev/null
+kubectl -n "${namespace}" wait --for=condition=Ready pod/kubedebug > /dev/null
 
-exec kubectl exec -it kubedebug -- "$@"
+exec kubectl -n "${namespace}" exec -it kubedebug -- "$@"
