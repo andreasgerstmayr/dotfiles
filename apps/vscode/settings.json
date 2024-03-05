@@ -33,6 +33,5 @@
     "dotfiles.repository": "andreasgerstmayr/dotfiles",
     "dotfiles.targetPath": "~/.dotfiles",
     "dotfiles.installCommand": "make submodules-update-local cli",
-    "editor.stickyScroll.enabled": true,
     "remote.autoForwardPortsSource": "hybrid"
 }
