@@ -32,6 +32,6 @@
     },
     "dotfiles.repository": "andreasgerstmayr/dotfiles",
     "dotfiles.targetPath": "~/.dotfiles",
-    "dotfiles.installCommand": "make submodules-update-local cli",
+    "dotfiles.installCommand": "make -C ~/.dotfiles submodules-update-local cli",
     "remote.autoForwardPortsSource": "hybrid"
 }
