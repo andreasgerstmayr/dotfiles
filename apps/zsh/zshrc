@@ -68,11 +68,15 @@ ZSH_CUSTOM="$HOME/.dotfiles/apps/zsh/custom"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+
+fzf_plugin=""
+command -v fzf > /dev/null && fzf_plugin="fzf"
+
 plugins=( \
     git-prompt \
     history \
     last-working-dir \
-    fzf \
+    ${fzf_plugin} \
     direnv \
     kubectl \
     kubectx \
