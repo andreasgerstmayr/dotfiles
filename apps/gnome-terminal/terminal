@@ -1,0 +1,11 @@
+[org/gnome/terminal/legacy/profiles:]
+default='98f09efc-5f70-482c-8b07-1bc0a11e6b43'
+
+[org/gnome/terminal/legacy/profiles:/:98f09efc-5f70-482c-8b07-1bc0a11e6b43]
+visible-name='default'
+palette=['rgb(94,92,100)', 'rgb(230,41,41)', 'rgb(100,239,91)', 'rgb(252,149,30)', 'rgb(28,116,197)', 'rgb(228,0,125)', 'rgb(85,221,255)', 'rgb(255,255,255)', 'rgb(119,118,123)', 'rgb(229,62,65)', 'rgb(148,239,142)', 'rgb(252,173,83)', 'rgb(63,156,240)', 'rgb(250,104,173)', 'rgb(151,234,255)', 'rgb(211,211,211)']
+use-theme-colors=false
+background-color='rgb(17,15,29)'
+foreground-color='rgb(242,242,242)'
+use-system-font=false
+font='Consolas 13'
