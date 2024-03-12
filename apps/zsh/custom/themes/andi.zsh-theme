@@ -19,7 +19,7 @@ ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%B%{$fg[green]?%G%}"
 ZSH_THEME_GIT_PROMPT_CHANGED="%B%{$fg[cyan]%}%{+%G%}"
 
-ZSH_THEME_VIRTUALENV_PREFIX=" workon %{$fg[red]%}"
+ZSH_THEME_VIRTUALENV_PREFIX=" workon %{$fg[cyan]%}"
 ZSH_THEME_VIRTUALENV_SUFFIX="%f"
 
 # This is the basic prompt that is always printed.  It will be
@@ -88,7 +88,7 @@ function _andi_precmd() {
     precmd_update_git_vars
 
     #
-    echo -n $'\n'$_ANDI_PROMPT$' '$(git_super_status)$(_andi_minikube)$(_andi_kubectx) > $_ANDI_ASYNC_PROMPT_FN
+    echo -n $'\n'$_ANDI_PROMPT$' '$(git_super_status)$(virtualenv_prompt_info)$(_andi_minikube)$(_andi_kubectx) > $_ANDI_ASYNC_PROMPT_FN
     if [[ $cmd_duration -gt $_ANDI_PROMPT_TIME_TRESHOLD ]]; then
       echo -n " took %{$fg[red]%}$(($cmd_duration/60))m%f" >> $_ANDI_ASYNC_PROMPT_FN
     fi

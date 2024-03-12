@@ -74,6 +74,7 @@ command -v fzf > /dev/null && fzf_plugin="fzf"
 
 plugins=( \
     git-prompt \
+    virtualenv \
     history \
     last-working-dir \
     ${fzf_plugin} \
