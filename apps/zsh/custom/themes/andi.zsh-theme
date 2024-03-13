@@ -50,7 +50,7 @@ _ANDI_PROMPT_TIME_TRESHOLD=60
 
 # Store command start time
 function _andi_preexec() {
-  _andi_cmd_start=$(date +%s)
+  _andi_cmd_start=$SECONDS
 }
 
 function _andi_minikube() {
@@ -78,7 +78,7 @@ function _andi_precmd() {
 
   local time_now cmd_duration
   if [[ -n $_andi_cmd_start ]]; then
-    time_now=$(date +%s)
+    time_now=$SECONDS
     cmd_duration=$((time_now - _andi_cmd_start))
     unset _andi_cmd_start # clear start time; required for empty commands
   fi
