@@ -1,0 +1,32 @@
+#!/bin/bash
+# usage: kubecert minio.default.svc.cluster.local
+set -eu
+
+openssl req -x509 -newkey rsa:4096 -sha256 -days 36500 -nodes -keyout ca.key -out ca.crt -subj '/CN=Demo CA' 2> /dev/null
+cat <<EOF
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ca
+data:
+  ca.crt: |
+EOF
+cat ca.crt | sed 's/^/    /'
+
+for cn in "$@"
+do
+    openssl req -x509 -newkey rsa:4096 -sha256 -days 36500 -nodes -keyout "$cn.key" -out "$cn.crt" -CA ca.crt -CAkey ca.key -subj "/CN=$cn" -addext "subjectAltName=DNS:$cn" 2> /dev/null
+    cat <<EOF
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: $cn
+data:
+  tls.key: $(base64 -w 0 "$cn.key")
+  tls.crt: $(base64 -w 0 "$cn.crt")
+EOF
+   rm "$cn.key" "$cn.crt"
+done
+
+rm ca.key ca.crt

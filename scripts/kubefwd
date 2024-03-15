@@ -1,4 +1,5 @@
 #!/bin/bash
+# usage: kubefwd -n tempo-operator-system deployment/tempo-operator-controller 8080 curl localhost:8080/metrics
 set -eu
 
 namespacearg=""
