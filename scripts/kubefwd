@@ -1,0 +1,33 @@
+#!/bin/bash
+set -eu
+
+namespacearg=""
+while getopts "n:" flag
+do
+  case "${flag}" in
+    n) namespacearg="-n ${OPTARG}";;
+  esac
+done
+shift "$((OPTIND-1))"
+
+name="$1"
+port="$2"
+shift
+shift
+
+kubectl port-forward $namespacearg $name $port > /dev/null &
+pid=$!
+
+function cleanup()
+{
+    kill $pid 2> /dev/null
+}
+trap cleanup EXIT
+
+while ! nc -z localhost "$port" > /dev/null 2>&1
+do
+    kill -0 $pid 2> /dev/null || exit 1
+    sleep 0.1
+done
+
+"$@"
