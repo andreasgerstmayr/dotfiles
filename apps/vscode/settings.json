@@ -1,4 +1,5 @@
 {
+    "telemetry.telemetryLevel": "off",
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     "workbench.colorTheme": "Default Dark+",
@@ -10,6 +11,7 @@
     "terminal.integrated.defaultProfile.linux": "zsh",
     "terminal.integrated.cursorBlinking": true,
     "terminal.integrated.drawBoldTextInBrightColors": false,
+    "terminal.integrated.showExitAlert": false,
     "workbench.colorCustomizations": {
         //"terminal.foreground": "#f2f2f2",
         //"terminal.background": "#110f1d",
