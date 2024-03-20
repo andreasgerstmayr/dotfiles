@@ -91,7 +91,7 @@ fpath+=${ZSH_CUSTOM}/plugins/zsh-completions/src
 source $ZSH/oh-my-zsh.sh
 
 
-# User configuration
+# User Configuration
 # zsh options
 setopt rm_star_silent # disable verification message for rm with *
 
@@ -99,37 +99,30 @@ setopt rm_star_silent # disable verification message for rm with *
 ZSH_HIGHLIGHT_STYLES[path]=none
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 
-# disable autocompletion from /etc/hosts and known_hosts
-zstyle ':completion:*:ssh:*' hosts off
+# env vars
+export EDITOR=vim
+export LESS="-F -g -i -M -R -S -w -X -z-4 -x4"
+export GOPROXY=https://proxy.golang.org,direct
 
-# env vars per system
+PATH="$PATH:$HOME/.local/bin"
+PATH="$PATH:$HOME/.rye/shims" # Rye (Python)
+PATH="$PATH:$HOME/go/bin" # Go
+PATH="$PATH:$HOME/.cargo/bin" # Rust
+PATH="$PATH:$HOME/.npm/packages/bin" # npm
+PATH="$PATH:$HOME/.dotfiles/scripts"
+export PATH=$PATH
+
 if [[ "$OSTYPE" == darwin* ]]; then
   export COPYFILE_DISABLE=true # don't add hidden files to tar archives
-
-  PATH="/usr/local/opt/ruby/bin:$PATH" # use Ruby from homebrew
-  PATH="$PATH:$(gem environment gemdir)/bin"
-  PATH="$PATH:$HOME/Library/Python/3.11/bin" # pip3 install --user
 elif [[ "$OSTYPE" == linux* ]]; then
-  export EDITOR=vim
-  #test -d /home/linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  : #test -d /home/linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
+# aliases and functions
 if [[ "$HOSTNAME" == "andreas-thinkpad" ]]; then
   alias code="/usr/bin/code --ozone-platform=wayland"
 fi
 
-export VOLTA_HOME="$HOME/.volta"
-PATH="${VOLTA_HOME}/bin:$PATH" # volta needs to come before /usr/bin
-PATH="$PATH:$HOME/.local/bin" # pip
-PATH="$PATH:$HOME/.npm/packages/bin" # npm
-PATH="$PATH:$HOME/go/bin" # Go
-PATH="$PATH:$HOME/.cargo/bin" # Rust
-PATH="$PATH:$HOME/.dotfiles/scripts"
-export PATH=$PATH
-export LESS="-F -g -i -M -R -S -w -X -z-4 -x4"
-export GOPROXY=https://proxy.golang.org,direct
-
-# aliases and functions
 ## files
 dusch() {
   du -sch "$@" | sort -rh | head
