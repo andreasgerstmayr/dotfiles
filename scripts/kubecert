@@ -13,20 +13,20 @@ data:
 EOF
 cat ca.crt | sed 's/^/    /'
 
-for cn in "$@"
+for dns in "$@"
 do
-    openssl req -x509 -newkey rsa:4096 -sha256 -days 36500 -nodes -keyout "$cn.key" -out "$cn.crt" -CA ca.crt -CAkey ca.key -subj "/CN=$cn" -addext "subjectAltName=DNS:$cn" 2> /dev/null
+    cn="${dns//,*/}"
+    subjectAltName="DNS:${dns//,/,DNS:}"
+    openssl req -x509 -newkey rsa:4096 -sha256 -days 36500 -nodes -keyout "$cn.key" -out "$cn.crt" -CA ca.crt -CAkey ca.key -subj "/CN=$cn" -addext "subjectAltName=$subjectAltName" 2> /dev/null
     cat <<EOF
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: $cn
+  name: $cn-certs
 data:
   tls.key: $(base64 -w 0 "$cn.key")
   tls.crt: $(base64 -w 0 "$cn.crt")
+  ca.crt: $(base64 -w 0 "ca.crt")
 EOF
-   rm "$cn.key" "$cn.crt"
 done
-
-rm ca.key ca.crt
