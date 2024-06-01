@@ -35,5 +35,6 @@
     "dotfiles.repository": "andreasgerstmayr/dotfiles",
     "dotfiles.targetPath": "~/.dotfiles",
     "dotfiles.installCommand": "install-devcontainer.sh",
-    "remote.autoForwardPortsSource": "hybrid"
+    "remote.autoForwardPortsSource": "hybrid",
+    "svelte.enable-ts-plugin": true
 }
