@@ -1,0 +1,86 @@
+#!/usr/bin/env python
+import sys, os, json
+from collections import defaultdict
+from packaging.version import Version, InvalidVersion
+
+def read_deps(lockfile):
+    deps = defaultdict(list)
+    if os.path.basename(lockfile) == "package-lock.json":
+        with open(lockfile) as f:
+            data = json.load(f)
+            for path, pkg in data["packages"].items():
+                if path == "" or pkg.get("link", False):
+                    continue
+
+                name = path[path.rfind("node_modules")+13:]
+                deps[name].append(pkg["version"])
+    else:
+        with open(lockfile) as f:
+            lastline = ""
+            for line in f:
+                line = line.strip()
+                if line.startswith("version"):
+                    name = lastline.split(", ")[0].strip('":')
+                    name = name[:name.rfind("@")]
+                    name = name.split("@npm:")[0]
+                    version = line.split(" ")[-1].strip('"')
+                    deps[name].append(version)
+                lastline = line
+    return deps
+
+def print_table(path_a, path_b, filter_status=[]):
+    deps_a = read_deps(path_a)
+    deps_b = read_deps(path_b)
+
+    if filter_status:
+        print(f"### Dependency dashboard (excluding {', '.join(filter_status)})")
+    else:
+        print("### Dependency dashboard")
+
+    print(f"Name | {path_a} | {path_b} | Status")
+    print("--- | --- | --- | ---")
+    summary = defaultdict(int)
+    for name in sorted(list(set(deps_a.keys())|set(deps_b.keys()))):
+        versions_a = sorted(deps_a[name])
+        versions_b = sorted(deps_b[name])
+        if versions_a == versions_b:
+            status = "equal"
+        elif len(versions_a) > 0 and len(versions_b) == 0:
+            status = "removed"
+        elif len(versions_a) == 0 and len(versions_b) > 0:
+            status = "added"
+        else:
+            try:
+                min_a = min([Version(v) for v in versions_a])
+                min_b = min([Version(v) for v in versions_b])
+
+                if min_b > min_a:
+                    status = "upgraded"
+                elif min_b < min_a:
+                    status = "downgraded"
+                else:
+                    status = "equal"
+            except InvalidVersion:
+                status = "?"
+
+        summary[status] += 1
+        if status not in filter_status:
+            print(f"{name} | {', '.join(versions_a)} | {', '.join(versions_b)} | {status}")
+
+    print()
+    print(f"**Summary**: {summary['upgraded']} upgraded, "
+                    f"{summary['downgraded']} downgraded, "
+                    f"{summary['added']} added, "
+                    f"{summary['removed']} removed, "
+                    f"{summary['equal']} equal.")
+
+
+print_table(sys.argv[1], sys.argv[2], ["equal", "upgraded"])
+print()
+
+print("""
+<details>
+  <summary>Full list of changes</summary>
+""")
+print_table(sys.argv[1], sys.argv[2])
+print("</details>")
