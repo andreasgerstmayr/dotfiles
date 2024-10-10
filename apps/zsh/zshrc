@@ -63,6 +63,15 @@ HIST_STAMPS="yyyy-mm-dd"
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM="$HOME/.dotfiles/apps/zsh/custom"
 
+# PATH must be set before loading plugins (mise)
+PATH="$PATH:$HOME/.local/bin"
+PATH="$PATH:$HOME/.rye/shims" # Rye (Python)
+PATH="$PATH:$HOME/go/bin" # Go
+PATH="$PATH:$HOME/.cargo/bin" # Rust
+PATH="$PATH:$HOME/.npm/packages/bin" # npm
+PATH="$PATH:$HOME/.dotfiles/scripts"
+export PATH=$PATH
+
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -78,7 +87,7 @@ plugins=( \
     history \
     last-working-dir \
     ${fzf_plugin} \
-    direnv \
+    mise \
     kubectl \
     kubectx \
     zsh-autosuggestions \
@@ -103,14 +112,6 @@ ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 export EDITOR=vim
 export LESS="-F -g -i -M -R -S -w -X -z-4 -x4"
 export GOPROXY=https://proxy.golang.org,direct
-
-PATH="$PATH:$HOME/.local/bin"
-PATH="$PATH:$HOME/.rye/shims" # Rye (Python)
-PATH="$PATH:$HOME/go/bin" # Go
-PATH="$PATH:$HOME/.cargo/bin" # Rust
-PATH="$PATH:$HOME/.npm/packages/bin" # npm
-PATH="$PATH:$HOME/.dotfiles/scripts"
-export PATH=$PATH
 
 if [[ "$OSTYPE" == darwin* ]]; then
   export COPYFILE_DISABLE=true # don't add hidden files to tar archives
