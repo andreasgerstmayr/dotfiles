@@ -1,0 +1,11 @@
+#!/bin/bash -eu
+a=$(mktemp)
+b=$(mktemp)
+exiftool -G1 -s "$1" > "$a"
+exiftool -G1 -s "$2" > "$b"
+
+if command -v git &> /dev/null; then
+  git diff --no-index "$a" "$b"
+else
+  diff "$a" "$b"
+fi

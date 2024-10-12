@@ -144,16 +144,6 @@ unzip-mkdirs() {
   for f in "$@"; do unzip -d "${f%*.zip}" "$f"; done
 }
 
-exif-no-date() {
-  exiftool -if 'not $datetimeoriginal' -p '$directory/$filename' -r "$@"
-}
-exif-filename-to-date() {
-  exiftool -if 'not $datetimeoriginal' '-alldates<filename' -overwrite_original -r "$@"
-}
-exif-directory-to-date() {
-  exiftool -if 'not $datetimeoriginal' '-alldates<${directory;s/.*(\d\d\d\d)-(\d\d)-(\d\d).*/$1:$2:$3/} 00:00:00' -overwrite_original -r "$@"
-}
-
 ## bash
 clean-history() {
   local DROP_REGEX="oc login|docker login|base64|pass|token"
