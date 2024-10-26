@@ -63,7 +63,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM="$HOME/.dotfiles/apps/zsh/custom"
 
-# PATH must be set before loading plugins (mise)
+# PATH must be set before loading plugins (required for mise plugin to find mise binary, otherwise plugin gets disabled)
 PATH="$PATH:$HOME/.local/bin"
 PATH="$PATH:$HOME/.rye/shims" # Rye (Python)
 PATH="$PATH:$HOME/go/bin" # Go
