@@ -78,15 +78,27 @@ export PATH=$PATH
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
+# git-prompt: variables for prompt
+# history: aliases
+# last-working-dir: always open last dir
+# fzf: ctrl+r
+# git: aliases
+# mise: manage Go/npm versions
+# kubectl: aliases
+# kubectx: variables for prompt
+# zsh-autosuggestions
+# zsh-syntax-highlighting
+# zsh-completions (NOT in plugins, but fpath)
+
 fzf_plugin=""
 command -v fzf > /dev/null && fzf_plugin="fzf"
 
 plugins=( \
     git-prompt \
-    virtualenv \
     history \
     last-working-dir \
     ${fzf_plugin} \
+    git \
     mise \
     kubectl \
     kubectx \
