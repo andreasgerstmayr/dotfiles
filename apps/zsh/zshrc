@@ -118,6 +118,10 @@ if [[ "$OSTYPE" == darwin* ]]; then
 elif [[ "$OSTYPE" == linux* ]]; then
   : #test -d /home/linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
+if [[ -d /mnt/c/Windows ]]; then
+  # WSL
+  export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent-relay.socket
+fi
 
 # aliases and functions
 if [[ "$HOSTNAME" == "andreas-thinkpad" ]]; then
