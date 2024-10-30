@@ -1,0 +1,29 @@
+#!/usr/bin/env python
+import sys
+import yaml
+from collections import defaultdict
+
+def main():
+    docs = yaml.safe_load_all(sys.stdin)
+    objects_per_namespace = defaultdict(list)
+    for doc in docs:
+        kind = doc["kind"]
+        metadata = doc["metadata"]
+        name = metadata["name"]
+        namespace = metadata.get("namespace", "")
+        objects_per_namespace[namespace].append(f"{kind}: {name}")
+
+    namespaces = sorted(objects_per_namespace.keys())
+    for namespace in namespaces:
+        is_last_ns = namespace == namespaces[-1]
+        namespace_text = namespace or '<cluster scoped>'
+        print(f"{'└' if is_last_ns else '├'}── {namespace_text}")
+
+        names = sorted(objects_per_namespace[namespace])
+        for name in names:
+            is_last_name = name == names[-1]
+            print(f"{' ' if is_last_ns else '│'}   {'└' if is_last_name else '├'}── {name}")
+
+
+if __name__ == "__main__":
+    main()
