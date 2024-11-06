@@ -1,0 +1,11 @@
+#!/bin/bash -eux
+
+org="$1"
+repo="$2"
+
+upstream="https://github.com/$org/$repo.git"
+fork="git@github.com:andreasgerstmayr/$repo.git"
+
+git clone --recursive "$fork"
+cd "$repo"
+git remote add upstream "$upstream"

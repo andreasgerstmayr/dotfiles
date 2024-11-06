@@ -1,0 +1,24 @@
+#!/bin/bash -eu
+
+project=${PWD##*/}
+version=0.0.$(date +%s)
+
+if [[ "$project" == "tempo-operator" ]]; then
+  if kubectl get ns | grep -q openshift-apiserver; then
+    if kubectl -n openshift-tempo-operator get subscription tempo-product; then
+      # deployed via OLM
+      IMG_PREFIX=quay.io/agerstmayr OPERATOR_VERSION=$version BUNDLE_VARIANT=openshift make docker-build docker-push bundle bundle-build bundle-push olm-upgrade reset
+    else
+      # deployed via manifests
+      IMG_PREFIX=quay.io/agerstmayr OPERATOR_VERSION=$version BUNDLE_VARIANT=openshift make docker-build docker-push deploy reset
+    fi
+  else
+    IMG_PREFIX=quay.io/agerstmayr OPERATOR_VERSION=$version make docker-build deploy reset
+  fi
+elif [[ "$project" == "observatorium-api" ]]; then
+  DOCKER_REPO=quay.io/agerstmayr/observatorium-api OCI_BIN=docker make container VERSION=$version
+  img=quay.io/agerstmayr/observatorium-api:main-2024-11-04-$version
+  docker push $img
+  echo
+  echo "!!! Cannot deploy automatically, switch the TempoStack to Unmanaged and use this image: $img"
+fi
