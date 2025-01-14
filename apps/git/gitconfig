@@ -21,3 +21,7 @@
 [submodule]
 	# update the content of all initialized submodules according to the commit recorded in the superproject
 	recurse = true
+
+[credential "https://github.com"]
+	helper =
+	helper = !/usr/bin/gh auth git-credential
