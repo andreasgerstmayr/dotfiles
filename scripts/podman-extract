@@ -1,0 +1,4 @@
+#!/bin/bash
+podman create --replace --name podman-extract-script "$1"
+podman cp podman-extract-script:"$2" .
+podman rm podman-extract-script > /dev/null
