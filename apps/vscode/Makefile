@@ -1,5 +1,12 @@
-vscode:
-	if [ -d /mnt/c/Windows ]; then make vscode-wsl; else make vscode-linux; fi
+list:
+	@echo "Available targets:"
+	@for t in `grep -oP '^([a-zA-Z-]+)(?=:.*$$)' Makefile`; do \
+        echo "  make $$t"; done
+
+vscode-osx:
+	ln -snf `pwd`/settings.json ~/Library/Application\ Support/Code/User/settings.json
+	ln -snf `pwd`/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
+	code --install-extension EditorConfig.EditorConfig
 
 vscode-linux:
 	ln -snf `pwd`/settings.json ~/.config/Code/User/settings.json
