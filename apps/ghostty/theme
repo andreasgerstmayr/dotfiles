@@ -16,10 +16,7 @@ palette = 14=#97eaff
 palette = 15=#d3d3d3
 background = #110f1d
 foreground = #f2f2f2
-#cursor-color = #c7c7c7
-#cursor-text = #ffffff
-#selection-background = #0013ff
-#selection-foreground = #08d2cf
+
 font-family = Consolas
 font-size = 16
-background-opacity = 0.9
+background-opacity = 0.95

@@ -1,1 +1,7 @@
+window-width = 80
+window-height = 25
+window-padding-x = 8
+
+quit-after-last-window-closed = true
+
 theme = /Users/andreas/.dotfiles/apps/ghostty/theme
