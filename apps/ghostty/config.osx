@@ -1,3 +1,11 @@
+# window appearance
+window-width = 80
+window-height = 25
+window-padding-x = 8
+
+quit-after-last-window-closed = true
+
+# theme
 palette = 0=#5e5c64
 palette = 1=#e62929
 palette = 2=#64ef5b
