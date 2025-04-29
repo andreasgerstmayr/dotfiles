@@ -104,10 +104,9 @@ plugins=( \
     zsh-syntax-highlighting \
 )
 
-# https://github.com/zsh-users/zsh-completions/issues/603
 fpath+=${ZSH_CUSTOM}/plugins/zsh-completions/src
-
-source $ZSH/oh-my-zsh.sh
+autoload -U compinit && compinit
+source "$ZSH/oh-my-zsh.sh"
 
 
 # User Configuration
