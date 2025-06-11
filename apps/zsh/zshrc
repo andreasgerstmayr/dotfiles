@@ -65,6 +65,7 @@ ZSH_CUSTOM="$HOME/.dotfiles/apps/zsh/custom"
 
 # PATH must be set before loading plugins (required for mise plugin to find mise binary, otherwise plugin gets disabled)
 PATH="$PATH:$HOME/.local/bin"
+PATH="$PATH:$HOME/npm/bin" # Node.js
 PATH="$PATH:$HOME/go/bin" # Go
 PATH="$PATH:$HOME/.cargo/bin" # Rust
 PATH="$PATH:$HOME/.dotfiles/scripts"
