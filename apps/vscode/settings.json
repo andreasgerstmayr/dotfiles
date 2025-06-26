@@ -5,6 +5,7 @@
     "workbench.colorTheme": "Default Dark+",
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
+    "editor.copyWithSyntaxHighlighting": false,
     "gitlens.currentLine.enabled": false,
     "gitlens.codeLens.enabled": false,
     "diffEditor.renderSideBySide": false,
