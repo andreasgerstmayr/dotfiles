@@ -158,6 +158,10 @@ unzip-mkdirs() {
   for f in "$@"; do unzip -d "${f%*.zip}" "$f"; done
 }
 
+skopeo-arch() {
+    skopeo inspect --raw "docker://$1"
+}
+
 ## bash
 clean-history() {
   local DROP_REGEX="oc login|docker login|base64|pass|token"
