@@ -125,6 +125,7 @@ export GOPROXY=https://proxy.golang.org,direct
 
 if [[ "$OSTYPE" == darwin* ]]; then
   export COPYFILE_DISABLE=true # don't add hidden files to tar archives
+  alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 elif [[ "$OSTYPE" == linux* ]]; then
   : #test -d /home/linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
