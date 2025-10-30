@@ -1,2 +1,2 @@
 #!/bin/bash
-nohup /opt/Cursor.AppImage "$@" >/dev/null 2>&1 &
+nohup /home/agerstmayr/cursor/Cursor.AppImage "$@" >/dev/null 2>&1 &

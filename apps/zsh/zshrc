@@ -148,6 +148,9 @@ alias gdiff="git diff --no-index"
 dir-diff() {
   diff --color=always -r --exclude .git "$1" "$2" | less
 }
+yaml-diff() {
+  git diff --no-index <(yq -P 'sort_keys(..)' "$1") <(yq -P 'sort_keys(..)' "$2")
+}
 
 ## tools
 rpm-extract() {
