@@ -37,5 +37,9 @@
     "dotfiles.targetPath": "~/.dotfiles",
     "dotfiles.installCommand": "install-devcontainer.sh",
     "remote.autoForwardPortsSource": "hybrid",
-    "jest.runMode": "on-demand"
+    "jest.runMode": "on-demand",
+    "vs-kubernetes.disable-linters": [
+        "resource-limits"
+    ],
+    "chatgpt.commentCodeLensEnabled": false
 }
