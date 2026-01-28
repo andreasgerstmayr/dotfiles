@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+
+tmpdir=$(mktemp -d)
+podman cp $(podman create --name tmp "$1"):/var/lib/rpm "${tmpdir}/rpmdb"
+podman rm tmp
+rpm -qa --dbpath "${tmpdir}/rpmdb"
+rm -r "${tmpdir}"
