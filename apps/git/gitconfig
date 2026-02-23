@@ -6,9 +6,15 @@
 	editor = vim
 	excludesfile = ~/.gitignore_global
 
+[commit]
+	gpgsign = true
+
 [pull]
 	# do not merge automatically
 	ff = only
+
+[push]
+	autoSetupRemote = true
 
 [init]
 	defaultBranch = main
@@ -21,6 +27,9 @@
 [submodule]
 	# update the content of all initialized submodules according to the commit recorded in the superproject
 	recurse = true
+
+[gpg]
+	format = ssh
 
 [credential "https://github.com"]
 	helper =
