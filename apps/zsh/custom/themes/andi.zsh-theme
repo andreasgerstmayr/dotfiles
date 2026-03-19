@@ -1,7 +1,6 @@
 #
 # Theme based on mitsuhikos prompt: https://github.com/mitsuhiko/dotfiles/blob/master/zsh/custom/themes/mitsuhiko.zsh-theme
 #
-# %f ... resets foreground color
 # %b ... resets bold
 #
 
@@ -9,9 +8,11 @@ setopt prompt_subst
 
 export LSCOLORS=ExGxFxDxCxHxHxCbCeEbEb
 export CLICOLOR=1
+local reset_fg="%f"
 
-ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[blue]%}git%f:"
+ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[blue]%}git%{$reset_fg%}:"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%B"
+ZSH_THEME_GIT_PROMPT_DIRTY="%B%{$fg[green]%}+"
 ZSH_THEME_GIT_PROMPT_BRANCH=""
 ZSH_THEME_GIT_PROMPT_STAGED="%B%{$fg[red]%}%{●%G%}"
 ZSH_THEME_GIT_PROMPT_SEPARATOR=""
@@ -20,24 +21,25 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%B%{$fg[green]?%G%}"
 ZSH_THEME_GIT_PROMPT_CHANGED="%B%{$fg[cyan]%}%{+%G%}"
 
 ZSH_THEME_VIRTUALENV_PREFIX=" workon %{$fg[cyan]%}"
-ZSH_THEME_VIRTUALENV_SUFFIX="%f"
+ZSH_THEME_VIRTUALENV_SUFFIX="%{$reset_fg%}"
 
 # This is the basic prompt that is always printed.  It will be
 # enclosed to make it newline.
-_ANDI_PROMPT='%B%{$fg[magenta]%}%n%f at %{$fg[yellow]%}%m%f in %{$fg[green]%}%~%f%'
+_MITSUHIKO_PROMPT='%B%{$fg[magenta]%}%n${reset_fg} at %{$fg[yellow]%}%m${reset_fg} in %{$fg[green]%}%~${reset_fg}%'
 
 # This is the base prompt that is rendered sync.  It should be
 # fast to render as a result.  The extra whitespace before the
 # newline is necessary to avoid some rendering bugs.
-PROMPT=$'\n'$_ANDI_PROMPT$' \n$%b '
+PROMPT=$'\n'$_MITSUHIKO_PROMPT$' \n$%b '
 
+# Show time on the right side.
 local _lineup=$'\e[1A'
 local _linedown=$'\e[1B'
 RPROMPT=%{${_lineup}%}'%B[%*]%b'%{${_linedown}%}
 
 # The pid of the async prompt process and the communication file
-_ANDI_ASYNC_PROMPT=0
-_ANDI_ASYNC_PROMPT_FN="/tmp/.zsh_tmp_prompt_$$"
+_MITSUHIKO_ASYNC_PROMPT=0
+_MITSUHIKO_ASYNC_PROMPT_FN="/tmp/.zsh_tmp_prompt_$$"
 
 # Remove the default git var update from chpwd and precmd to speed
 # up the shell prompt.  We will do the precmd_update_git_vars in
@@ -46,41 +48,41 @@ chpwd_functions=("${(@)chpwd_functions:#chpwd_update_git_vars}")
 precmd_functions=("${(@)precmd_functions:#precmd_update_git_vars}")
 
 # Conditionally print command execution time
-_ANDI_PROMPT_TIME_TRESHOLD=60
+_MITSUHIKO_PROMPT_TIME_TRESHOLD=60
 
 # Store command start time
-function _andi_preexec() {
-  _andi_cmd_start=$SECONDS
+function _mitsuhiko_preexec() {
+  _mitsuhiko_cmd_start=$SECONDS
 }
 
-function _andi_minikube() {
-  if [ -n "$MINIKUBE_ACTIVE_DOCKERD" ]; then
-    echo " docker:%{$fg[yellow]%}minikube%f"
+function minikube_prompt_info() {
+  if [[ -n "$MINIKUBE_ACTIVE_DOCKERD" ]]; then
+    echo " docker:%{$fg[yellow]%}minikube%{$reset_fg%}"
   fi
 }
 
-function _andi_kubectx() {
+function kubectx_prompt_info_custom() {
   local kubectx
   kubectx=$(kubectx_prompt_info)
   if [[ -z "${kubectx}" || "${kubectx}" == "minikube" ]]; then
   elif [[ "${kubectx}" == *observability* ]]; then
-    echo " kube:%{$fg[yellow]%}devcluster%f"
+    echo " kube:%{$fg[yellow]%}devcluster%{$reset_fg%}"
   else
-    echo " kube:%{$fg[yellow]%}${kubectx}%f"
+    echo " kube:%{$fg[yellow]%}${kubectx}%{$reset_fg%}"
   fi
 }
 
 # This here implements the async handling of the prompt.  It
 # runs the expensive git parts in a subprocess and passes the
 # information back via tempfile.
-function _andi_precmd() {
-  _andi_rv=$?
+function _mitsuhiko_precmd() {
+  _mitsuhiko_rv=$?
 
   local time_now cmd_duration
-  if [[ -n $_andi_cmd_start ]]; then
+  if [[ -n $_mitsuhiko_cmd_start ]]; then
     time_now=$SECONDS
-    cmd_duration=$((time_now - _andi_cmd_start))
-    unset _andi_cmd_start # clear start time; required for empty commands
+    cmd_duration=$((time_now - _mitsuhiko_cmd_start))
+    unset _mitsuhiko_cmd_start # clear start time; required for empty commands
   fi
 
   function async_prompt() {
@@ -88,14 +90,14 @@ function _andi_precmd() {
     precmd_update_git_vars
 
     #
-    echo -n $'\n'$_ANDI_PROMPT$' '$(git_super_status)$(virtualenv_prompt_info)$(_andi_minikube)$(_andi_kubectx) > $_ANDI_ASYNC_PROMPT_FN
-    if [[ $cmd_duration -gt $_ANDI_PROMPT_TIME_TRESHOLD ]]; then
-      echo -n " took %{$fg[red]%}$(($cmd_duration/60))m%f" >> $_ANDI_ASYNC_PROMPT_FN
+    echo -n $'\n'$_MITSUHIKO_PROMPT$' '$(git_super_status)$(virtualenv_prompt_info)$(minikube_prompt_info)$(kubectx_prompt_info_custom) > $_MITSUHIKO_ASYNC_PROMPT_FN
+    if [[ $cmd_duration -gt $_MITSUHIKO_PROMPT_TIME_TRESHOLD ]]; then
+      echo -n " took %{$fg[red]%}$(($cmd_duration/60))m%{$reset_fg%}" >> $_MITSUHIKO_ASYNC_PROMPT_FN
     fi
-    if [[ x$_andi_rv != x0 ]]; then
-      echo -n " exited %{$fg[red]%}$_andi_rv%f" >> $_ANDI_ASYNC_PROMPT_FN
+    if [[ x$_mitsuhiko_rv != x0 ]]; then
+      echo -n " exited %{$fg[red]%}$_mitsuhiko_rv%{$reset_fg%}" >> $_MITSUHIKO_ASYNC_PROMPT_FN
     fi
-    echo -n $' \n$%b ' >> $_ANDI_ASYNC_PROMPT_FN
+    echo -n $' \n$%b ' >> $_MITSUHIKO_ASYNC_PROMPT_FN
 
     # signal parent
     kill -s USR1 $$
@@ -104,31 +106,40 @@ function _andi_precmd() {
   # If we still have a prompt async process we kill it to make sure
   # we do not backlog with useless prompt things.  This also makes
   # sure that we do not have prompts interleave in the tempfile.
-  if [[ "${_ANDI_ASYNC_PROMPT}" != 0 ]]; then
-    kill -s HUP $_ANDI_ASYNC_PROMPT >/dev/null 2>&1 || :
+  if [[ "${_MITSUHIKO_ASYNC_PROMPT}" != 0 ]]; then
+    kill -s HUP $_MITSUHIKO_ASYNC_PROMPT >/dev/null 2>&1 || :
   fi
 
   # start background computation
   async_prompt &!
-  _ANDI_ASYNC_PROMPT=$!
+  _MITSUHIKO_ASYNC_PROMPT=$!
 }
 
 # This is the trap for the signal that updates our prompt and
 # redraws it.  We intentionally do not delete the tempfile here
-# so that we can reuse the last prompt for successive commands
-function _andi_trapusr1() {
-  PROMPT="$(cat $_ANDI_ASYNC_PROMPT_FN)"
-  _ANDI_ASYNC_PROMPT=0
-  zle && zle reset-prompt
+# so that we can reuse the last prompt for successive commands.
+#
+# Uses the function form (TRAPUSR1) for proper zle integration.
+# Guards reset-prompt to avoid calling it during interactive
+# widgets like fzf-history-widget or isearch, as that would
+# corrupt their terminal state and break Enter/accept behavior.
+function TRAPUSR1() {
+  PROMPT="$(cat $_MITSUHIKO_ASYNC_PROMPT_FN)"
+  _MITSUHIKO_ASYNC_PROMPT=0
+  if zle; then
+    case "$WIDGET" in
+      *fzf*|*isearch*|*history-search*|*complete*) ;;
+      *) zle reset-prompt ;;
+    esac
+  fi
 }
 
 # Make sure we clean up our tempfile on exit
-function _andi_zshexit() {
-  rm -f $_ANDI_ASYNC_PROMPT_FN
+function _mitsuhiko_zshexit() {
+  rm -f $_MITSUHIKO_ASYNC_PROMPT_FN
 }
 
 # Hook our preexec, precmd and zshexit functions and USR1 trap
-preexec_functions+=(_andi_preexec)
-precmd_functions+=(_andi_precmd)
-zshexit_functions+=(_andi_zshexit)
-trap '_andi_trapusr1' USR1
+preexec_functions+=(_mitsuhiko_preexec)
+precmd_functions+=(_mitsuhiko_precmd)
+zshexit_functions+=(_mitsuhiko_zshexit)
