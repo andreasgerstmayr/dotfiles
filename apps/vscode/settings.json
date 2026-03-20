@@ -41,5 +41,7 @@
     "vs-kubernetes.disable-linters": [
         "resource-limits"
     ],
-    "chatgpt.commentCodeLensEnabled": false
+    "chatgpt.commentCodeLensEnabled": false,
+    "claudeCode.preferredLocation": "panel",
+    "claudeCode.selectedModel": "claude-opus-4-6"
 }
