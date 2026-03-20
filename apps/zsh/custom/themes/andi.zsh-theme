@@ -27,23 +27,18 @@ ZSH_THEME_VIRTUALENV_SUFFIX="%{$reset_fg%}"
 # enclosed to make it newline.
 _MITSUHIKO_PROMPT='%B%{$fg[magenta]%}%n${reset_fg} at %{$fg[yellow]%}%m${reset_fg} in %{$fg[green]%}%~${reset_fg}%'
 
-# This is the base prompt that is rendered sync.  It should be
-# fast to render as a result.  The extra whitespace before the
-# newline is necessary to avoid some rendering bugs.
-PROMPT=$'\n'$_MITSUHIKO_PROMPT$' \n$%b '
+# The extra whitespace before the newline is necessary to avoid
+# some rendering bugs.
+PROMPT=$'\n'$_MITSUHIKO_PROMPT' ${_OMZ_ASYNC_OUTPUT[_mitsuhiko_async_handler]}'$' \n$%b '
 
 # Show time on the right side.
 local _lineup=$'\e[1A'
 local _linedown=$'\e[1B'
 RPROMPT=%{${_lineup}%}'%B[%*]%b'%{${_linedown}%}
 
-# The pid of the async prompt process and the communication file
-_MITSUHIKO_ASYNC_PROMPT=0
-_MITSUHIKO_ASYNC_PROMPT_FN="/tmp/.zsh_tmp_prompt_$$"
-
 # Remove the default git var update from chpwd and precmd to speed
 # up the shell prompt.  We will do the precmd_update_git_vars in
-# the async prompt instead
+# the async handler instead
 chpwd_functions=("${(@)chpwd_functions:#chpwd_update_git_vars}")
 precmd_functions=("${(@)precmd_functions:#precmd_update_git_vars}")
 
@@ -72,74 +67,37 @@ function kubectx_prompt_info_custom() {
   fi
 }
 
-# This here implements the async handling of the prompt.  It
-# runs the expensive git parts in a subprocess and passes the
-# information back via tempfile.
+# Capture exit code and command duration before the async handler
+# forks, so the subprocess inherits correct values.
 function _mitsuhiko_precmd() {
   _mitsuhiko_rv=$?
 
-  local time_now cmd_duration
   if [[ -n $_mitsuhiko_cmd_start ]]; then
-    time_now=$SECONDS
-    cmd_duration=$((time_now - _mitsuhiko_cmd_start))
+    _mitsuhiko_cmd_duration=$(($SECONDS - _mitsuhiko_cmd_start))
     unset _mitsuhiko_cmd_start # clear start time; required for empty commands
-  fi
-
-  function async_prompt() {
-    # Run the git var update here instead of in the parent
-    precmd_update_git_vars
-
-    #
-    echo -n $'\n'$_MITSUHIKO_PROMPT$' '$(git_super_status)$(virtualenv_prompt_info)$(minikube_prompt_info)$(kubectx_prompt_info_custom) > $_MITSUHIKO_ASYNC_PROMPT_FN
-    if [[ $cmd_duration -gt $_MITSUHIKO_PROMPT_TIME_TRESHOLD ]]; then
-      echo -n " took %{$fg[red]%}$(($cmd_duration/60))m%{$reset_fg%}" >> $_MITSUHIKO_ASYNC_PROMPT_FN
-    fi
-    if [[ x$_mitsuhiko_rv != x0 ]]; then
-      echo -n " exited %{$fg[red]%}$_mitsuhiko_rv%{$reset_fg%}" >> $_MITSUHIKO_ASYNC_PROMPT_FN
-    fi
-    echo -n $' \n$%b ' >> $_MITSUHIKO_ASYNC_PROMPT_FN
-
-    # signal parent
-    kill -s USR1 $$
-  }
-
-  # If we still have a prompt async process we kill it to make sure
-  # we do not backlog with useless prompt things.  This also makes
-  # sure that we do not have prompts interleave in the tempfile.
-  if [[ "${_MITSUHIKO_ASYNC_PROMPT}" != 0 ]]; then
-    kill -s HUP $_MITSUHIKO_ASYNC_PROMPT >/dev/null 2>&1 || :
-  fi
-
-  # start background computation
-  async_prompt &!
-  _MITSUHIKO_ASYNC_PROMPT=$!
-}
-
-# This is the trap for the signal that updates our prompt and
-# redraws it.  We intentionally do not delete the tempfile here
-# so that we can reuse the last prompt for successive commands.
-#
-# Uses the function form (TRAPUSR1) for proper zle integration.
-# Guards reset-prompt to avoid calling it during interactive
-# widgets like fzf-history-widget or isearch, as that would
-# corrupt their terminal state and break Enter/accept behavior.
-function TRAPUSR1() {
-  PROMPT="$(cat $_MITSUHIKO_ASYNC_PROMPT_FN)"
-  _MITSUHIKO_ASYNC_PROMPT=0
-  if zle; then
-    case "$WIDGET" in
-      *fzf*|*isearch*|*history-search*|*complete*) ;;
-      *) zle reset-prompt ;;
-    esac
+  else
+    _mitsuhiko_cmd_duration=0
   fi
 }
 
-# Make sure we clean up our tempfile on exit
-function _mitsuhiko_zshexit() {
-  rm -f $_MITSUHIKO_ASYNC_PROMPT_FN
+# Async handler: runs in a subprocess via _omz_register_handler,
+# outputs the dynamic prompt fragment to stdout.
+function _mitsuhiko_async_handler() {
+  precmd_update_git_vars
+
+  echo -n "$(git_super_status)$(virtualenv_prompt_info)$(minikube_prompt_info)$(kubectx_prompt_info_custom)"
+  if [[ $_mitsuhiko_cmd_duration -gt $_MITSUHIKO_PROMPT_TIME_TRESHOLD ]]; then
+    echo -n " took %{$fg[red]%}$(($_mitsuhiko_cmd_duration/60))m%{$reset_fg%}"
+  fi
+  if [[ $_mitsuhiko_rv -ne 0 ]]; then
+    echo -n " exited %{$fg[red]%}$_mitsuhiko_rv%{$reset_fg%}"
+  fi
 }
 
-# Hook our preexec, precmd and zshexit functions and USR1 trap
+# Prepend our precmd so it runs before _omz_async_request
+# (which forks the handler subprocess and needs our globals set).
+precmd_functions=(_mitsuhiko_precmd "${precmd_functions[@]}")
 preexec_functions+=(_mitsuhiko_preexec)
-precmd_functions+=(_mitsuhiko_precmd)
-zshexit_functions+=(_mitsuhiko_zshexit)
+
+# Register the async handler with OMZ's async prompt system
+_omz_register_handler _mitsuhiko_async_handler
