@@ -27,6 +27,9 @@ ZSH_THEME_VIRTUALENV_SUFFIX="%{$reset_fg%}"
 # enclosed to make it newline.
 _MITSUHIKO_PROMPT='%B%{$fg[magenta]%}%n${reset_fg} at %{$fg[yellow]%}%m${reset_fg} in %{$fg[green]%}%~${reset_fg}%'
 
+# Conditionally print command execution time
+_MITSUHIKO_PROMPT_TIME_TRESHOLD=60
+
 # The extra whitespace before the newline is necessary to avoid
 # some rendering bugs.
 PROMPT=$'\n'$_MITSUHIKO_PROMPT' ${_OMZ_ASYNC_OUTPUT[_mitsuhiko_async_handler]}'$' \n$%b '
@@ -41,14 +44,6 @@ RPROMPT=%{${_lineup}%}'%B[%*]%b'%{${_linedown}%}
 # the async handler instead
 chpwd_functions=("${(@)chpwd_functions:#chpwd_update_git_vars}")
 precmd_functions=("${(@)precmd_functions:#precmd_update_git_vars}")
-
-# Conditionally print command execution time
-_MITSUHIKO_PROMPT_TIME_TRESHOLD=60
-
-# Store command start time
-function _mitsuhiko_preexec() {
-  _mitsuhiko_cmd_start=$SECONDS
-}
 
 function minikube_prompt_info() {
   if [[ -n "$MINIKUBE_ACTIVE_DOCKERD" ]]; then
@@ -65,6 +60,11 @@ function kubectx_prompt_info_custom() {
   else
     echo " kube:%{$fg[yellow]%}${kubectx}%{$reset_fg%}"
   fi
+}
+
+# Store command start time
+function _mitsuhiko_preexec() {
+  _mitsuhiko_cmd_start=$SECONDS
 }
 
 # Capture exit code and command duration before the async handler
