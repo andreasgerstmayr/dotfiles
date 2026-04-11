@@ -2,7 +2,7 @@
     "telemetry.telemetryLevel": "off",
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
-    "workbench.colorTheme": "Default Dark+",
+    "workbench.colorTheme": "Dark+",
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
     "editor.copyWithSyntaxHighlighting": false,
@@ -37,6 +37,7 @@
     "dotfiles.targetPath": "~/.dotfiles",
     "dotfiles.installCommand": "install-devcontainer.sh",
     "remote.autoForwardPortsSource": "hybrid",
+    "js/ts.preferGoToSourceDefinition": true,
     "jest.runMode": "on-demand",
     "vs-kubernetes.disable-linters": [
         "resource-limits"
