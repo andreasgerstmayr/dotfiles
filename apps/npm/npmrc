@@ -1,1 +1,3 @@
+# npm config ls -l
 ignore-scripts = true
+min-release-age=7 # days

@@ -1,0 +1,2 @@
+# uv run --show-settings
+exclude-newer = "7 days"
