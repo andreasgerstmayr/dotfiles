@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+commit=$1
+shift
+
+base=$(git rev-parse "$commit^")
+for branch in "$@"; do
+  if git merge-tree --write-tree --merge-base="$base" "$branch" "$commit" >/dev/null 2>&1; then
+    echo "$branch: clean"
+  else
+    echo "$branch: conflict"
+  fi
+done

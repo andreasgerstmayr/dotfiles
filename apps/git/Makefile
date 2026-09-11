@@ -4,5 +4,6 @@ git:
 
 git-work:
 	rm -f ~/.gitconfig
-	sed 's/andreas@gerstmayr.me/agerstmayr@redhat.com/' `pwd`/gitconfig > ~/.gitconfig
+	cp `pwd`/gitconfig ~/.gitconfig
+	sed -i 's/andreas@gerstmayr.me/agerstmayr@redhat.com/' ~/.gitconfig
 	ln -snf `pwd`/gitignore_global ~/.gitignore_global
