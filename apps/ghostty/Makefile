@@ -7,4 +7,5 @@ ghostty-osx:
 	ln -snf `pwd`/config.osx ~/Library/Application\ Support/com.mitchellh.ghostty/config
 
 ghostty-linux:
+	mkdir -p ~/.config/ghostty
 	ln -snf `pwd`/config.linux ~/.config/ghostty/config

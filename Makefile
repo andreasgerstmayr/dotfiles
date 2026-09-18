@@ -18,3 +18,5 @@ cli:
 	make -C apps/tmux
 	make -C apps/vim
 	make -C apps/zsh
+	make -C apps/npm
+	make -C apps/uv

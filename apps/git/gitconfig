@@ -1,6 +1,7 @@
 [user]
 	name = Andreas Gerstmayr
 	email = andreas@gerstmayr.me
+	signingkey = ~/.ssh/id_ed25519.pub
 
 [core]
 	editor = vim
